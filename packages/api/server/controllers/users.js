@@ -15,5 +15,8 @@ module.exports = {
             .findAll()
             .then(users => res.status(200).send(users))
             .catch(error => res.status(400).send(error))
+    },
+    retrieve(req, res) {
+        return res.status(200).send("user id : [" + req.params.userId + "]" );
     }
 }

@@ -6,6 +6,8 @@
   ],
   "scripts": {
     "dev": "concurrently --kill-others --success first \"npm run start:dev --prefix ./packages/api\" \"npm run serve --prefix ./packages/app\"",
+    "dev:api": "npm run start:dev --prefix ./packages/api",
+    "dev:app": "npm run serve --prefix ./packages/app",
     "build": "lerna run build"
   },
   "devDependencies": {
