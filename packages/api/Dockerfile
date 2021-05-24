@@ -13,7 +13,7 @@ ADD . /api
 # npm install 을 실행
 RUN npm install
 
-# 환경변수 NODE_ENV의 값을 development로 설정
+# 환경변수 NODE_ENV의 값을 production로 설정
 ENV NODE_ENV "production"
 
 # 가상 머신에 오픈할 포트
