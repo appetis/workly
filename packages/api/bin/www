@@ -1,5 +1,22 @@
 const http = require('http');
+const https = require('https');
+const fs = require('fs');
+const dotenv = require('dotenv');
+dotenv.config();
+const prod = process.env.NODE_ENV === 'production';
+
 const app = require('../app');
+
+if(prod) {
+  const options = {
+    ca: fs.readFileSync('/etc/letsencrypt/live/api.appetis.net/fullchain.pem'),
+    key: fs.readFileSync('/etc/letsencrypt/live/api.appetis.net/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/api.appetis.net/cert.pem'),
+  };
+  https.createServer(options, app).listen(443, () => {
+    console.log('443번 포트에서 대기중입니다.');
+  });
+}
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 app.set('port', port);
