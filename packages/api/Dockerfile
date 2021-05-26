@@ -1,7 +1,7 @@
 # 이미지 full
 FROM node:latest
 
-RUN npm install -g sequelize-cli
+RUN npm install -g pm2 node-gyp sequelize-cli
 
 #/app 디렉토리 생성
 RUN mkdir -p /api
@@ -20,4 +20,6 @@ ENV NODE_ENV "production"
 EXPOSE 3000
 
 # 컨테이너에서 실행될 명령을 지정
-CMD ["npm", "start"]
+# CMD ["npm", "start"]
+CMD ["pm2-docker", "./bin/www"]
+#CMD ["pm2-runtime", "start", "ecosystem.config.js", "--env", "production"]
