@@ -7,17 +7,6 @@ const prod = process.env.NODE_ENV === 'production';
 
 const app = require('../app');
 
-if(prod) {
-  const options = {
-    ca: fs.readFileSync('/var/www/cert/live/api.appetis.net/fullchain.pem'),
-    key: fs.readFileSync('/var/www/cert/live/api.appetis.net/privkey.pem'),
-    cert: fs.readFileSync('/var/www/cert/live/api.appetis.net/cert.pem'),
-  };
-  https.createServer(options, app).listen(443, () => {
-    console.log('443번 포트에서 대기중입니다.');
-  });
-}
-
 const port = parseInt(process.env.PORT, 10) || 3000;
 app.set('port', port);
 
