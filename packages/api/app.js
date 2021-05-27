@@ -17,7 +17,7 @@ require('./server/routes')(app);
 
 // Setup a default catch-all route then sends back a welcome
 app.get('*', (req, res) => res.status(200).send({
-    message: 'Welcome to the beginning of nothingness! ['+  process.env.NODE_ENV +']['+ process.env.POSTGRES_HOST +']['+ process.env.POSTGRES_PORT +']'
+    message: 'Welcome to the beginning of nothingness! ['+  process.env.NODE_ENV +']['+ process.env.POSTGRES_HOST +']['+ process.env.POSTGRES_PORT +']['+ process.env.CONNECT +']'
 }))
 
 module.exports = app;
