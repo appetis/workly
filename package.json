@@ -5,6 +5,7 @@
     "packages/*"
   ],
   "scripts": {
+    "bootstrap": "npm install && lerna exec npm install",
     "dev": "concurrently --kill-others --success first \"npm run start:dev --prefix ./packages/api\" \"npm run serve --prefix ./packages/app\"",
     "dev:api": "npm run start:dev --prefix ./packages/api",
     "dev:app": "npm run serve --prefix ./packages/app",
