@@ -105,6 +105,8 @@ dist
 
 # DS_Store
 .DS_Store
+.idea
+
 
 # ENV file
 .env
