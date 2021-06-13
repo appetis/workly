@@ -1,0 +1,72 @@
+name: api
+on:
+  push:
+    paths:
+      - 'packages/api/**'
+    branches:
+      - master
+      - develop
+  pull_request:
+    paths:
+      - 'packages/api/**'
+    branches:
+      - master
+      - develop
+
+jobs:
+  build-api:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 'packages/api'
+    steps:
+      - name: Checkout source codes
+        uses: actions/checkout@v2
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Compress files
+        run: zip -r ./api-deploy.zip . -x *.git*
+
+      - name: AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Upload to AWS S3
+        run: |
+          aws s3 cp \
+          --region us-east-1 \
+          ./api-deploy.zip s3://appetis-deploy
+
+      - name: Deploy to AWS EC2
+        run: |
+          aws deploy create-deployment \
+          --application-name appetis-api \
+          --deployment-group-name appetis-api-group \
+          --s3-location bucket=appetis-deploy,key=api-deploy.zip,bundleType=zip
+
+      - name: Notify to Slack
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          author_name: BUILD - API
+          fields: repo,message,commit,author,job,took
+          mention: channel
+          if_mention: failure,cancelled
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        if: always() # Pick up events even if the job fails or is canceled.

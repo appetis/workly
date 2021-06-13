@@ -1,0 +1,10 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /var/docker/deploy/deploy-api/
+    overwrite: yes
+hooks:
+  ApplicationStart:
+    - location: deploy.sh
+      timeout: 180
