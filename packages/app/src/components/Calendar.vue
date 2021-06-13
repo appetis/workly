@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full">Hello</div>
+  <div class="w-full">{{ msg }}</div>
 </template>
 
 <script>

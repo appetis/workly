@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <Calendar />
+    <Calendar msg="Calendar page" />
   </div>
 </template>
 
