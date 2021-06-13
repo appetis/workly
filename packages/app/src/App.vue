@@ -1,26 +1,27 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
-</template>
+  <div class="flex brand">
+    <LeftMenu />
 
+    <div class="h-screen w-full bg-brand-lightgray">
+      <Header />
+      <router-view class="w-full" />
+    </div>
+  </div>
+</template>
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import LeftMenu from '@/components/LeftMenu'
+import Header from '@/components/Header'
 
 export default {
-  name: "App",
   components: {
-    HelloWorld,
+    LeftMenu,
+    Header,
   },
-};
-</script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  methods: {
+    // getImgUrl(pet) {
+    //   var images = require.context('../assets/images/', false, /\.png$/)
+    //   return images('./' + pet + ".png")
+    // }
+  },
 }
-</style>
+</script>
