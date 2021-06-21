@@ -34,6 +34,7 @@
     .modal {
         @apply flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0
     }
+    .modal-background,
     .modal .modal-background {
         @apply fixed inset-0 bg-brand-darkgray bg-opacity-75 transition-opacity backdrop-filter backdrop-blur-sm
     }
@@ -71,6 +72,22 @@
         @apply inline-block bg-black rounded-full text-white h-6 w-6 mr-2 text-center cursor-pointer
     }
 }
+@layer utilities {
+    @variants responsive {
+        .text-shadow {
+            text-shadow: 2px 2px 4px #333;
+        }
+        .text-shadow-md {
+            text-shadow: 4px 4px 8px #333;
+        }
+        .text-shadow-lg {
+            text-shadow: 15px 15px 30px #333;
+        }
+        .text-shadow-none {
+            text-shadow: none;
+        }
+    }
+}
 
 html, body {
     font-family: "Avenir Next", "Avenir", sans-serif;
@@ -80,4 +97,10 @@ html, body {
 }
 .profile-online {
     background-color: #01C314;
+}
+.w-18 {
+    width: 4.5rem;
+}
+.h-18 {
+    height: 4.5rem;
 }

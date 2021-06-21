@@ -16,5 +16,9 @@ describe('Header', () => {
     }),
     test('If bell menu is shown', () => {
       expect(wrapper.get('#header-icon-bell').isVisible()).toBe(true)
+    }),
+    test('Profile click', async () => {
+      await wrapper.find('#header-icon-bell').trigger('click')
+      expect(wrapper.html()).toContain('modal')
     })
 })
