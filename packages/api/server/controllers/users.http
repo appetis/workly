@@ -1,0 +1,16 @@
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{"email": "test@test.com", "password": "test"}
+
+###
+GET http://localhost:3000/api/users
+Accept: application/json
+Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE2MjQzMTczMjksImV4cCI6MTYyNDMxOTEyOSwiaXNzIjoiYXBwZXRpcyJ9.Pg8oeIcdwlG25V6J71GjOlDEDuSv0Vhvv03PPsO6ZEc
+
+###
+GET http://localhost:3000/api/users/35
+Accept: application/json
+Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE2MjQzMTczMjksImV4cCI6MTYyNDMxOTEyOSwiaXNzIjoiYXBwZXRpcyJ9.Pg8oeIcdwlG25V6J71GjOlDEDuSv0Vhvv03PPsO6ZEc
+
+###
