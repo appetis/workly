@@ -1,11 +1,11 @@
-const usersController = require('../controllers').users;
+const userController = require('../controllers').user;
 const router = require("express").Router();
 const { verifyToken } = require("./middlewares");
 
 module.exports = (app) => {
-    router.post('/users', usersController.create);
-    router.get('/users', verifyToken, usersController.getUsers);
-    router.get('/users/:id', verifyToken, usersController.getUser);
+    router.post('/users', userController.create);
+    router.get('/users', verifyToken, userController.getUsers);
+    router.get('/users/:id', verifyToken, userController.getUser);
 
     app.use('/api', router);
 }
