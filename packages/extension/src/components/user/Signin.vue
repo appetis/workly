@@ -1,13 +1,12 @@
 <template>
   <div
-    class="fixed z-10 inset-0 overflow-y-auto"
+    class="fixed inset-0 overflow-y-auto z-10"
     aria-labelledby="modal-title"
     role="dialog"
     aria-modal="true"
   >
+    <div class="modal-background" aria-hidden="true"></div>
     <div class="modal">
-      <div class="modal-background" aria-hidden="true"></div>
-
       <!--      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>-->
 
       <div class="modal-content-sm">
@@ -16,10 +15,6 @@
         </span>
         <div class="modal-body">
           <div>
-            <div class="profile-photo">
-              <img :src="displayImage" />
-              <div class="profile-online"></div>
-            </div>
             <div class="profile-top">
               <h3
                 class="text-lg leading-6 font-medium text-gray-900"
@@ -120,7 +115,7 @@
 
 <script>
 export default {
-  name: 'Profile',
+  name: 'Signin',
   props: {
     avatar: {
       required: true,
@@ -135,18 +130,5 @@ export default {
       this.$emit('close')
     },
   },
-  computed: {
-    displayImage() {
-      return this.avatar
-    },
-  },
 }
 </script>
-<style scoped>
-.pv-icon {
-  width: 20px;
-}
-.vb-icon {
-  width: 22px;
-}
-</style>

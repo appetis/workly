@@ -4,7 +4,9 @@
     <transition name="slide-fade">
       <div v-if="show" class="text-white slide-fade">
         <div class="mb-7 text-right cursor-pointer" @click="addNew('event')">
-          <div class="inline-flex align-middle mr-5 text-shadow">Event</div>
+          <div class="inline-flex align-middle mr-5 text-shadow text-base">
+            Event
+          </div>
           <div
             class="
               inline-flex
@@ -21,7 +23,9 @@
           </div>
         </div>
         <div class="mb-7 text-right cursor-pointer" @click="addNew('meeting')">
-          <div class="inline-flex align-middle mr-5 text-shadow">Meeting</div>
+          <div class="inline-flex align-middle mr-5 text-shadow text-base">
+            Meeting
+          </div>
           <div
             class="
               inline-flex
@@ -38,7 +42,9 @@
           </div>
         </div>
         <div class="mb-7 text-right cursor-pointer" @click="addNew('project')">
-          <div class="inline-flex align-middle mr-5 text-shadow">Project</div>
+          <div class="inline-flex align-middle mr-5 text-shadow text-base">
+            Project
+          </div>
           <div
             class="
               inline-flex
@@ -55,7 +61,7 @@
           </div>
         </div>
         <div class="mb-7 text-right cursor-pointer" @click="addNew('vacation')">
-          <div class="inline-flex align-middle mr-5 text-shadow">
+          <div class="inline-flex align-middle mr-5 text-shadow text-base">
             Out of Office
           </div>
           <div
@@ -77,11 +83,9 @@
     </transition>
 
     <v-btn
-      fixed
-      class="mx-2
-      right-7
-      bottom-7"
+      class="fixed mx-2 right-7 bottom-7"
       fab
+      large
       color="accent"
       @click="show = !show"
     >
@@ -98,28 +102,6 @@
         id="project-hide-menus"
       ></v-icon>
     </v-btn>
-
-    <!--  <button
-    class="
-      fixed
-      right-7
-      bottom-7
-      rounded-full
-      bg-brand-dark
-      text-white
-      h-18
-      w-18
-      font-bold
-      shadow
-      border-0
-      focus:outline-none
-    "
-    @click="show = !show"
-  >
-    <v-icon name="plus" base-class="cv-icon" v-if="!show" id="project-show-menus"></v-icon>
-
-    <v-icon name="x" base-class="cv-icon" v-if="show" id="project-hide-menus"></v-icon>
-  </button>-->
   </div>
 </template>
 <script>

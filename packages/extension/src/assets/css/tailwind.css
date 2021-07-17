@@ -41,10 +41,10 @@
     .modal .modal-background {
         @apply fixed inset-0 bg-brand-darkgray bg-opacity-75 transition-opacity backdrop-filter backdrop-blur-sm
     }
-    .modal-background,
+/*    .modal-background,
     .modal .modal-background {
         z-index: 2;
-    }
+    }*/
     .modal-content, .modal-content-sm, .modal-content-md, .modal-content-lg, .modal-content-xl {
         @apply inline-block bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:mt-40 sm:mb-8 sm:align-middle sm:w-full
     }

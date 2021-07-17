@@ -6,14 +6,17 @@
   ],
   "scripts": {
     "bootstrap": "npm install && lerna exec npm install",
-    "dev": "concurrently --kill-others --success first \"npm run start:dev --prefix ./packages/api\" \"npm run serve --prefix ./packages/app\"",
+    "dev": "concurrently --kill-others --success first \"npm run start:dev --prefix ./packages/api\" \"npm run serve --prefix ./packages/extension\"",
     "dev:api": "npm run start:dev --prefix ./packages/api",
     "dev:app": "npm run serve --prefix ./packages/app",
+    "ext:app": "npm run serve --prefix ./packages/extension",
     "build": "lerna run build"
   },
   "devDependencies": {
     "concurrently": "^6.1.0",
     "lerna": "^4.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "vue-icon": "^2.2.0"
+  }
 }

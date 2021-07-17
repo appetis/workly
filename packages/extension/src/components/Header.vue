@@ -36,19 +36,33 @@
       :avatar="avatar"
       id="modal-profile"
     />
+    <Init
+      v-show="showInit"
+      id="modal-init"
+      @goHasCode="goHasCode"
+      @goSignup="goSignup"
+    />
+    <Code v-show="showCode" id="modal-code" :callFocus="callFocus" />
   </div>
 </template>
 
 <script>
 import Profile from './user/Profile'
+import Init from './init/Init'
+import Code from './init/Code'
 export default {
   components: {
     Profile,
+    Init,
+    Code,
   },
   data() {
     return {
+      showInit: true,
+      showCode: false,
       avatar: require('@/assets/images/avatar.png'),
       showProfile: false,
+      callFocus: false,
     }
   },
   methods: {
@@ -57,6 +71,16 @@ export default {
     },
     closeProfile() {
       this.showProfile = false
+    },
+    goHasCode() {
+      this.showInit = false
+      this.showCode = true
+      this.callFocus = true
+      console.log('goHasCode')
+    },
+    goSignup() {
+      this.showInit = false
+      console.log('goSignup')
     },
   },
 }
