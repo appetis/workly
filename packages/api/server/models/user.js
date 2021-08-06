@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     collate: 'utf8_general_ci',
   });
   User.associate = (db) => {
+    db.User.belongsToMany(db.Team, { through: 'UserTeam' });
   };
   return User;
 }
