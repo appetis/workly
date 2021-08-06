@@ -11,7 +11,11 @@
 
       <div class="modal-content-sm">
         <div class="modal-body">
-          <h2 class="text-lg py-4">Enter your invite code</h2>
+          <h2 class="text-lg py-4">
+            Verification
+          </h2>
+          <p>Verification code has been sent to your email address.<br />
+            Please check your email.</p>
 
           <div class="flex">
             <!--            <CodeInput @codeKeyup="codeKeyup" :current="1" />-->
@@ -72,10 +76,7 @@
           </div>
 
           <div class="text-right flex mt-6">
-            <div class="w-1/2 px-1">
-              <button class="btn-border-black" @click="goSignup">Signup</button>
-            </div>
-            <div class="w-1/2 px-1">
+            <div class="w-full px-1">
               <button class="btn-black" @click="verifyCode">Continue</button>
             </div>
           </div>
@@ -88,7 +89,7 @@
 <script>
 //import CodeInput from "./CodeInput";
 export default {
-  name: 'Code',
+  name: 'Verification',
   components: {
     //  CodeInput
   },

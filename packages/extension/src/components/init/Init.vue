@@ -15,36 +15,10 @@
 
           <div class="text-right flex">
             <div class="w-1/2 px-1">
-              <button
-                class="
-                  py-2
-                  w-full
-                  border border-solid border-black
-                  rounded
-                  text-sm
-                  hover:bg-black hover:text-white
-                  font-medium
-                "
-                @click="goSignup"
-              >
-                No
-              </button>
+              <button class="btn-border-black" @click="goSignup">No</button>
             </div>
             <div class="w-1/2 px-1">
-              <button
-                class="
-                  py-2
-                  w-full
-                  border border-solid border-black
-                  rounded
-                  text-sm
-                  hover:bg-black hover:text-white
-                  font-medium
-                "
-                @click="goHasCode"
-              >
-                Yes
-              </button>
+              <button class="btn-border-black" @click="goHasCode">Yes</button>
             </div>
           </div>
         </div>

@@ -5,24 +5,24 @@
 </template>
 
 <script>
-import UserService from "@/services/UserService";
+import UserService from '@/services/UserService'
 
 export default {
   name: 'User',
   data() {
     return {
-      users: []
+      users: [],
     }
   },
   created() {
     UserService.getUsers()
-      .then(response => {
+      .then((response) => {
         this.users = response.data
       })
-      .catch(error => {
+      .catch((error) => {
         console.log('There was an error: ', error.response)
       })
-  }
+  },
 }
 </script>
 

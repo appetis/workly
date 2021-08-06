@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        brand: {
+        wk: {
           lightgray: '#FAFAFA',
           darkgray: '#474747',
           defgray: '#808080',

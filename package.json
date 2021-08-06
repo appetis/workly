@@ -9,7 +9,7 @@
     "dev": "concurrently --kill-others --success first \"npm run start:dev --prefix ./packages/api\" \"npm run serve --prefix ./packages/extension\"",
     "dev:api": "npm run start:dev --prefix ./packages/api",
     "dev:app": "npm run serve --prefix ./packages/app",
-    "ext:app": "npm run serve --prefix ./packages/extension",
+    "dev:ext": "npm run serve --prefix ./packages/extension",
     "build": "lerna run build"
   },
   "devDependencies": {

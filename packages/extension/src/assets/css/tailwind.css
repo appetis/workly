@@ -8,19 +8,19 @@
         @apply overflow-y-auto overflow-x-hidden !important
     }
     .left-menu {
-        @apply h-screen relative w-28 p-4 bg-brand-dark text-white
+        @apply h-screen relative w-28 p-4 bg-wk-dark text-white
     }
     .logo {
-        @apply bg-brand-darkgray text-xs text-gray-500 text-center py-5 px-2 rounded-lg
+        @apply bg-wk-darkgray text-xs text-gray-500 text-center py-5 px-2 rounded-lg
     }
     .menu-icon-button {
-        @apply text-brand-darkgray block mb-6 px-4 rounded-full px-3 py-4 text-center mb-6 hover:bg-white hover:text-brand-dark
+        @apply text-wk-darkgray block mb-6 px-4 rounded-full px-3 py-4 text-center mb-6 hover:bg-white hover:text-wk-dark
     }
     .router-link-exact-active {
-        @apply bg-white text-brand-dark rounded-full py-4 text-center mb-6
+        @apply bg-white text-wk-dark rounded-full py-4 text-center mb-6
     }
     .header {
-        @apply w-full h-20 text-brand-dark border-b border-gray-200
+        @apply w-full h-20 text-wk-dark border-b border-gray-200
     }
     .header-title {
         @apply float-left font-semi-bold text-xl p-6
@@ -39,14 +39,14 @@
     }
     .modal-background,
     .modal .modal-background {
-        @apply fixed inset-0 bg-brand-darkgray bg-opacity-75 transition-opacity backdrop-filter backdrop-blur-sm
+        @apply fixed inset-0 bg-wk-darkgray bg-opacity-75 transition-opacity backdrop-filter backdrop-blur-sm
     }
 /*    .modal-background,
     .modal .modal-background {
         z-index: 2;
     }*/
     .modal-content, .modal-content-sm, .modal-content-md, .modal-content-lg, .modal-content-xl {
-        @apply inline-block bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:mt-40 sm:mb-8 sm:align-middle sm:w-full
+        @apply inline-block bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:mt-24 sm:mb-8 sm:align-middle sm:w-full
     }
     .modal-content-sm {
         @apply sm:max-w-sm
@@ -63,8 +63,11 @@
     .modal-close {
         @apply absolute right-0 p-4 cursor-pointer
     }
+    .modal-header {
+        @apply pt-5 px-5 text-xl sm:px-7
+    }
     .modal-body {
-        @apply bg-white py-7 px-7 sm:py-8 sm:px-12
+        @apply bg-white py-7 px-5 sm:py-8 sm:px-7
     }
     .profile-photo {
         @apply relative mx-auto flex-shrink-0 flex items-center justify-center h-20 w-20 rounded-full sm:h-20 sm:w-20
@@ -92,11 +95,11 @@
         font-family: "Avenir";
     }
     .v-application .primary--text {
-        @apply text-brand-darkgray;
+        @apply text-wk-darkgray;
     }
     .theme--light.v-calendar-weekly .v-calendar-weekly__head-weekday.v-outside,
     .v-calendar-weekly__head-weekday.v-future {
-        @apply bg-brand-light text-brand-darkgray py-3
+        @apply bg-wk-light text-wk-darkgray py-3
     }
     .v-application--wrap {
         min-height: auto;
@@ -110,6 +113,30 @@
     }
     .v-btn {
         text-transform: capitalize;
+    }
+    label {
+        @apply font-medium text-sm
+    }
+    .white-board-rounded {
+        @apply bg-white border border-solid border-gray-500 rounded text-wk-darkgray w-full py-2 px-3 outline-none
+    }
+    .input-underline {
+        @apply text-center border-b-2 border-solid border-gray-800 w-full text-lg py-2 focus:outline-none focus:border-red-500
+    }
+    .btn-black {
+        @apply py-2 px-11 rounded text-sm bg-black text-white border border-solid border-black font-medium hover:bg-white hover:border-black hover:text-black
+    }
+    .btn-black-full {
+        @apply py-2 px-11 rounded text-sm bg-black text-white border border-solid border-black font-medium w-full hover:bg-white hover:border-black hover:text-black
+    }
+    .btn-border-black {
+        @apply  py-2 w-full border border-solid border-black rounded text-sm hover:bg-black hover:text-white font-medium
+    }
+    .input-icon {
+        width: 20px;
+    }
+    .input-icons {
+        @apply absolute right-2 bottom-2 text-gray-500;
     }
 }
 @layer utilities {

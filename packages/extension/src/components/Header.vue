@@ -42,7 +42,32 @@
       @goHasCode="goHasCode"
       @goSignup="goSignup"
     />
-    <Code v-show="showCode" id="modal-code" :callFocus="callFocus" />
+    <Code
+      v-show="showCode"
+      id="modal-code"
+      :callFocus="callFocus"
+      @goSignup="goSignup"
+    />
+    <Signup
+      v-show="showSignup"
+      id="modal-signup"
+      @goHasCode="goHasCode"
+      @goSignin="goSignin"
+      @goVerification="goVerification"
+      @goAsGuest="goAsGuest"
+    />
+    <Signin
+      v-show="showSignin"
+      id="modal-signin"
+      @goHasCode="goHasCode"
+      @goSignup="goSignup"
+      @goAsGuest="goAsGuest"
+    />
+    <Verification
+        v-show="showVerification"
+        id="modal-signup"
+        @openCalendar="openCalendar"
+    />
   </div>
 </template>
 
@@ -50,16 +75,25 @@
 import Profile from './user/Profile'
 import Init from './init/Init'
 import Code from './init/Code'
+import Signup from './user/Signup'
+import Signin from './user/Signin'
+import Verification from './user/Verification'
 export default {
   components: {
     Profile,
     Init,
     Code,
+    Signup,
+    Signin,
+    Verification
   },
   data() {
     return {
       showInit: true,
       showCode: false,
+      showSignup: false,
+      showSignin: false,
+      showVerification: false,
       avatar: require('@/assets/images/avatar.png'),
       showProfile: false,
       callFocus: false,
@@ -72,16 +106,52 @@ export default {
     closeProfile() {
       this.showProfile = false
     },
+    goInit() {
+      this.showInit = true
+      this.showCode = false
+    },
     goHasCode() {
       this.showInit = false
       this.showCode = true
       this.callFocus = true
+      this.showSignup = false
+      this.showSignin = false
       console.log('goHasCode')
     },
     goSignup() {
       this.showInit = false
+      this.showCode = false
+      this.showSignup = true
+      this.showSignin = false
       console.log('goSignup')
     },
+    goSignin() {
+      this.showInit = false
+      this.showSignup = false
+      this.showSignin = true
+      console.log('goSignin')
+    },
+    goVerification() {
+      this.showInit = false
+      this.showCode = false
+      this.showSignup = false
+      this.showSignin = false
+      this.showVerification = true
+    },
+    goAsGuest() {
+      this.showInit = false
+      this.showCode = false
+      this.showSignup = false
+      this.showSignin = false
+      console.log('goAsGuest')
+    },
+    openCalendar() {
+      this.showInit = false
+      this.showCode = false
+      this.showSignup = false
+      this.showSignin = false
+      this.showVerification = false
+    }
   },
 }
 </script>
