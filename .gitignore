@@ -110,3 +110,7 @@ dist
 
 # ENV file
 .env
+
+artifacts/
+
+key.pem
