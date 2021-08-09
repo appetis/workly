@@ -3,18 +3,29 @@ const {User} = require('../models');
 
 exports.create = async (req, res) => {
     try {
+        let email = req.body.email;
+        if (!validateEmail(email)) {
+            return res.status(401).send('Invalid email address');
+        }
+
+        let password = req.body.password;
+        if (password.length < 8) {
+            return res.status(401).send('Password must be at least 8 characters');
+        }
+
         const user = await User.findOne({
             where: {
-                email: req.body.email
+                email
             }
         });
         if (user) {
             return res.status(403).send('Email is already in use.');
+
         }
 
-        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        const hashedPassword = await bcrypt.hash(password, 10);
         let newUser = await User.create({
-            email: req.body.email,
+            email,
             password: hashedPassword
         });
         delete newUser.dataValues.password;
@@ -60,3 +71,7 @@ exports.getUser = async (req, res) => {
         return res.status(500).send('Server error');
     }
 };
+
+validateEmail = (email) => {
+    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+}
