@@ -9,6 +9,13 @@ exports.generateToken = async (req, res) => {
                 email: req.body.email
             }
         });
+        if (!user) {
+            return res.status(401).json({
+                code: 401,
+                message: 'Cannot found the user'
+            });
+        }
+
         const result = await bcrypt.compare(req.body.password, user.password);
         if (!result) {
             return res.status(401).json({
