@@ -5,71 +5,121 @@
     role="dialog"
     aria-modal="true"
   >
-    <div class="modal-background" aria-hidden="true"></div>
+    <div class="init-modal-background" aria-hidden="true"></div>
     <div class="modal">
       <!--      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>-->
 
       <div class="modal-content-sm">
-        <div class="modal-header text-center">Worlky Logo</div>
+        <div class="modal-header init-modal-header">
+          <div class="w-1/10 bg-wk-gray-box px-2 rounded mr-2">w</div>
+          <div class="w-9/10 text-base pt-1 font-semibold">
+            Login to Your Workly Account
+          </div>
+        </div>
         <div class="modal-body">
-          <h2 class="text-2xl font-semibold text-center">Sign in</h2>
-
-          <div class="pt-4">
+          <!--
+          <div class="mb-4">
             <button class="btn-border-black">Continue with Google</button>
-          </div>
 
-          <div class="border-b border-solid border-gray-200 h-6 text-center">
-            <span class="relative top-3 bg-white px-10">or</span>
+            <div class="border-b border-solid border-gray-200 h-6 text-center">
+              <span class="relative top-3 bg-white px-10">or</span>
+            </div>
           </div>
+          -->
 
           <form @submit.prevent="onSubmit">
-            <div class="pt-4">
+            <div>
               <label for="username">Email</label>
               <input
                 id="username"
                 class="white-board-rounded"
                 v-model="user.email"
-                v-bind:class="{ 'border-red-900': showRequiredEmail }"
+                v-bind:class="{ 'border-red-700': showRequiredEmail }"
+                @blur.prevent="onBlurEmail"
               />
+              <span class="text-red-700 ml-1" v-show="showRequiredEmail">{{
+                showRequiredEmailMessage
+              }}</span>
             </div>
             <div class="pt-2 relative">
-              <label for="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                class="white-board-rounded"
-                v-model="user.password"
-              />
-              <v-icon
-                name="eye-off"
-                base-class="input-icon"
-                class="input-icons"
-                id="password-icon-eye-off"
-              ></v-icon>
-              <v-icon
-                name="eye"
-                base-class="input-icon"
-                class="input-icons"
-                id="password-icon-eye"
-              ></v-icon>
+              <div class="relative">
+                <label for="password">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  ref="password"
+                  class="white-board-rounded"
+                  v-model="user.password"
+                  v-bind:class="{ 'border-red-700': showRequiredPassword }"
+                  @blur.prevent="onBlurPassword"
+                />
+                <div @click="hidePlainPassword">
+                  <v-icon
+                    name="eye-off"
+                    base-class="input-icon"
+                    class="input-icons cursor-pointer"
+                    id="password-icon-eye-off"
+                    v-show="showPassword"
+                  ></v-icon>
+                </div>
+                <div @click="showPlainPassword">
+                  <v-icon
+                    name="eye"
+                    base-class="input-icon"
+                    class="input-icons cursor-pointer"
+                    id="password-icon-eye"
+                    v-show="!showPassword"
+                  ></v-icon>
+                </div>
+              </div>
+              <span class="text-red-700 ml-1" v-show="showRequiredPassword">{{
+                showRequiredPasswordMessage
+              }}</span>
+            </div>
+            <div
+              class="
+                text-red-700
+                mt-4
+                border border-red-700
+                rounded
+                w-full
+                py-2
+                px-3
+              "
+              v-show="showAuthenticationFailMessage != ''"
+            >
+              {{ showAuthenticationFailMessage }}
             </div>
             <div class="pt-5">
-              <button type="submit" class="btn-black-full">
-                Sign ip with email
-              </button>
-              <div class="text-xs mt-1">
-                By signing up, you agree to the Worlky Terms of Use and Privacy
-                Policy.
-              </div>
+              <button type="submit" class="btn-black-full">Login</button>
             </div>
           </form>
 
-          <div class="pt-2 text-center">
-            Already have an account?
-            <span class="text-blue cursor-pointer" @click="goSignup"
-              >Sign up</span
-            >
+          <div class="border-b border-solid border-gray-200 h-6 text-center">
+            <span class="relative top-3 bg-white px-10">or</span>
           </div>
+
+          <div class="flex pt-6">
+            <div class="w-1/2 pr-1">
+              <button class="btn-border-black" @click="goAsGuest">
+                Continue as a guest
+              </button>
+            </div>
+            <div class="w-1/2 pl-1">
+              <button class="btn-border-black" @click="goHasCode">
+                Continue with a code
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer init-modal-footer">
+          Already have an account?
+          <span
+            class="text-blue cursor-pointer underline font-semibold"
+            @click="goSignup"
+            >Register</span
+          >
         </div>
       </div>
     </div>
@@ -83,7 +133,11 @@ export default {
   data() {
     return {
       showRequiredEmail: false,
+      showRequiredEmailMessage: '',
       showRequiredPassword: false,
+      showRequiredPasswordMessage: '',
+      showAuthenticationFailMessage: '',
+      showPassword: false,
       user: this.freshUserObject(),
     }
   },
@@ -100,16 +154,72 @@ export default {
     goAsGuest() {
       this.$emit('goAsGuest')
     },
+    openCalendar() {
+      this.$emit('openCalendar')
+    },
+    onBlurEmail() {
+      let error = 0
+      if (!this.user.email) {
+        this.showRequiredEmail = true
+        this.showRequiredEmailMessage = 'Email address is required'
+        error++
+      } else if (!this.validEmail(this.user.email)) {
+        this.showRequiredEmail = true
+        this.showRequiredEmailMessage = 'The email address is not correct.'
+        error++
+      } else {
+        this.showRequiredEmail = false
+        this.showRequiredEmailMessage = ''
+      }
+      return error
+    },
+    onBlurPassword() {
+      let error = 0
+      if (!this.user.password) {
+        this.showRequiredPassword = true
+        this.showRequiredPasswordMessage = 'Password is required'
+        error++
+      } else if (this.user.password.length < 8) {
+        this.showRequiredPassword = true
+        this.showRequiredPasswordMessage = 'Minimum 8 characters required'
+        error++
+      } /*else if (!this.validPassword(this.user.password)) {
+        this.showRequiredPassword = true
+        this.showRequiredPasswordMessage =
+          'The password must include lowercase, uppercase, number and special character.'
+        error++
+      }*/ else {
+        this.showRequiredPassword = false
+        this.showRequiredPasswordMessage = ''
+      }
+      return error
+    },
+    showPlainPassword() {
+      this.$refs['password'].type = 'text'
+      this.showPassword = true
+    },
+    hidePlainPassword() {
+      this.$refs['password'].type = 'password'
+      this.showPassword = false
+    },
     onSubmit() {
       console.log('submit')
+      let empty = 0
+      empty += this.onBlurEmail()
+      empty += this.onBlurPassword()
+      if (empty) return false
+
       this.$store
         .dispatch('getToken', this.user)
         .then(() => {
           this.freshUserObject()
-          console.log('success')
+          console.log('success', this.$store.state.user)
+          this.openCalendar()
         })
         .catch((error) => {
-          console.log(error)
+          console.log('=================> error!!!!')
+          console.log('===>', error.response)
+          this.showAuthenticationFailMessage = error.response.data.message
         })
     },
     freshUserObject() {
@@ -117,6 +227,16 @@ export default {
         email: '',
         password: '',
       }
+    },
+    validEmail: function (email) {
+      var re =
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      return re.test(email)
+    },
+    validPassword: function (password) {
+      //var paswd = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/
+      var paswd = /^(?=.*[0-9])(?=.*)[a-zA-Z0-9!@#$%^&*]{7,15}$/
+      return password.match(paswd)
     },
   },
 }

@@ -3,7 +3,6 @@ import headers from './headers'
 
 export default {
   getToken(data) {
-    console.log('getToken ===>', data)
     return apiClient.post('/api/token', data)
   },
   getUsers() {

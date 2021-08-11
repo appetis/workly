@@ -7,6 +7,12 @@
     html {
         @apply overflow-y-auto overflow-x-hidden !important
     }
+    .init-background {
+        background-image: url("../images/init_background.png");
+        height: 100%;
+        background-position: center;
+        background-size: cover;
+    }
     .left-menu {
         @apply h-screen relative w-28 p-4 bg-wk-dark text-white
     }
@@ -41,12 +47,15 @@
     .modal .modal-background {
         @apply fixed inset-0 bg-wk-darkgray bg-opacity-75 transition-opacity backdrop-filter backdrop-blur-sm
     }
+    .init-modal-background {
+        @apply fixed inset-0 bg-wk-darkgray bg-opacity-40 transition-opacity backdrop-filter backdrop-blur-sm
+    }
 /*    .modal-background,
     .modal .modal-background {
         z-index: 2;
     }*/
     .modal-content, .modal-content-sm, .modal-content-md, .modal-content-lg, .modal-content-xl {
-        @apply inline-block bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:mt-24 sm:mb-8 sm:align-middle sm:w-full
+        @apply inline-block bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:mt-40 sm:mb-8 sm:align-middle sm:w-full
     }
     .modal-content-sm {
         @apply sm:max-w-sm
@@ -64,10 +73,13 @@
         @apply absolute right-0 p-4 cursor-pointer
     }
     .modal-header {
-        @apply pt-5 px-5 text-xl sm:px-7
+        @apply py-3 px-5 sm:px-6
     }
     .modal-body {
-        @apply bg-white py-7 px-5 sm:py-8 sm:px-7
+        @apply bg-white py-7 px-5 sm:py-8 sm:px-6
+    }
+    .modal-footer {
+        @apply py-3 px-5 sm:px-6
     }
     .profile-photo {
         @apply relative mx-auto flex-shrink-0 flex items-center justify-center h-20 w-20 rounded-full sm:h-20 sm:w-20
@@ -120,6 +132,9 @@
     .white-board-rounded {
         @apply bg-white border border-solid border-gray-500 rounded text-wk-darkgray w-full py-2 px-3 outline-none
     }
+    .input-code {
+        @apply text-center border border-solid border-gray-300 bg-wk-lightgray w-full text-lg py-2 rounded focus:outline-none focus:border-red-500 focus:bg-white
+    }
     .input-underline {
         @apply text-center border-b-2 border-solid border-gray-800 w-full text-lg py-2 focus:outline-none focus:border-red-500
     }
@@ -137,6 +152,12 @@
     }
     .input-icons {
         @apply absolute right-2 bottom-2 text-gray-500;
+    }
+    .init-modal-header {
+        @apply bg-black text-white flex font-semibold text-base
+    }
+    .init-modal-footer {
+        @apply bg-gray-200 text-center
     }
 }
 @layer utilities {

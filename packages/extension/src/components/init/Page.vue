@@ -1,0 +1,113 @@
+<template>
+  <div class="w-full h-screen bg-black init-background">
+    <Init
+      v-show="showInit"
+      id="modal-init"
+      @goHasCode="goHasCode"
+      @goSignup="goSignup"
+    />
+    <Code
+      v-show="showCode"
+      id="modal-code"
+      :callFocus="callFocus"
+      @goSignup="goSignup"
+    />
+    <Signup
+      v-show="showSignup"
+      id="modal-signup"
+      @goHasCode="goHasCode"
+      @goSignin="goSignin"
+      @goVerification="goVerification"
+      @goAsGuest="goAsGuest"
+    />
+    <Signin
+      v-show="showSignin"
+      id="modal-signin"
+      @goHasCode="goHasCode"
+      @goSignup="goSignup"
+      @goAsGuest="goAsGuest"
+      @openCalendar="openCalendar"
+    />
+    <Verification
+      v-show="showVerification"
+      id="modal-signup"
+      @openCalendar="openCalendar"
+    />
+  </div>
+</template>
+<script>
+import Init from './Init'
+import Code from './Code'
+import Signup from '../user/Signup'
+import Signin from '../user/Signin'
+import Verification from '../user/Verification'
+
+export default {
+  components: {
+    Init,
+    Code,
+    Signup,
+    Signin,
+    Verification,
+  },
+  data() {
+    return {
+      showInit: false,
+      showCode: true,
+      showSignup: false,
+      showSignin: false,
+      showVerification: false,
+      callFocus: false,
+    }
+  },
+  methods: {
+    goInit() {
+      this.showInit = true
+      this.showCode = false
+    },
+    goHasCode() {
+      this.showInit = false
+      this.showCode = true
+      this.callFocus = true
+      this.showSignup = false
+      this.showSignin = false
+      console.log('goHasCode')
+    },
+    goSignup() {
+      this.showInit = false
+      this.showCode = false
+      this.showSignup = true
+      this.showSignin = false
+      console.log('goSignup')
+    },
+    goSignin() {
+      this.showInit = false
+      this.showSignup = false
+      this.showSignin = true
+      console.log('goSignin')
+    },
+    goVerification() {
+      this.showInit = false
+      this.showCode = false
+      this.showSignup = false
+      this.showSignin = false
+      this.showVerification = true
+    },
+    goAsGuest() {
+      this.showInit = false
+      this.showCode = false
+      this.showSignup = false
+      this.showSignin = false
+      this.$store.state.ready = true
+      console.log('goAsGuest')
+    },
+    openCalendar() {
+      this.showInit = false
+      this.showCode = false
+      this.showSignup = false
+      this.showSignin = false
+      this.showVerification = false
+    },
+  },
+}
+</script>

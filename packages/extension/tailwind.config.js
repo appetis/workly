@@ -10,6 +10,7 @@ module.exports = {
           defgray: '#808080',
           light: '#EEEEEE',
           dark: '#151515',
+          'gray-box': '#AEAEAE',
         },
       },
       fontWeight: {

@@ -1,7 +1,7 @@
 <template>
   <v-app class="home">
     <List />
-    <Add />
+    <Add v-show="$store.state.ready" />
   </v-app>
 </template>
 

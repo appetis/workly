@@ -5,7 +5,7 @@
     role="dialog"
     aria-modal="true"
   >
-    <div class="modal-background" aria-hidden="true"></div>
+    <div class="init-modal-background" aria-hidden="true"></div>
     <div class="modal">
       <!--      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>-->
 

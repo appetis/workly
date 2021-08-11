@@ -5,21 +5,32 @@
     role="dialog"
     aria-modal="true"
   >
-    <div class="modal-background" aria-hidden="true"></div>
+    <div class="init-modal-background" aria-hidden="true"></div>
     <div class="modal">
       <!--      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>-->
 
       <div class="modal-content-sm">
+        <div class="modal-header init-modal-header">
+          <div
+            class="w-1/10 bg-wk-gray-box px-2 rounded mr-2 align-middle pt-1"
+          >
+            W
+          </div>
+          <div class="w-9/10 pt-1">Unlock Workly with Invite Code</div>
+        </div>
         <div class="modal-body">
-          <h2 class="text-lg py-4">Enter your invite code</h2>
+          <p class="text-sm">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra sit
+            nunc, purus lectus ornare non. Ornare id ac augue sed suspendisse
+            erat auctor semper.
+          </p>
 
-          <div class="flex">
-            <!--            <CodeInput @codeKeyup="codeKeyup" :current="1" />-->
+          <div class="flex mt-6">
             <div class="w-1/6 px-1">
               <input
                 type="text"
                 maxlength="1"
-                class="input-underline"
+                class="input-code"
                 ref="code_1"
                 @keyup="codeKeyup(1)"
               />
@@ -28,7 +39,7 @@
               <input
                 type="text"
                 maxlength="1"
-                class="input-underline"
+                class="input-code"
                 ref="code_2"
                 @keyup="codeKeyup(2)"
               />
@@ -37,7 +48,7 @@
               <input
                 type="text"
                 maxlength="1"
-                class="input-underline"
+                class="input-code"
                 ref="code_3"
                 @keyup="codeKeyup(3)"
               />
@@ -46,7 +57,7 @@
               <input
                 type="text"
                 maxlength="1"
-                class="input-underline"
+                class="input-code"
                 ref="code_4"
                 @keyup="codeKeyup(4)"
               />
@@ -55,7 +66,7 @@
               <input
                 type="text"
                 maxlength="1"
-                class="input-underline"
+                class="input-code"
                 ref="code_5"
                 @keyup="codeKeyup(5)"
               />
@@ -64,21 +75,24 @@
               <input
                 type="text"
                 maxlength="1"
-                class="input-underline"
+                class="input-code"
                 ref="code_6"
                 @keyup="codeKeyup(6)"
               />
             </div>
           </div>
 
-          <div class="text-right flex mt-6">
-            <div class="w-1/2 px-1">
-              <button class="btn-border-black" @click="goSignup">Signup</button>
-            </div>
-            <div class="w-1/2 px-1">
-              <button class="btn-black" @click="verifyCode">Continue</button>
-            </div>
+          <div class="mt-7">
+            <button class="btn-black-full" @click="verifyCode">Continue</button>
           </div>
+        </div>
+        <div class="modal-footer init-modal-footer">
+          Don't have an invite code?
+          <span
+            class="text-blue cursor-pointer font-semibold underline"
+            @click="goSignup"
+            >Register</span
+          >
         </div>
       </div>
     </div>
