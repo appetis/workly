@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const {User} = require('../models');
+const emailService = require('../services/email.service');
 
 exports.create = async (req, res) => {
     try {
@@ -38,6 +39,8 @@ exports.create = async (req, res) => {
             password: hashedPassword
         });
         delete newUser.dataValues.password;
+
+        emailService.sendVerificationCode(newUser);
 
         return res.status(201).json(newUser);
     } catch (error) {

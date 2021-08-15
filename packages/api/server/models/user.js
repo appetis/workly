@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   });
   User.associate = (db) => {
     db.User.belongsToMany(db.Team, { through: 'UserTeam' });
+    db.User.hasMany(db.Code);
   };
   return User;
 }
