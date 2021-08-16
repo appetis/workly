@@ -34,7 +34,8 @@ exports.generateToken = async (req, res) => {
         return res.status(200).json({
             code: 200,
             message: 'Token generated',
-            token
+            token,
+            status: user.status
         });
     } catch (error) {
         console.error(error);

@@ -9,6 +9,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(100),
       allowNull: false,
     },
+    status: {
+      type: DataTypes.STRING(10),
+      allowNull: false,
+      defaultValue: 'CREATED'
+    },
   }, {
     charset: 'utf8',
     collate: 'utf8_general_ci',
