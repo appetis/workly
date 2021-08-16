@@ -25,10 +25,10 @@ exports.generateToken = async (req, res) => {
         }
 
         const token = jwt.sign({
-            email: req.body.email
+            id: user.id
         }, process.env.JWT_SECRET, {
             expiresIn: '30m',
-            issuer: 'appetis'
+            issuer: 'workly'
         });
 
         return res.status(200).json({
