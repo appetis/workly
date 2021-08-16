@@ -17,7 +17,7 @@ exports.sendVerificationCode = async (user) => {
 saveCode = async (userId, code) => {
     Code.create({
         code,
-        status: 'ACTIVE',
+        status: 'CREATED',
         expiredAt: getExpiredTime(),
         UserId: userId
     });

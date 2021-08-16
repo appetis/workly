@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     status: {
       type: DataTypes.STRING(10),
       allowNull: false,
+      defaultValue: 'CREATED'
     },
     expiredAt: {
       type: DataTypes.DATE,
