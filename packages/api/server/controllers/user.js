@@ -121,7 +121,7 @@ exports.verify = async (req, res) => {
         const userCode = await Code.findOne({
             where: {
                 UserId: userId,
-                status: 'CREATED',
+                status: 'CR',
                 expiredAt: {
                     [Op.gt]: new Date()
                 }
@@ -142,8 +142,8 @@ exports.verify = async (req, res) => {
             })
         }
 
-        await user.update({status: 'VERIFIED'});
-        await userCode.update({status: 'VERIFIED'});
+        await user.update({status: 'VE'});
+        await userCode.update({status: 'VE'});
 
         return res.status(200).json(user);
     } catch (error) {

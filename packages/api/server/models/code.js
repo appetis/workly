@@ -6,9 +6,9 @@ module.exports = (sequelize, DataTypes) => {
       unique: true
     },
     status: {
-      type: DataTypes.STRING(10),
+      type: DataTypes.STRING(4),
       allowNull: false,
-      defaultValue: 'CREATED'
+      defaultValue: 'CR'
     },
     expiredAt: {
       type: DataTypes.DATE,

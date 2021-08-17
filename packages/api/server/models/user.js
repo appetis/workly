@@ -10,9 +10,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     status: {
-      type: DataTypes.STRING(10),
+      type: DataTypes.STRING(4),
       allowNull: false,
-      defaultValue: 'CREATED'
+      defaultValue: 'CR'
     },
   }, {
     charset: 'utf8',
