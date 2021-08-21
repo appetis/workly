@@ -1,20 +1,22 @@
 const bcrypt = require('bcrypt');
-const {User} = require('../models');
+const { Op } = require('sequelize');
+const { User, Code } = require('../models');
+const emailService = require('../services/email.service');
 
 exports.create = async (req, res) => {
     try {
         let email = req.body.email;
         if (!validateEmail(email)) {
-            return res.status(401).json({
-                code: 401,
+            return res.status(400).json({
+                code: 400,
                 message: 'Invalid email address'
             });
         }
 
         let password = req.body.password;
         if (password.length < 8) {
-            return res.status(401).json({
-                code: 401,
+            return res.status(400).json({
+                code: 400,
                 message: 'Password must be at least 8 characters'
             });
         }
@@ -25,8 +27,8 @@ exports.create = async (req, res) => {
             }
         });
         if (user) {
-            return res.status(401).json({
-                code: 401,
+            return res.status(400).json({
+                code: 400,
                 message: 'Email is already in use.'
             });
 
@@ -38,6 +40,8 @@ exports.create = async (req, res) => {
             password: hashedPassword
         });
         delete newUser.dataValues.password;
+
+        emailService.sendVerificationCode(newUser);
 
         return res.status(201).json(newUser);
     } catch (error) {
@@ -67,17 +71,21 @@ exports.getUsers = async (req, res) => {
     }
 };
 
-exports.getUser = async (req, res) => {
+exports.getUserById = async (req, res) => {
     try {
         const user = await User.findOne({
             where: {
                 id: parseInt(req.params.id, 10)
-            }, attributes: {
+            },
+            attributes: {
                 exclude: ['password']
             }
         });
         if (!user) {
-            return res.status(204).send();
+            return res.status(204).json({
+                code: 204,
+                message: 'Cannot found the user'
+            });
         }
 
         return res.status(202).json(user);
@@ -89,6 +97,63 @@ exports.getUser = async (req, res) => {
         });
     }
 };
+
+exports.verify = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const code = req.body.code;
+
+        let user = await User.findOne({
+            where: {
+                id: userId
+            },
+            attributes: {
+                exclude: ['password']
+            }
+        });
+        if (!user) {
+            return res.status(400).json({
+                code: 400,
+                message: 'Cannot found the user'
+            });
+        }
+
+        const userCode = await Code.findOne({
+            where: {
+                UserId: userId,
+                status: 'CR',
+                expiredAt: {
+                    [Op.gt]: new Date()
+                }
+            }
+        });
+
+        if (!userCode) {
+            return res.status(400).json({
+                code: 400,
+                message: 'Cannot found a code for the user'
+            });
+        }
+
+        if (userCode.code !== code) {
+            return res.status(400).json({
+                code: 400,
+                message: 'Invalid code'
+            })
+        }
+
+        await user.update({status: 'VE'});
+        await userCode.update({status: 'VE'});
+
+        return res.status(200).json(user);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+           code: 500,
+           message: 'Server error'
+        });
+    }
+}
 
 validateEmail = (email) => {
     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
