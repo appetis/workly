@@ -1,4 +1,4 @@
-const { create, getUsers, getUser } = require('./user');
+const { create, getUsers, getUserById } = require('./user');
 jest.mock('../models');
 const { User } = require('../models');
 
@@ -86,7 +86,7 @@ describe('get a user', () => {
     test('should response 204 if the user does not exist', async () => {
         User.findOne.mockReturnValue(Promise.resolve(null));
 
-        await getUser(req, res);
+        await getUserById(req, res);
         expect(res.status).toBeCalledWith(204);
     });
 
@@ -96,7 +96,7 @@ describe('get a user', () => {
            email: 'test@test.com'
        }));
 
-       await getUser(req, res);
+       await getUserById(req, res);
        expect(res.status).toBeCalledWith(202);
     });
 
@@ -105,7 +105,7 @@ describe('get a user', () => {
         console.error = jest.fn();
         User.findOne.mockReturnValue(Promise.reject(error));
 
-        await getUser(req, res);
+        await getUserById(req, res);
         expect(res.status).toBeCalledWith(500);
     });
 });
