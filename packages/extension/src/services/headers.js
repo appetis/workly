@@ -1,6 +1,7 @@
 const headers = {
-  Authorization: 'Bearer my-token',
+  Authorization: 'Bearer ' + localStorage.token,
   'My-Custom-Header': 'foobar',
 }
+console.log('===>', headers)
 
 export default headers

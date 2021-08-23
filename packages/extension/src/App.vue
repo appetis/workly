@@ -23,6 +23,25 @@ export default {
     LeftMenu,
     Header,
   },
+  mounted() {
+    if (localStorage.token) {
+      this.$store.state.ready = true
+      this.$store.state.user.token = localStorage.token
+    }
+
+    var events = [
+      { id: 1, value: 'hello' },
+      { id: 2, value: 'hello2' },
+      { id: 3, value: 'hello3' },
+    ]
+
+    // set array to LocalStorage
+    localStorage.setItem('events', JSON.stringify(events))
+
+    // get array from LocalStorage
+    console.log(JSON.parse(localStorage.getItem('events') || '[]'))
+  },
+  watch: {},
   methods: {
     // getImgUrl(pet) {
     //   var images = require.context('../assets/images/', false, /\.png$/)

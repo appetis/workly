@@ -14,4 +14,7 @@ export default {
   addUser(data) {
     return apiClient.post('/api/users', data, { headers })
   },
+  verify(userid, data) {
+    return apiClient.post(`/api/users/${userid}/verify`, data)
+  },
 }

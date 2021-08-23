@@ -57,7 +57,7 @@ export default {
       showSignup: false,
       showSignin: false,
       showVerification: false,
-      callFocus: false,
+      callFocus: true,
     }
   },
   methods: {
@@ -89,6 +89,7 @@ export default {
     goVerification() {
       this.showInit = false
       this.showCode = false
+      this.callFocus = true
       this.showSignup = false
       this.showSignin = false
       this.showVerification = true

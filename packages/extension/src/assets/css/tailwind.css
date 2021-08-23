@@ -133,7 +133,7 @@
         @apply bg-white border border-solid border-gray-500 rounded text-wk-darkgray w-full py-2 px-3 outline-none
     }
     .input-code {
-        @apply text-center border border-solid border-gray-300 bg-wk-lightgray w-full text-lg py-2 rounded focus:outline-none focus:border-red-500 focus:bg-white
+        @apply text-center border border-solid border-gray-300 bg-wk-lightgray w-full text-lg py-2 rounded uppercase focus:outline-none focus:border-red-500 focus:bg-white
     }
     .input-underline {
         @apply text-center border-b-2 border-solid border-gray-800 w-full text-lg py-2 focus:outline-none focus:border-red-500

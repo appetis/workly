@@ -78,12 +78,26 @@
                 showRequiredPasswordMessage
               }}</span>
             </div>
+            <div
+              class="
+                text-red-700
+                mt-4
+                border border-red-700
+                rounded
+                w-full
+                py-2
+                px-3
+              "
+              v-show="showSignupFailMessage != ''"
+            >
+              {{ showSignupFailMessage }}
+            </div>
             <div class="pt-5">
               <button class="btn-black-full">Sign up with email</button>
               <div class="text-xs mt-1">
                 By signing up, you agree to the Worlky's
-                <span class="underline">Terms of Use</span> and
-                <span class="underline">Privacy Policy</span>.
+                <span class="underline cursor-pointer">Terms of Use</span> and
+                <span class="underline cursor-pointer">Privacy Policy</span>.
               </div>
             </div>
           </form>
@@ -130,6 +144,7 @@ export default {
       showRequiredPassword: false,
       showRequiredPasswordMessage: '',
       showPassword: false,
+      showSignupFailMessage: '',
       user: this.freshUserObject(),
     }
   },
@@ -207,8 +222,17 @@ export default {
           console.log('success')
         })
         .catch((error) => {
-          console.log(error)
+          this.showSignupFailMessage = error.response.data.message
         })
+      /*UserService.addUser(this.user)
+        .then(() => {
+          this.freshUserObject()
+          this.goVerification()
+          console.log('success')
+        })
+        .catch((error) => {
+          this.showSignupFailMessage = error.response.data.message
+        })*/
     },
     freshUserObject() {
       return {
