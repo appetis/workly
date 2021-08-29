@@ -1,6 +1,6 @@
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const {User} = require('../models');
+const authService = require('../services/auth.service');
 
 exports.login = async (req, res) => {
     try {
@@ -29,7 +29,7 @@ exports.login = async (req, res) => {
         delete user.dataValues.password;
 
         if (user.status === 'VE') {
-            const token = generateToken(user.id);
+            const token = authService.generateToken(user.id);
             return res.status(200).json({
                 code: 200,
                 message: 'Logged in successfully',
@@ -50,13 +50,4 @@ exports.login = async (req, res) => {
             message: 'Server error'
         });
     }
-}
-
-generateToken = (userId) => {
-    return jwt.sign({
-        id: userId
-    }, process.env.JWT_SECRET, {
-        expiresIn: '30m',
-        issuer: 'workly'
-    });
 }
