@@ -11,6 +11,7 @@
       id="modal-code"
       :callFocus="callFocus"
       @goSignup="goSignup"
+      @goSignin="goSignin"
     />
     <Signup
       v-show="showSignup"
@@ -27,6 +28,7 @@
       @goSignup="goSignup"
       @goAsGuest="goAsGuest"
       @openCalendar="openCalendar"
+      @goVerification="goVerification"
     />
     <Verification
       v-show="showVerification"
@@ -82,6 +84,7 @@ export default {
     },
     goSignin() {
       this.showInit = false
+      this.showCode = false
       this.showSignup = false
       this.showSignin = true
       console.log('goSignin')
@@ -100,7 +103,8 @@ export default {
       this.showSignup = false
       this.showSignin = false
       this.$store.state.ready = true
-      console.log('goAsGuest')
+      this.$store.state.isGuest = true
+      localStorage.isGuest = true
     },
     openCalendar() {
       this.showInit = false

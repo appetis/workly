@@ -102,11 +102,14 @@
             </div>
           </form>
 
-          <div class="border-b border-solid border-gray-200 h-6 text-center">
+          <div
+            class="border-b border-solid border-gray-200 h-6 text-center"
+            v-show="!$store.state.isGuest"
+          >
             <span class="relative top-3 bg-white px-10">or</span>
           </div>
 
-          <div class="flex pt-6">
+          <div class="flex pt-6" v-show="!$store.state.isGuest">
             <div class="w-1/2 pr-1">
               <button class="btn-border-black" @click="goAsGuest">
                 Continue as a guest

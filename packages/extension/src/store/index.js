@@ -11,14 +11,17 @@ export default new Vuex.Store({
       token: '',
     },
     ready: false,
+    isGuest: false,
   },
   mutations: {
-    SET_USER(state, user) {
-      console.log('SET_USER ===>', user)
-      state.user.id = user.id
-      if (user.token) {
-        state.user.token = user.token
-        localStorage.token = user.token
+    SET_USER(state, data) {
+      console.log('SET_USER ===>', data.user, data.token)
+      state.user.id = data.user.id
+      if (data.token) {
+        state.user.token = data.token
+        localStorage.token = data.token
+        localStorage.removeItem('isGuest')
+        state.isGuest = false
       }
       //state.ready = true
     },
@@ -27,13 +30,12 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    getToken({ commit }, user) {
-      return UserService.getToken(user)
+    login({ commit }, user) {
+      return UserService.login(user)
         .then((response) => {
-          // console.log('response ====>', response)
-          // user.token = response.data.token
           commit('SET_USER', response.data)
-          if (response.data.verified) commit('SET_READY')
+          if (response.data.user.status === 'VE') commit('SET_READY')
+          return response
         })
         .catch((error) => {
           throw error
@@ -42,7 +44,9 @@ export default new Vuex.Store({
     verifyCode({ commit }, data) {
       return UserService.verify(data.id, data.req)
         .then((response) => {
-          commit('SET_USER', response.user)
+          console.log('VERIFY --->', response)
+          commit('SET_USER', response.data)
+          if (response.data.user.status === 'VE') commit('SET_READY')
         })
         .catch((error) => {
           throw error
@@ -51,7 +55,10 @@ export default new Vuex.Store({
     createUser({ commit }, user) {
       return UserService.addUser(user)
         .then((response) => {
-          commit('SET_USER', response.data)
+          const data = {
+            user: response.data,
+          }
+          commit('SET_USER', data)
         })
         .catch((error) => {
           throw error
@@ -60,7 +67,7 @@ export default new Vuex.Store({
     joinTeamByCode({ commit }, code) {
       return UserService.verify(code)
         .then((response) => {
-          commit('SET_USER', response.user)
+          commit('SET_USER', response.data)
         })
         .catch((error) => {
           throw error

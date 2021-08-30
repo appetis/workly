@@ -33,7 +33,7 @@
                   class="input-code"
                   ref="code_1"
                   @keyup="codeKeyup(1)"
-                  @focus="onFocus()"
+                  @focus="onFocus(1)"
                 />
               </div>
               <div class="w-1/6 px-1">
@@ -43,7 +43,7 @@
                   class="input-code"
                   ref="code_2"
                   @keyup="codeKeyup(2)"
-                  @focus="onFocus()"
+                  @focus="onFocus(2)"
                 />
               </div>
               <div class="w-1/6 px-1">
@@ -53,7 +53,7 @@
                   class="input-code"
                   ref="code_3"
                   @keyup="codeKeyup(3)"
-                  @focus="onFocus()"
+                  @focus="onFocus(3)"
                 />
               </div>
               <div class="w-1/6 px-1">
@@ -63,7 +63,7 @@
                   class="input-code"
                   ref="code_4"
                   @keyup="codeKeyup(4)"
-                  @focus="onFocus()"
+                  @focus="onFocus(4)"
                 />
               </div>
               <div class="w-1/6 px-1">
@@ -73,7 +73,7 @@
                   class="input-code"
                   ref="code_5"
                   @keyup="codeKeyup(5)"
-                  @focus="onFocus()"
+                  @focus="onFocus(5)"
                 />
               </div>
               <div class="w-1/6 px-1">
@@ -83,7 +83,7 @@
                   class="input-code"
                   ref="code_6"
                   @keyup="codeKeyup(6)"
-                  @focus="onFocus()"
+                  @focus="onFocus(6)"
                 />
               </div>
             </div>
@@ -176,6 +176,9 @@ export default {
     goSignup() {
       this.$emit('goSignup')
     },
+    openCalendar() {
+      this.$emit('openCalendar')
+    },
     onSubmit() {
       const code = this.setCode()
       if (code.length < 6) return false
@@ -190,10 +193,11 @@ export default {
       this.$store
         .dispatch('verifyCode', data)
         .then(() => {
-          this.freshUserObject()
-          console.log('success')
+          console.log('Verification --- lsuccess', this.$store.state.user)
+          this.openCalendar()
         })
         .catch((error) => {
+          console.log("VERIFICATION ERROR ===>", error);
           this.showVerifyFailMessage = error.response.data.message
         })
     },

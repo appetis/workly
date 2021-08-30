@@ -95,11 +95,14 @@
             </div>
           </form>
 
-          <div class="border-b border-solid border-gray-200 h-6 text-center">
+          <div
+            class="border-b border-solid border-gray-200 h-6 text-center"
+            v-show="!$store.state.isGuest"
+          >
             <span class="relative top-3 bg-white px-10">or</span>
           </div>
 
-          <div class="flex pt-6">
+          <div class="flex pt-6" v-show="!$store.state.isGuest">
             <div class="w-1/2 pr-1">
               <button class="btn-border-black" @click="goAsGuest">
                 Continue as a guest
@@ -157,6 +160,9 @@ export default {
     openCalendar() {
       this.$emit('openCalendar')
     },
+    goVerification() {
+      this.$emit('goVerification')
+    },
     onBlurEmail() {
       let error = 0
       if (!this.user.email) {
@@ -210,15 +216,15 @@ export default {
       if (empty) return false
 
       this.$store
-        .dispatch('getToken', this.user)
-        .then(() => {
+        .dispatch('login', this.user)
+        .then((response) => {
           this.freshUserObject()
+          console.log('Signin ====>', response)
           console.log('success', this.$store.state.user)
-          this.openCalendar()
+          if (response.data.user.status === 'VE') this.openCalendar()
+          else this.goVerification()
         })
         .catch((error) => {
-          console.log('=================> error!!!!')
-          console.log('===>', error.response)
           this.showAuthenticationFailMessage = error.response.data.message
         })
     },

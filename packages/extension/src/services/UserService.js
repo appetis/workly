@@ -2,8 +2,8 @@ import apiClient from './apiClient'
 import headers from './headers'
 
 export default {
-  getToken(data) {
-    return apiClient.post('/api/token', data)
+  login(data) {
+    return apiClient.post('/api/login', data)
   },
   getUsers() {
     return apiClient.get('/api/users')

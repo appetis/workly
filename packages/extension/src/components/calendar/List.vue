@@ -212,7 +212,8 @@ export default {
       const max = new Date(`${end.date}T23:59:59`)
       const days = (max.getTime() - min.getTime()) / 86400000
       const eventCount = this.rnd(days, days + 20)
-
+      console.log(eventCount)
+      /*
       for (let i = 0; i < eventCount; i++) {
         const allDay = this.rnd(0, 3) === 0
         const firstTimestamp = this.rnd(min.getTime(), max.getTime())
@@ -227,7 +228,8 @@ export default {
           color: this.colors[this.rnd(0, this.colors.length - 1)],
           timed: !allDay,
         })
-      }
+      }*/
+      console.log(events)
 
       this.events = events
     },

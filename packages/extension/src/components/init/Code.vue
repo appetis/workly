@@ -97,6 +97,12 @@
             @click="goSignup"
             >Register</span
           >
+          |
+          <span
+            class="text-blue cursor-pointer font-semibold underline"
+            @click="goSignin"
+            >Login</span
+          >
         </div>
       </div>
     </div>
@@ -167,11 +173,13 @@ export default {
     goSignup() {
       this.$emit('goSignup')
     },
+    goSignin() {
+      this.$emit('goSignin')
+    },
     onSubmit() {
       const code = this.setCode()
       if (code.length < 6) return false
-      console.log(code);
-      return false;
+      console.log(code)
 
       this.$store
         .dispatch('verifyCode', code)

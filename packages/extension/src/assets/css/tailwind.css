@@ -76,10 +76,10 @@
         @apply py-3 px-5 sm:px-6
     }
     .modal-body {
-        @apply bg-white py-7 px-5 sm:py-8 sm:px-6
+        @apply bg-white py-7 px-5 sm:py-8 sm:px-6 text-wk-dark
     }
     .modal-footer {
-        @apply py-3 px-5 sm:px-6
+        @apply py-3 px-5 sm:px-6 text-wk-dark
     }
     .profile-photo {
         @apply relative mx-auto flex-shrink-0 flex items-center justify-center h-20 w-20 rounded-full sm:h-20 sm:w-20
@@ -110,7 +110,8 @@
         @apply text-wk-darkgray;
     }
     .theme--light.v-calendar-weekly .v-calendar-weekly__head-weekday.v-outside,
-    .v-calendar-weekly__head-weekday.v-future {
+    .v-calendar-weekly__head-weekday.v-future,
+    .v-calendar-weekly__head-weekday.v-present {
         @apply bg-wk-light text-wk-darkgray py-3
     }
     .v-application--wrap {
@@ -158,6 +159,25 @@
     }
     .init-modal-footer {
         @apply bg-gray-200 text-center
+    }
+
+    /* guest */
+    .member-only-form {
+        @apply absolute border rounded border-solid p-3 w-48 bg-white text-wk-darkgray left-28 border-red-500;
+        z-index: 1;
+        /*position: absolute;*/
+        /*background-color: #ffffff;*/
+        /*border: solid 2px #d0d0d0;*/
+        /*width: 350px;*/
+        /*height: 150px;*/
+        /*padding: 10px;*/
+        /*left: 110px;*/
+    }
+    .member-only-form .close {
+        @apply absolute top-2 right-2 w-4 h-4 cursor-pointer
+        /*position: absolute;*/
+        /*top: 5px;*/
+        /*right: 5px*/
     }
 }
 @layer utilities {

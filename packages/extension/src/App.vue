@@ -24,11 +24,11 @@ export default {
     Header,
   },
   mounted() {
-    if (localStorage.token) {
+    if (localStorage.token || localStorage.isGuest) {
       this.$store.state.ready = true
       this.$store.state.user.token = localStorage.token
     }
-
+    if (localStorage.isGuest) this.$store.state.isGuest = true
     var events = [
       { id: 1, value: 'hello' },
       { id: 2, value: 'hello2' },
