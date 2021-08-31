@@ -31,12 +31,76 @@
     .header-avatar {
         @apply w-14 ml-4 cursor-pointer
     }
+    .modal {
+        @apply flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0
+    }
+    .modal-background,
+    .modal .modal-background {
+        @apply fixed inset-0 bg-brand-darkgray bg-opacity-75 transition-opacity backdrop-filter backdrop-blur-sm
+    }
+    .modal-content, .modal-content-sm, .modal-content-md, .modal-content-lg, .modal-content-xl {
+        @apply inline-block bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:mt-40 sm:mb-8 sm:align-middle sm:w-full
+    }
+    .modal-content-sm {
+        @apply sm:max-w-sm
+    }
+    .modal-content-md {
+        @apply sm:max-w-md
+    }
+    .modal-content-lg {
+        @apply sm:max-w-lg
+    }
+    .modal-content-xl {
+        @apply sm:max-w-xl
+    }
+    .modal-close {
+        @apply absolute right-0 p-4 cursor-pointer
+    }
+    .modal-body {
+        @apply bg-white py-7 px-7 sm:py-8 sm:px-12
+    }
+    .profile-photo {
+        @apply mx-auto relative flex-shrink-0 flex items-center justify-center h-20 w-20 rounded-full sm:mx-0 sm:h-20 sm:w-20
+    }
+    .profile-online {
+        @apply absolute h-4 w-4 rounded-full right-2 bottom-2
+    }
+    .profile-top {
+        @apply mt-3 text-center w-full sm:mt-0 sm:ml-4 sm:text-left
+    }
+    .profile-icon {
+        @apply inline-block bg-black rounded-full text-white h-6 w-6 mr-2 text-center cursor-pointer
+    }
+}
+@layer utilities {
+    @variants responsive {
+        .text-shadow {
+            text-shadow: 2px 2px 4px #333;
+        }
+        .text-shadow-md {
+            text-shadow: 4px 4px 8px #333;
+        }
+        .text-shadow-lg {
+            text-shadow: 15px 15px 30px #333;
+        }
+        .text-shadow-none {
+            text-shadow: none;
+        }
+    }
 }
 
 html, body {
     font-family: "Avenir Next", "Avenir", sans-serif;
 }
-
 .logo {
     font-size: 10px;
+}
+.profile-online {
+    background-color: #01C314;
+}
+.w-18 {
+    width: 4.5rem;
+}
+.h-18 {
+    height: 4.5rem;
 }

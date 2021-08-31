@@ -10,7 +10,7 @@ Chrome Extension for team dashboard in New Tab
 ## Project setup
 
 ```shell
-$ git clone https://github.com/appetis/appetis.git
+$ git clone https://github.com/workly-page/workly.git
 
 $ cp .env.example .env
 

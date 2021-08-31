@@ -21,5 +21,5 @@ EXPOSE 3000
 
 # 컨테이너에서 실행될 명령을 지정
 # CMD ["npm", "start"]
-CMD ["pm2-docker", "./bin/www"]
+CMD ["pm2-docker", "./bin/server.js"]
 #CMD ["pm2-runtime", "start", "ecosystem.config.js", "--env", "production"]

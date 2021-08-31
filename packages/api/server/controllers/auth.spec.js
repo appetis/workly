@@ -1,11 +1,11 @@
-const { generateToken } = require('./auth');
+const { token } = require('./auth');
 const bcrypt = require('bcrypt');
 jest.mock('../models');
 const { User } = require('../models');
 
-describe('generate JWT token', () => {
+describe('login', () => {
     const email = 'test@test.com';
-    const password = 'test';
+    const password = 'test1234';
     const req = {
         body: { email, password }
     };
@@ -17,7 +17,7 @@ describe('generate JWT token', () => {
     test('should response 401 if user info is incorrect', async () => {
         User.findOne.mockReturnValue(Promise.resolve({ email, password }));
 
-        await generateToken(req, res);
+        await token(req, res);
         expect(res.status).toBeCalledWith(401);
     });
 
@@ -28,7 +28,7 @@ describe('generate JWT token', () => {
         const hashedPassword = await bcrypt.hash(password, 10);
         User.findOne.mockReturnValue(Promise.resolve({ email, password: hashedPassword }));
 
-        await generateToken(req, res);
+        await token(req, res);
 
         expect(res.status).toBeCalledWith(200);
         const expected = {
@@ -44,7 +44,7 @@ describe('generate JWT token', () => {
         console.error = jest.fn();
         User.findOne.mockReturnValue(Promise.reject(error));
 
-        await generateToken(req, res);
+        await token(req, res);
         expect(res.status).toBeCalledWith(500);
     })
 });

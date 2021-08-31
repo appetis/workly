@@ -21,6 +21,10 @@ module.exports = {
         'extra-bold': 800,
         black: 900,
       },
+      boxShadow: {
+        sm: '2px 2px 4px #333',
+        DEFAULT: '3px 3px 10px #333',
+      },
     },
   },
   variants: {

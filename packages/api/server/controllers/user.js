@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const { Op } = require('sequelize');
 const { User, Code } = require('../models');
 const emailService = require('../services/email.service');
+const authService = require('../services/auth.service');
 
 exports.create = async (req, res) => {
     try {
@@ -145,7 +146,12 @@ exports.verify = async (req, res) => {
         await user.update({status: 'VE'});
         await userCode.update({status: 'VE'});
 
-        return res.status(200).json(user);
+        return res.status(200).json({
+            code: 200,
+            message: 'Verified the user email',
+            user,
+            token: authService.generateToken(user.id)
+        });
     } catch (error) {
         console.error(error);
         return res.status(500).json({

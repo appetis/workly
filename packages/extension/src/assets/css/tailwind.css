@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css?family=Avenir');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    html {
+        @apply overflow-y-auto overflow-x-hidden !important
+    }
+    .init-background {
+        background-image: url("../images/init_background.png");
+        height: 100%;
+        background-position: center;
+        background-size: cover;
+    }
+    .left-menu {
+        @apply h-screen relative w-28 p-4 bg-wk-dark text-white
+    }
+    .logo {
+        @apply bg-wk-darkgray text-xs text-gray-500 text-center py-5 px-2 rounded-lg
+    }
+    .menu-icon-button {
+        @apply text-wk-darkgray block mb-6 px-4 rounded-full px-3 py-4 text-center mb-6 hover:bg-white hover:text-wk-dark
+    }
+    .router-link-exact-active {
+        @apply bg-white text-wk-dark rounded-full py-4 text-center mb-6
+    }
+    .header {
+        @apply w-full h-20 text-wk-dark border-b border-gray-200
+    }
+    .header-title {
+        @apply float-left font-semi-bold text-xl p-6
+    }
+    .header-menus {
+        @apply flex items-center float-right text-gray-500 px-4 py-2
+    }
+    .header-icons {
+        @apply px-2 cursor-pointer
+    }
+    .header-avatar {
+        @apply w-16 ml-4 cursor-pointer
+    }
+    .modal {
+        @apply flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0
+    }
+    .modal-background,
+    .modal .modal-background {
+        @apply fixed inset-0 bg-wk-darkgray bg-opacity-75 transition-opacity backdrop-filter backdrop-blur-sm
+    }
+    .init-modal-background {
+        @apply fixed inset-0 bg-wk-darkgray bg-opacity-40 transition-opacity backdrop-filter backdrop-blur-sm
+    }
+/*    .modal-background,
+    .modal .modal-background {
+        z-index: 2;
+    }*/
+    .modal-content, .modal-content-sm, .modal-content-md, .modal-content-lg, .modal-content-xl {
+        @apply inline-block bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:mt-40 sm:mb-8 sm:align-middle sm:w-full
+    }
+    .modal-content-sm {
+        @apply sm:max-w-sm
+    }
+    .modal-content-md {
+        @apply sm:max-w-md
+    }
+    .modal-content-lg {
+        @apply sm:max-w-lg
+    }
+    .modal-content-xl {
+        @apply sm:max-w-xl
+    }
+    .modal-close {
+        @apply absolute right-0 p-4 cursor-pointer
+    }
+    .modal-header {
+        @apply py-3 px-5 sm:px-6
+    }
+    .modal-body {
+        @apply bg-white py-7 px-5 sm:py-8 sm:px-6 text-wk-dark
+    }
+    .modal-footer {
+        @apply py-3 px-5 sm:px-6 text-wk-dark
+    }
+    .profile-photo {
+        @apply relative mx-auto flex-shrink-0 flex items-center justify-center h-20 w-20 rounded-full sm:h-20 sm:w-20
+    }
+    .profile-online,
+    .profile-online-sm {
+        @apply absolute rounded-full right-2 bottom-2
+    }
+    .profile-online,
+    .profile-online-sm {
+        @apply h-4 w-4
+    }
+    .profile-online-sm {
+        @apply h-3 w-3
+    }
+    .profile-top {
+        @apply mt-3 text-center w-full mx-auto
+    }
+    .profile-icon {
+        @apply inline-block bg-black rounded-full p-3 mx-2 text-center cursor-pointer text-white
+    }
+
+    /* calendar override */
+    .v-application {
+        font-family: "Avenir";
+    }
+    .v-application .primary--text {
+        @apply text-wk-darkgray;
+    }
+    .theme--light.v-calendar-weekly .v-calendar-weekly__head-weekday.v-outside,
+    .v-calendar-weekly__head-weekday.v-future,
+    .v-calendar-weekly__head-weekday.v-present {
+        @apply bg-wk-light text-wk-darkgray py-3
+    }
+    .v-application--wrap {
+        min-height: auto;
+    }
+    .v-btn--fab.v-size--small {
+        height: 30px;
+        width: 30px;
+    }
+    .v-toolbar__content, .v-toolbar__extension {
+        padding-right: 25px;
+    }
+    .v-btn {
+        text-transform: capitalize;
+    }
+    label {
+        @apply font-medium text-sm
+    }
+    .white-board-rounded {
+        @apply bg-white border border-solid border-gray-500 rounded text-wk-darkgray w-full py-2 px-3 outline-none
+    }
+    .input-code {
+        @apply text-center border border-solid border-gray-300 bg-wk-lightgray w-full text-lg py-2 rounded uppercase focus:outline-none focus:border-red-500 focus:bg-white
+    }
+    .input-underline {
+        @apply text-center border-b-2 border-solid border-gray-800 w-full text-lg py-2 focus:outline-none focus:border-red-500
+    }
+    .btn-black {
+        @apply py-2 px-11 rounded text-sm bg-black text-white border border-solid border-black font-medium hover:bg-white hover:border-black hover:text-black
+    }
+    .btn-black-full {
+        @apply py-2 px-11 rounded text-sm bg-black text-white border border-solid border-black font-medium w-full hover:bg-white hover:border-black hover:text-black
+    }
+    .btn-border-black {
+        @apply  py-2 w-full border border-solid border-black rounded text-sm hover:bg-black hover:text-white font-medium
+    }
+    .input-icon {
+        width: 20px;
+    }
+    .input-icons {
+        @apply absolute right-2 bottom-2 text-gray-500;
+    }
+    .init-modal-header {
+        @apply bg-black text-white flex font-semibold text-base
+    }
+    .init-modal-footer {
+        @apply bg-gray-200 text-center
+    }
+
+    /* guest */
+    .member-only-form {
+        @apply absolute border rounded border-solid p-3 w-48 bg-white text-wk-darkgray left-28 border-red-500;
+        z-index: 1;
+        /*position: absolute;*/
+        /*background-color: #ffffff;*/
+        /*border: solid 2px #d0d0d0;*/
+        /*width: 350px;*/
+        /*height: 150px;*/
+        /*padding: 10px;*/
+        /*left: 110px;*/
+    }
+    .member-only-form .close {
+        @apply absolute top-2 right-2 w-4 h-4 cursor-pointer
+        /*position: absolute;*/
+        /*top: 5px;*/
+        /*right: 5px*/
+    }
+}
+@layer utilities {
+    @variants responsive {
+        .text-shadow {
+            text-shadow: 2px 2px 4px #333;
+        }
+        .text-shadow-md {
+            text-shadow: 4px 4px 8px #333;
+        }
+        .text-shadow-lg {
+            text-shadow: 15px 15px 30px #333;
+        }
+        .text-shadow-none {
+            text-shadow: none;
+        }
+    }
+}
+
+html, body {
+    font-family: "Avenir Next", "Avenir", sans-serif;
+}
+img, svg, video, canvas, audio, iframe, embed, object {
+    display: initial;
+}
+.logo {
+    font-size: 10px;
+}
+.profile-online,
+.profile-online-sm {
+    background-color: #01C314;
+}
+.w-22 {
+    width: 5.5rem;
+}
+.w-18 {
+    width: 4.5rem;
+}
+.h-22 {
+    height: 5.5rem;
+}
+.h-18 {
+    height: 4.5rem;
+}
