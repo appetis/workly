@@ -17,10 +17,10 @@
         @apply h-screen relative w-28 p-4 bg-wk-dark text-white
     }
     .logo {
-        @apply bg-wk-darkgray text-xs text-gray-500 text-center py-5 px-2 rounded-lg
+        @apply bg-wk-secondary text-xs text-gray-500 text-center py-5 px-2 rounded-lg
     }
     .menu-icon-button {
-        @apply text-wk-darkgray block mb-6 px-4 rounded-full px-3 py-4 text-center mb-6 hover:bg-white hover:text-wk-dark
+        @apply text-wk-secondary block mb-6 px-4 rounded-full px-3 py-4 text-center mb-6 hover:bg-white hover:text-wk-dark
     }
     .router-link-exact-active {
         @apply bg-white text-wk-dark rounded-full py-4 text-center mb-6
@@ -45,10 +45,10 @@
     }
     .modal-background,
     .modal .modal-background {
-        @apply fixed inset-0 bg-wk-darkgray bg-opacity-75 transition-opacity backdrop-filter backdrop-blur-sm
+        @apply fixed inset-0 bg-wk-secondary bg-opacity-75 transition-opacity backdrop-filter backdrop-blur-sm
     }
     .init-modal-background {
-        @apply fixed inset-0 bg-wk-darkgray bg-opacity-40 transition-opacity backdrop-filter backdrop-blur-sm
+        @apply fixed inset-0 bg-wk-secondary bg-opacity-40 transition-opacity backdrop-filter backdrop-blur-sm
     }
 /*    .modal-background,
     .modal .modal-background {
@@ -107,12 +107,12 @@
         font-family: "Avenir";
     }
     .v-application .primary--text {
-        @apply text-wk-darkgray;
+        @apply text-wk-secondary;
     }
     .theme--light.v-calendar-weekly .v-calendar-weekly__head-weekday.v-outside,
     .v-calendar-weekly__head-weekday.v-future,
     .v-calendar-weekly__head-weekday.v-present {
-        @apply bg-wk-light text-wk-darkgray py-3
+        @apply bg-wk-light text-wk-secondary py-3
     }
     .v-application--wrap {
         min-height: auto;
@@ -131,7 +131,7 @@
         @apply font-medium text-sm
     }
     .white-board-rounded {
-        @apply bg-white border border-solid border-gray-500 rounded text-wk-darkgray w-full py-2 px-3 outline-none
+        @apply bg-white border border-solid border-gray-500 rounded text-wk-secondary w-full py-2 px-3 outline-none
     }
     .input-code {
         @apply text-center border border-solid border-gray-300 bg-wk-lightgray w-full text-lg py-2 rounded uppercase focus:outline-none focus:border-red-500 focus:bg-white
@@ -163,7 +163,7 @@
 
     /* guest */
     .member-only-form {
-        @apply absolute border rounded border-solid p-3 w-48 bg-white text-wk-darkgray left-28 border-red-500;
+        @apply absolute border rounded border-solid p-3 w-48 bg-white text-wk-secondary left-28 border-red-500;
         z-index: 1;
         /*position: absolute;*/
         /*background-color: #ffffff;*/

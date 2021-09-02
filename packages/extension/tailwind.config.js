@@ -6,10 +6,10 @@ module.exports = {
       colors: {
         wk: {
           lightgray: '#FAFAFA',
-          darkgray: '#474747',
+          secondary: '#7A9597',
           defgray: '#808080',
           light: '#EEEEEE',
-          dark: '#151515',
+          dark: '#042F31',
           'gray-box': '#AEAEAE',
         },
       },

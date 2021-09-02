@@ -197,7 +197,7 @@ export default {
           this.openCalendar()
         })
         .catch((error) => {
-          console.log("VERIFICATION ERROR ===>", error);
+          console.log('VERIFICATION ERROR ===>', error)
           this.showVerifyFailMessage = error.response.data.message
         })
     },
