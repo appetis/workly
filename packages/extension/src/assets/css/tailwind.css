@@ -17,10 +17,10 @@
         @apply h-screen relative w-28 p-4 bg-wk-dark text-white
     }
     .logo {
-        @apply bg-wk-darkgray text-xs text-gray-500 text-center py-5 px-2 rounded-lg
+        @apply bg-wk-secondary text-xs text-gray-500 text-center py-5 px-2 rounded-lg
     }
     .menu-icon-button {
-        @apply text-wk-darkgray block mb-6 px-4 rounded-full px-3 py-4 text-center mb-6 hover:bg-white hover:text-wk-dark
+        @apply text-wk-secondary block mb-6 px-4 rounded-full px-3 py-4 text-center mb-6 hover:bg-white hover:text-wk-dark
     }
     .router-link-exact-active {
         @apply bg-white text-wk-dark rounded-full py-4 text-center mb-6
@@ -32,23 +32,26 @@
         @apply float-left font-semi-bold text-xl p-6
     }
     .header-menus {
-        @apply flex items-center float-right text-gray-500 px-4 py-2
+        @apply flex items-center float-right text-gray-500 px-4 py-1
     }
     .header-icons {
         @apply px-2 cursor-pointer
     }
     .header-avatar {
-        @apply w-16 ml-4 cursor-pointer
+        @apply w-14 cursor-pointer
+    }
+    .profile-avatar {
+        @apply w-16 cursor-pointer
     }
     .modal {
         @apply flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0
     }
     .modal-background,
     .modal .modal-background {
-        @apply fixed inset-0 bg-wk-darkgray bg-opacity-75 transition-opacity backdrop-filter backdrop-blur-sm
+        @apply fixed inset-0 bg-black bg-opacity-75 transition-opacity backdrop-filter backdrop-blur-sm
     }
     .init-modal-background {
-        @apply fixed inset-0 bg-wk-darkgray bg-opacity-40 transition-opacity backdrop-filter backdrop-blur-sm
+        @apply fixed inset-0 bg-black bg-opacity-40 transition-opacity backdrop-filter backdrop-blur-sm
     }
 /*    .modal-background,
     .modal .modal-background {
@@ -76,24 +79,19 @@
         @apply py-3 px-5 sm:px-6
     }
     .modal-body {
-        @apply bg-white py-7 px-5 sm:py-8 sm:px-6 text-wk-dark
+        @apply bg-white py-7 px-5 sm:py-8 sm:px-6 text-black
     }
     .modal-footer {
-        @apply py-3 px-5 sm:px-6 text-wk-dark
+        @apply py-3 px-5 sm:px-6 text-black
     }
     .profile-photo {
-        @apply relative mx-auto flex-shrink-0 flex items-center justify-center h-20 w-20 rounded-full sm:h-20 sm:w-20
+        @apply mx-auto flex-shrink-0 flex items-center justify-center rounded-full
     }
     .profile-online,
-    .profile-online-sm {
-        @apply absolute rounded-full right-2 bottom-2
-    }
-    .profile-online,
-    .profile-online-sm {
-        @apply h-4 w-4
-    }
-    .profile-online-sm {
-        @apply h-3 w-3
+    .profile-leave,
+    .profile-meeting {
+        @apply rounded-full border-4 table;
+        padding: 2px;
     }
     .profile-top {
         @apply mt-3 text-center w-full mx-auto
@@ -107,12 +105,12 @@
         font-family: "Avenir";
     }
     .v-application .primary--text {
-        @apply text-wk-darkgray;
+        @apply text-wk-secondary;
     }
     .theme--light.v-calendar-weekly .v-calendar-weekly__head-weekday.v-outside,
     .v-calendar-weekly__head-weekday.v-future,
     .v-calendar-weekly__head-weekday.v-present {
-        @apply bg-wk-light text-wk-darkgray py-3
+        @apply bg-wk-light text-wk-secondary py-3
     }
     .v-application--wrap {
         min-height: auto;
@@ -131,7 +129,7 @@
         @apply font-medium text-sm
     }
     .white-board-rounded {
-        @apply bg-white border border-solid border-gray-500 rounded text-wk-darkgray w-full py-2 px-3 outline-none
+        @apply bg-white border border-solid border-gray-500 rounded text-black w-full py-2 px-3 outline-none
     }
     .input-code {
         @apply text-center border border-solid border-gray-300 bg-wk-lightgray w-full text-lg py-2 rounded uppercase focus:outline-none focus:border-red-500 focus:bg-white
@@ -158,12 +156,12 @@
         @apply bg-black text-white flex font-semibold text-base
     }
     .init-modal-footer {
-        @apply bg-gray-200 text-center
+        @apply bg-gray-200 text-center text-xs
     }
 
     /* guest */
     .member-only-form {
-        @apply absolute border rounded border-solid p-3 w-48 bg-white text-wk-darkgray left-28 border-red-500;
+        @apply absolute border rounded border-solid p-3 w-48 bg-white text-wk-secondary left-28 border-red-500;
         z-index: 1;
         /*position: absolute;*/
         /*background-color: #ffffff;*/
@@ -206,9 +204,16 @@ img, svg, video, canvas, audio, iframe, embed, object {
 .logo {
     font-size: 10px;
 }
-.profile-online,
-.profile-online-sm {
-    background-color: #01C314;
+.profile-online {
+    border-color: #01C314;
+}
+
+.profile-leave {
+    border-color: #ef3434;
+}
+
+.profile-meeting {
+    border-color: #dac12f;
 }
 .w-22 {
     width: 5.5rem;

@@ -213,8 +213,8 @@ export default {
       const days = (max.getTime() - min.getTime()) / 86400000
       const eventCount = this.rnd(days, days + 20)
       console.log(eventCount)
-      /*
-      for (let i = 0; i < eventCount; i++) {
+
+      /*      for (let i = 0; i < eventCount; i++) {
         const allDay = this.rnd(0, 3) === 0
         const firstTimestamp = this.rnd(min.getTime(), max.getTime())
         const first = new Date(firstTimestamp - (firstTimestamp % 900000))

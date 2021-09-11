@@ -1,12 +1,14 @@
 <template>
   <div class="left-menu">
-    <div class="logo">APPETIS LOGO</div>
+    <div>
+      <img :src="logo" />
+    </div>
     <div class="mt-10 px-1" v-show="!$store.state.isGuest">
       <router-link to="/" class="menu-icon-button" id="menu-icon-calendar"
         ><v-icon name="calendar" base-class="v-icon"></v-icon
       ></router-link>
       <router-link to="/user" class="menu-icon-button" id="menu-icon-user"
-        ><v-icon name="user" base-class="v-icon"></v-icon
+        ><v-icon name="users" base-class="v-icon"></v-icon
       ></router-link>
       <router-link to="/link" class="menu-icon-button" id="menu-icon-link"
         ><v-icon name="link" base-class="v-icon"></v-icon
@@ -32,7 +34,7 @@
       </div>
     </div>
 
-    ifGuest: {{ $store.state.isGuest }}
+    <!--    ifGuest: {{ $store.state.isGuest }}-->
 
     <div class="absolute bottom-0 px-1">
       <router-link to="/setting" class="menu-icon-button" id="menu-icon-setting"
@@ -54,8 +56,11 @@
             class="text-gray-400 align-middle w-4"
             name="log-in"
         ></v-icon>-->
-        <li class="ml-1 align-middle cursor-pointer" @click="goSignup">
-          Sign up for fee
+        <li
+          class="ml-1 align-middle cursor-pointer text-black"
+          @click="goSignup"
+        >
+          Sign up for free
         </li>
       </div>
     </div>
@@ -72,8 +77,11 @@
       @goVerification="goVerification"
       @openCalendar="openCalendar"
     />
-    <Verification v-show="showVerification" id="modal-signup"
-                  @openCalendar="openCalendar" />
+    <Verification
+      v-show="showVerification"
+      id="modal-signup"
+      @openCalendar="openCalendar"
+    />
   </div>
 </template>
 <script>
@@ -88,6 +96,7 @@ export default {
   },
   data() {
     return {
+      logo: require('@/assets/images/logo_s.png'),
       showTextSignup: false,
       css: {
         signupTop: '100px',
