@@ -1,7 +1,7 @@
 # Workly
 
 [![api](https://github.com/appetis/workly/actions/workflows/api.yml/badge.svg)](https://github.com/appetis/workly/actions/workflows/api.yml)
-[![app](https://github.com/appetis/workly/actions/workflows/app.yml/badge.svg)](https://github.com/appetis/workly/actions/workflows/app.yml)
+[![extension](https://github.com/appetis/workly/actions/workflows/extension.yml/badge.svg)](https://github.com/appetis/workly/actions/workflows/extension.yml)
 
 Chrome Extension for team dashboard in New Tab
 
