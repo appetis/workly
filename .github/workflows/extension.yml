@@ -1,0 +1,64 @@
+name: extension
+on:
+  push:
+    paths:
+      - 'packages/extension/**'
+    branches:
+      - master
+      - develop
+  pull_request:
+    paths:
+      - 'packages/extension/**'
+    branches:
+      - master
+      - develop
+
+jobs:
+  build-app:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 'packages/extension'
+    steps:
+      - name: Checkout source codes
+        uses: actions/checkout@v2
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Compress files
+        run: zip -r ./extension-deploy.zip ./dist
+
+      - name: Upload to AWS S3
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          aws s3 cp \
+          --region us-east-1 \
+          ./extension-deploy.zip s3://appetis-deploy/extension-deploy.zip
+
+      - name: Notify to Slack
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          author_name: BUILD - EXTENSION
+          fields: repo,message,commit,author,job,took
+          mention: channel
+          if_mention: failure,cancelled
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        if: always() # Pick up events even if the job fails or is canceled.
