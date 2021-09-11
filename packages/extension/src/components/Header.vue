@@ -20,15 +20,15 @@
         class="header-icons"
         id="header-icon-bell"
       ></v-icon>
-      <div class="relative">
+      <div class="profile-photo profile-online">
         <img
           :src="avatar"
-          class="header-avatar rounded-full"
+          class="header-avatar"
           @click="openProfile()"
           id="header-profile"
         />
-        <div class="profile-online-sm"></div>
       </div>
+
     </div>
     <Profile
       v-show="showProfile"

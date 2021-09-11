@@ -5,7 +5,7 @@
     <div class="brand table" v-show="$store.state.ready">
       <LeftMenu class="table-cell align-top" />
 
-      <div class="h-screen w-full bg-brand-lightgray table-cell">
+      <div class="h-screen w-full table-cell">
         <Header />
         <router-view class="w-full" />
       </div>

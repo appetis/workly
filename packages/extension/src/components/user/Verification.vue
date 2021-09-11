@@ -103,7 +103,10 @@
             </div>
 
             <div class="mt-7">
-              <button class="btn-black-full">Continue</button>
+              <button class="btn-black-full" v-show="!isLoading">
+                Continue
+              </button>
+              <circle2 class="mx-auto" v-show="isLoading"></circle2>
             </div>
           </form>
         </div>
@@ -115,17 +118,18 @@
 </template>
 
 <script>
-//import CodeInput from "./CodeInput";
+import { Circle2 } from 'vue-loading-spinner'
 export default {
   name: 'Verification',
   components: {
-    //  CodeInput
+    Circle2,
   },
   props: ['callFocus'],
   data() {
     return {
       current: 1,
       showVerifyFailMessage: '',
+      isLoading: false,
     }
   },
   mounted() {
@@ -182,6 +186,7 @@ export default {
     onSubmit() {
       const code = this.setCode()
       if (code.length < 6) return false
+      this.isLoading = true
 
       const data = {
         req: {
@@ -197,8 +202,8 @@ export default {
           this.openCalendar()
         })
         .catch((error) => {
-          console.log('VERIFICATION ERROR ===>', error)
           this.showVerifyFailMessage = error.response.data.message
+          this.isLoading = false
         })
     },
   },

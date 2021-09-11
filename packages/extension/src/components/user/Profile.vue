@@ -15,9 +15,11 @@
         </span>
         <div class="modal-body">
           <div>
-            <div class="profile-photo">
-              <img :src="displayImage" />
-              <div class="profile-online"></div>
+            <div class="profile-photo profile-online">
+              <img :src="displayImage"
+                class="profile-avatar"
+              />
+<!--              <div class="profile-online"></div>-->
             </div>
             <div class="profile-top">
               <h3

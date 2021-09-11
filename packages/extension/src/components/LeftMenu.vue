@@ -56,8 +56,11 @@
             class="text-gray-400 align-middle w-4"
             name="log-in"
         ></v-icon>-->
-        <li class="ml-1 align-middle cursor-pointer" @click="goSignup">
-          Sign up for fee
+        <li
+          class="ml-1 align-middle cursor-pointer text-black"
+          @click="goSignup"
+        >
+          Sign up for free
         </li>
       </div>
     </div>

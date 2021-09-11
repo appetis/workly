@@ -93,7 +93,10 @@
               {{ showSignupFailMessage }}
             </div>
             <div class="pt-5">
-              <button class="btn-black-full">Sign up with email</button>
+              <button class="btn-black-full" v-show="!isLoading">
+                Sign up with email
+              </button>
+              <circle2 class="mx-auto" v-show="isLoading"></circle2>
               <div class="text-xs mt-1">
                 By signing up, you agree to the Worlky's
                 <span class="underline cursor-pointer">Terms of Use</span> and
@@ -137,9 +140,13 @@
 </template>
 
 <script>
+import { Circle2 } from 'vue-loading-spinner'
 export default {
   name: 'Signup',
   props: {},
+  components: {
+    Circle2,
+  },
   data() {
     return {
       showRequiredEmail: false,
@@ -148,6 +155,7 @@ export default {
       showRequiredPasswordMessage: '',
       showPassword: false,
       showSignupFailMessage: '',
+      isLoading: false,
       user: this.freshUserObject(),
     }
   },
@@ -217,6 +225,7 @@ export default {
       empty += this.onBlurEmail()
       empty += this.onBlurPassword()
       if (empty) return false
+      this.isLoading = true
       this.$store
         .dispatch('createUser', this.user)
         .then(() => {
@@ -226,6 +235,7 @@ export default {
         })
         .catch((error) => {
           this.showSignupFailMessage = error.response.data.message
+          this.isLoading = false
         })
       /*UserService.addUser(this.user)
         .then(() => {

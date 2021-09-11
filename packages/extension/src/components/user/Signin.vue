@@ -91,7 +91,10 @@
               {{ showAuthenticationFailMessage }}
             </div>
             <div class="pt-5">
-              <button type="submit" class="btn-black-full">Login</button>
+              <button type="submit" class="btn-black-full" v-show="!isLoading">
+                Login
+              </button>
+              <circle2 class="mx-auto" v-show="isLoading"></circle2>
             </div>
           </form>
 
@@ -130,9 +133,14 @@
 </template>
 
 <script>
+import { Circle2 } from 'vue-loading-spinner'
+
 export default {
   name: 'Signin',
   props: {},
+  components: {
+    Circle2,
+  },
   data() {
     return {
       showRequiredEmail: false,
@@ -141,6 +149,7 @@ export default {
       showRequiredPasswordMessage: '',
       showAuthenticationFailMessage: '',
       showPassword: false,
+      isLoading: false,
       user: this.freshUserObject(),
     }
   },
@@ -214,18 +223,17 @@ export default {
       empty += this.onBlurEmail()
       empty += this.onBlurPassword()
       if (empty) return false
-
+      this.isLoading = true
       this.$store
         .dispatch('login', this.user)
         .then((response) => {
           this.freshUserObject()
-          console.log('Signin ====>', response)
-          console.log('success', this.$store.state.user)
           if (response.data.user.status === 'VE') this.openCalendar()
           else this.goVerification()
         })
         .catch((error) => {
           this.showAuthenticationFailMessage = error.response.data.message
+          this.isLoading = false
         })
     },
     freshUserObject() {
