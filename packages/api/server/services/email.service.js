@@ -1,14 +1,16 @@
 const crypto = require("crypto");
+const ses = require('../services/ses.service');
 const { Code } = require('../models');
 
 const expiredDays = 1;
-const fromEmail = 'no-reply@workly.page';
+const verificationCodeLength = 6;
 
 exports.sendVerificationCode = async (user) => {
     try {
-        const code = await getUniqueCode();
+        const code = await getVerificationCode();
         await saveCode(user['id'], code);
-        send(user['email'], 'Workly Verification Code', '', code);
+
+        send(user['email'], code);
     } catch (error) {
         console.error(error);
     }
@@ -23,11 +25,17 @@ saveCode = async (userId, code) => {
     });
 }
 
-send = (toEmail, subject, content, code) => {
+send = (toEmail, code) => {
+    console.log("Email verification code: " + code);
+
     if (process.env.NODE_ENV === 'production') {
-        // TODO: send an email via AWS SES
-    } else {
-        console.log('Email Verification Code:', code);
+        ses.sendTemplateEmail(toEmail, code)
+            .then(() => {
+                console.log("Sent the verification email to " + toEmail);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     }
 }
 
@@ -39,10 +47,10 @@ getExpiredTime = () => {
     return expiredTime;
 }
 
-getUniqueCode = async () => {
+getVerificationCode = async () => {
     let code;
     do {
-        code = generateCode(6);
+        code = generateCode(verificationCodeLength);
     } while (await isExisted(code))
 
     return code;
