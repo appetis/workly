@@ -42,7 +42,7 @@ exports.create = async (req, res) => {
         });
         delete newUser.dataValues.password;
 
-        emailService.sendVerificationCode(newUser);
+        await emailService.sendVerificationCode(newUser);
 
         return res.status(201).json(newUser);
     } catch (error) {
