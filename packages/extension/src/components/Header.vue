@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <div class="header-title">David Health</div>
+    <div class="header-title">HW Project (Workly)</div>
     <div class="header-menus">
       <v-icon
         name="search"
@@ -20,7 +20,7 @@
         class="header-icons"
         id="header-icon-bell"
       ></v-icon>
-      <div class="profile-photo profile-online">
+      <div class="ml-4 profile-photo profile-online">
         <img
           :src="avatar"
           class="header-avatar"
@@ -28,7 +28,6 @@
           id="header-profile"
         />
       </div>
-
     </div>
     <Profile
       v-show="showProfile"

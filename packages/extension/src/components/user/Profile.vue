@@ -16,10 +16,8 @@
         <div class="modal-body">
           <div>
             <div class="profile-photo profile-online">
-              <img :src="displayImage"
-                class="profile-avatar"
-              />
-<!--              <div class="profile-online"></div>-->
+              <img :src="displayImage" class="profile-avatar" />
+              <!--              <div class="profile-online"></div>-->
             </div>
             <div class="profile-top">
               <h3
@@ -32,7 +30,7 @@
                 <span
                   class="
                     inline-block
-                    bg-brand-defgray
+                    bg-wk-defgray
                     rounded-sm
                     px-2
                     mr-2
