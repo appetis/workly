@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Code = sequelize.define('Code', {
+  const Verification = sequelize.define('Verification', {
     code: {
       type: DataTypes.STRING(6),
       allowNull: false,
@@ -18,8 +18,8 @@ module.exports = (sequelize, DataTypes) => {
     charset: 'utf8',
     collate: 'utf8_general_ci',
   });
-  Code.associate = (db) => {
-    db.Code.belongsTo(db.User);
+  Verification.associate = (db) => {
+    db.Verification.belongsTo(db.User);
   };
-  return Code;
+  return Verification;
 }
