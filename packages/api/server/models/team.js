@@ -20,8 +20,8 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Team.associate = db => {
-    db.Team.belongsToMany(db.User, { through: 'UserTeam' });
     db.Team.belongsToMany(db.Verification, { through: 'TeamVerification' });
+    db.Team.belongsToMany(db.Link, { through: 'TeamLink' });
   };
 
   return Team;
