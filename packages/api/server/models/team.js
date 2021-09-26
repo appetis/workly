@@ -1,21 +1,28 @@
 module.exports = (sequelize, DataTypes) => {
-  const Team = sequelize.define('Team', {
-    name: {
-      type: DataTypes.STRING(30),
-      allowNull: false,
-      unique: true
+  const Team = sequelize.define(
+    'Team',
+    {
+      name: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+        unique: true,
+      },
+      status: {
+        type: DataTypes.STRING(4),
+        allowNull: false,
+        defaultValue: 'CR',
+      },
     },
-    status: {
-      type: DataTypes.ENUM('ACTIVE', 'INACTIVE'),
-      allowNull: false,
-      defaultValue: 'ACTIVE'
+    {
+      charset: 'utf8',
+      collate: 'utf8_general_ci',
     },
-  }, {
-    charset: 'utf8',
-    collate: 'utf8_general_ci',
-  });
-  Team.associate = (db) => {
+  );
+
+  Team.associate = db => {
     db.Team.belongsToMany(db.User, { through: 'UserTeam' });
+    db.Team.belongsToMany(db.Verification, { through: 'TeamVerification' });
   };
+
   return Team;
-}
+};
