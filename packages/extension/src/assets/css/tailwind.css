@@ -107,6 +107,7 @@
     .v-application .primary--text {
         @apply text-wk-secondary;
     }
+    .theme--light.v-calendar-weekly .v-calendar-weekly__head-weekday,
     .theme--light.v-calendar-weekly .v-calendar-weekly__head-weekday.v-outside,
     .v-calendar-weekly__head-weekday.v-future,
     .v-calendar-weekly__head-weekday.v-present {

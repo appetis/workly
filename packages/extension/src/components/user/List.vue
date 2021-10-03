@@ -1,7 +1,7 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="desserts"
+    :items="users"
     sort-by="department"
     :single-select="singleSelect"
     item-key="name"
@@ -9,17 +9,13 @@
     class="elevation-1"
   >
     <template v-slot:item.status="{ item }">
-      <v-chip
-          :color="getColor(item.status)"
-          dark
-      >
-      </v-chip>
-        {{ item.status_name }}
+      <v-chip :color="getColor(item.status)" dark> </v-chip>
+      {{ item.status_name }}
     </template>
     <template v-slot:top>
       <v-toolbar flat>
         <v-toolbar-title>Members</v-toolbar-title>
-        <span class="sub-title"> 12 members </span>
+        <span class="sub-title"> {{ users.length }} members </span>
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ on, attrs }">
@@ -97,26 +93,14 @@
       </v-toolbar>
     </template>
     <template v-slot:item.actions="{ item }">
-      <div class="action-box"
-           @click="editItem(item)">
-        <v-icon
-          name="calendar"
-          base-class="icon-12"
-        ></v-icon>
+      <div class="action-box" @click="editItem(item)">
+        <v-icon name="calendar" base-class="icon-12"></v-icon>
       </div>
-      <div class="action-box"
-           @click="deleteItem(item)">
-        <v-icon
-          name="mail"
-          base-class="icon-12"
-        ></v-icon>
+      <div class="action-box" @click="deleteItem(item)">
+        <v-icon name="mail" base-class="icon-12"></v-icon>
       </div>
-      <div class="action-box"
-           @click="deleteItem(item)">
-        <v-icon
-            name="message-square"
-            base-class="icon-12"
-        ></v-icon>
+      <div class="action-box" @click="deleteItem(item)">
+        <v-icon name="message-square" base-class="icon-12"></v-icon>
       </div>
     </template>
     <template v-slot:no-data>
@@ -149,7 +133,7 @@ export default {
         { text: 'Status', value: 'status' },
         { text: '', value: 'actions', sortable: false },
       ],
-      desserts: [],
+      users: [],
       editedIndex: -1,
       editedItem: {
         name: '',
@@ -165,6 +149,7 @@ export default {
         phone: '',
         status: '',
       },
+      totalCount: 0,
     }
   },
   computed: {
@@ -196,7 +181,17 @@ export default {
         })
     },
     initialize() {
-      this.desserts = [
+      //console.log("======> initialize", this.$store.state.user.token)
+      if(this.$store.state.user.token) {
+        UserService.getUsers()
+            .then((response) => {
+              this.users = response.data
+            })
+            .catch((error) => {
+              throw error
+            })
+      }
+      /*this.users = [
         {
           name: 'Frozen Yogurt',
           position: 'Project Manager',
@@ -277,29 +272,29 @@ export default {
           status: 'WH',
           status_name: 'Work from home',
         },
-      ]
+      ]*/
     },
 
     editItem(user) {
-      this.editedIndex = this.desserts.indexOf(user)
+      this.editedIndex = this.users.indexOf(user)
       this.editedItem = Object.assign({}, user)
       this.dialog = true
     },
 
     deleteItem(user) {
-      this.editedIndex = this.desserts.indexOf(user)
+      this.editedIndex = this.users.indexOf(user)
       this.editedItem = Object.assign({}, user)
       this.dialogDelete = true
     },
 
     messageUser(user) {
-      this.editedIndex = this.desserts.indexOf(user)
+      this.editedIndex = this.users.indexOf(user)
       this.editedItem = Object.assign({}, user)
       this.dialogDelete = true
     },
 
     deleteItemConfirm() {
-      this.desserts.splice(this.editedIndex, 1)
+      this.users.splice(this.editedIndex, 1)
       this.closeDelete()
     },
 
@@ -321,14 +316,13 @@ export default {
 
     save() {
       if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem)
+        Object.assign(this.users[this.editedIndex], this.editedItem)
       } else {
-        this.desserts.push(this.editedItem)
+        this.users.push(this.editedItem)
       }
       this.close()
     },
-    getColor (status) {
-      console.log("status:", status)
+    getColor(status) {
       if (status == 'VE') return 'vacation'
       else if (status == 'WH') return 'other'
       else return 'online'

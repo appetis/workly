@@ -1,5 +1,5 @@
 import apiClient from './apiClient'
-import headers from './headers'
+//import headers from './headers'
 
 export default {
   login(data) {
@@ -12,7 +12,7 @@ export default {
     return apiClient.get('/api/users/' + id)
   },
   addUser(data) {
-    return apiClient.post('/api/users', data, { headers })
+    return apiClient.post('/api/users', data)
   },
   verify(userid, data) {
     return apiClient.post(`/api/users/${userid}/verify`, data)
