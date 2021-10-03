@@ -1,6 +1,6 @@
 const crypto = require("crypto");
 const ses = require('../services/ses.service');
-const { Code } = require('../models');
+const { Verification } = require('../models');
 
 const expiredDays = 1;
 const verificationCodeLength = 6;
@@ -17,7 +17,7 @@ exports.sendVerificationCode = async (user) => {
 }
 
 saveCode = async (userId, code) => {
-    Code.create({
+    Verification.create({
         code,
         status: 'CR',
         expiredAt: getExpiredTime(),
@@ -57,7 +57,7 @@ getVerificationCode = async () => {
 }
 
 isExisted = async (code) => {
-    const existedCode = await Code.findOne({
+    const existedCode = await Verification.findOne({
         where: { code }
     });
 

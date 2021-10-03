@@ -1,19 +1,15 @@
 module.exports = (sequelize, DataTypes) => {
-  const Code = sequelize.define(
-    'Code',
+  const Dashboard = sequelize.define(
+    'Dashboard',
     {
-      name: {
+      title: {
         type: DataTypes.STRING(50),
         allowNull: false,
       },
-      type: {
-        type: DataTypes.STRING(20),
-        allowNull: false,
-      },
-      code: {
+      theme: {
         type: DataTypes.STRING(4),
         allowNull: false,
-        unique: true,
+        defaultValue: 'LI',
       },
     },
     {
@@ -22,7 +18,9 @@ module.exports = (sequelize, DataTypes) => {
     },
   );
 
-  Code.associate = db => {};
+  Dashboard.associate = db => {
+    db.Profile.belongsTo(db.User);
+  };
 
-  return Code;
+  return Dashboard;
 };

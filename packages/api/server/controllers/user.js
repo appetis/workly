@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const { Op } = require('sequelize');
-const { User, Code } = require('../models');
+const { User, Verification } = require('../models');
 const emailService = require('../services/email.service');
 const authService = require('../services/auth.service');
 
@@ -119,7 +119,7 @@ exports.verify = async (req, res) => {
             });
         }
 
-        const userCode = await Code.findOne({
+        const userVerification = await Verification.findOne({
             where: {
                 UserId: userId,
                 status: 'CR',
@@ -129,14 +129,14 @@ exports.verify = async (req, res) => {
             }
         });
 
-        if (!userCode) {
+        if (!userVerification) {
             return res.status(400).json({
                 code: 400,
                 message: 'Cannot found a code for the user'
             });
         }
 
-        if (userCode.code !== code) {
+        if (userVerification.code !== code) {
             return res.status(400).json({
                 code: 400,
                 message: 'Invalid code'
@@ -144,7 +144,7 @@ exports.verify = async (req, res) => {
         }
 
         await user.update({status: 'VE'});
-        await userCode.update({status: 'VE'});
+        await userVerification.update({status: 'VE'});
 
         return res.status(200).json({
             code: 200,
