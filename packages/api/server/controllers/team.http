@@ -1,19 +1,24 @@
-POST http://localhost:3000/api/teams/4/join
-Content-Type: application/json
-Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE2MjgxMzE5MTQsImV4cCI6MTYyODEzMzcxNCwiaXNzIjoiYXBwZXRpcyJ9.KjY90f1rRZLmWbEXZrQjLMgzei1GFEt9CWo4frerLEk
+GET http://localhost:3000/api/teams/1/members
+Accept: application/json
+Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjMzMzE4MTE1LCJleHAiOjE2MzMzMTk5MTUsImlzcyI6IndvcmtseSJ9.ybITMvGOrBqggiR9lgFjXPn0eGHHzene7tS5k91pi7k
 
-{"userId": 3, "teamId": 4}
+###
+POST http://localhost:3000/api/teams/2/join
+Content-Type: application/json
+Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjMzMzE4MTE1LCJleHAiOjE2MzMzMTk5MTUsImlzcyI6IndvcmtseSJ9.ybITMvGOrBqggiR9lgFjXPn0eGHHzene7tS5k91pi7k
+
+{"userId": 2, "teamId": 1}
 
 ###
 GET http://localhost:3000/api/teams/Appetis
 Accept: application/json
-Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE2MjgxMzE5MTQsImV4cCI6MTYyODEzMzcxNCwiaXNzIjoiYXBwZXRpcyJ9.KjY90f1rRZLmWbEXZrQjLMgzei1GFEt9CWo4frerLEk
+Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjMzMzE4MTE1LCJleHAiOjE2MzMzMTk5MTUsImlzcyI6IndvcmtseSJ9.ybITMvGOrBqggiR9lgFjXPn0eGHHzene7tS5k91pi7k
 
 ###
 POST http://localhost:3000/api/teams
 Content-Type: application/json
-Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE2MjgxMzE5MTQsImV4cCI6MTYyODEzMzcxNCwiaXNzIjoiYXBwZXRpcyJ9.KjY90f1rRZLmWbEXZrQjLMgzei1GFEt9CWo4frerLEk
+Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjMzMzE4MTE1LCJleHAiOjE2MzMzMTk5MTUsImlzcyI6IndvcmtseSJ9.ybITMvGOrBqggiR9lgFjXPn0eGHHzene7tS5k91pi7k
 
-{"name": "Appetis6", "userId": 3}
+{"name": "Appetis", "userId": 1}
 
 ###
