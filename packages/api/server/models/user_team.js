@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
 
   UserTeam.associate = db => {
     db.User.belongsToMany(db.Team, { through: 'UserTeam' });
-    db.Team.belongsToMany(db.User, { through: 'UserTeam' });
+    db.Team.belongsToMany(db.User, { through: 'UserTeam', as: 'members' });
   };
 
   return UserTeam;
