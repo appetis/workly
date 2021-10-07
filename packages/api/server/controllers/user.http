@@ -1,23 +1,22 @@
-POST http://localhost:3000/api/users/1/verify
+POST http://localhost:3000/api/users/2/verify
 Content-Type: application/json
-Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI5MTE1ODQ2LCJleHAiOjE2MjkxMTc2NDYsImlzcyI6IndvcmtseSJ9._gVPt-tVKExnfuUZdrb3pqykOHODssz6Km6wha0RJFU
 
-{"code":  "35FB81"}
+{"code":  "278645"}
 
 ###
 POST http://localhost:3000/api/users
 Content-Type: application/json
 
-{"email": "test@test.com", "password": "test1234"}
+{"email": "test1@test.com", "password": "test1234"}
 
 ###
 GET http://localhost:3000/api/users
 Accept: application/json
-Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI5MTE1ODQ2LCJleHAiOjE2MjkxMTc2NDYsImlzcyI6IndvcmtseSJ9._gVPt-tVKExnfuUZdrb3pqykOHODssz6Km6wha0RJFU
+Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjMzMjgxNTg0LCJleHAiOjE2MzMyODMzODQsImlzcyI6IndvcmtseSJ9.z--kSFPOgkq2kGegZX74pO0M7rXZXGXsBMhQppNXcas
 
 ###
 GET http://localhost:3000/api/users/1
 Accept: application/json
-Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI5MTE1ODQ2LCJleHAiOjE2MjkxMTc2NDYsImlzcyI6IndvcmtseSJ9._gVPt-tVKExnfuUZdrb3pqykOHODssz6Km6wha0RJFU
+Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjMzMjgxNTg0LCJleHAiOjE2MzMyODMzODQsImlzcyI6IndvcmtseSJ9.z--kSFPOgkq2kGegZX74pO0M7rXZXGXsBMhQppNXcas
 
 ###
