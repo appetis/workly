@@ -1,3 +1,16 @@
+POST http://localhost:3000/api/users/1/profile
+Content-Type: application/json
+Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjMzOTAwMzg4LCJleHAiOjE2MzM5MDIxODgsImlzcyI6IndvcmtseSJ9.l4q2y6S0QG1rWWPpU0qYxiEazBhf3i7D3iJjXwIk0BE
+
+{
+  "name": "Susan Guerrero",
+  "position":  "Project Manager",
+  "status": "OF",
+  "phone": "647-999-1234",
+  "phone_ext": "335"
+}
+
+###
 POST http://localhost:3000/api/users/2/verify
 Content-Type: application/json
 
@@ -12,11 +25,11 @@ Content-Type: application/json
 ###
 GET http://localhost:3000/api/users
 Accept: application/json
-Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjMzMjgxNTg0LCJleHAiOjE2MzMyODMzODQsImlzcyI6IndvcmtseSJ9.z--kSFPOgkq2kGegZX74pO0M7rXZXGXsBMhQppNXcas
+Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjMzOTAwMzg4LCJleHAiOjE2MzM5MDIxODgsImlzcyI6IndvcmtseSJ9.l4q2y6S0QG1rWWPpU0qYxiEazBhf3i7D3iJjXwIk0BE
 
 ###
 GET http://localhost:3000/api/users/1
 Accept: application/json
-Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjMzMjgxNTg0LCJleHAiOjE2MzMyODMzODQsImlzcyI6IndvcmtseSJ9.z--kSFPOgkq2kGegZX74pO0M7rXZXGXsBMhQppNXcas
+Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjMzOTAwMzg4LCJleHAiOjE2MzM5MDIxODgsImlzcyI6IndvcmtseSJ9.l4q2y6S0QG1rWWPpU0qYxiEazBhf3i7D3iJjXwIk0BE
 
 ###

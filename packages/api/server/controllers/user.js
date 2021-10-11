@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const { Op } = require('sequelize');
-const { User, Verification } = require('../models');
+const { User, Verification, Profile } = require('../models');
 const emailService = require('../services/email.service');
 const authService = require('../services/auth.service');
 
@@ -158,6 +158,70 @@ exports.verify = async (req, res) => {
       message: 'Verified the user email',
       user,
       token: authService.generateToken(user.id),
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      code: 500,
+      message: 'Server error',
+    });
+  }
+};
+
+const createUserProfile = async (userId, data) => {
+  return Profile.create({
+    UserId: userId,
+    name: data.name,
+    position: data.position,
+    phone: data.phone,
+    phone_ext: data.phone_ext,
+    status: data.status,
+  });
+};
+
+const updateUserProfile = async (profile, data) => {
+  return profile.update({
+    name: data.name,
+    position: data.position,
+    phone: data.phone,
+    phone_ext: data.phone_ext,
+    status: data.status,
+  });
+};
+
+exports.updateProfile = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const user = await User.findOne({
+      where: {
+        id: userId,
+      },
+      attributes: {
+        exclude: ['password'],
+      },
+    });
+    if (!user) {
+      return res.status(400).json({
+        code: 400,
+        message: 'Cannot find the user',
+      });
+    }
+
+    let profile = await Profile.findOne({
+      where: {
+        UserId: userId,
+      },
+    });
+    if (profile) {
+      profile = await updateUserProfile(profile, req.body);
+    } else {
+      profile = await createUserProfile(userId, req.body);
+    }
+
+    return res.status(200).json({
+      code: 200,
+      message: 'Updated the profile',
+      profile,
     });
   } catch (error) {
     console.error(error);
