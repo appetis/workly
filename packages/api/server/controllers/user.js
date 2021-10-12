@@ -60,6 +60,7 @@ const createUserProfile = async (userId, data) => {
   return Profile.create({
     UserId: userId,
     name: data.name,
+    department: data.department,
     position: data.position,
     phone: data.phone,
     phone_ext: data.phone_ext,
@@ -70,6 +71,7 @@ const createUserProfile = async (userId, data) => {
 const updateUserProfile = async (profile, data) => {
   return profile.update({
     name: data.name,
+    department: data.department,
     position: data.position,
     phone: data.phone,
     phone_ext: data.phone_ext,

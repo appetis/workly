@@ -56,7 +56,7 @@ exports.getMembersById = async (req, res) => {
           include: [
             {
               model: Profile,
-              attributes: ['position', 'phone'],
+              attributes: ['department', 'position', 'phone'],
             },
           ],
         },
