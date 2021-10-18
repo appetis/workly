@@ -20,6 +20,12 @@ const findUserById = async id => {
     attributes: {
       exclude: ['password'],
     },
+    include: [
+      {
+        model: Profile,
+        attributes: ['department', 'position', 'phone'],
+      },
+    ],
   });
 };
 
