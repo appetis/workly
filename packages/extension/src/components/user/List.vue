@@ -188,6 +188,7 @@ export default {
       if(this.$store.state.user.token && (user.teams.length > 0)) {
         TeamService.getTeams(user.teams[0].id)
             .then((response) => {
+              console.log(response.data.team);
               this.users = response.data.team.members
             })
             .catch((error) => {
@@ -326,9 +327,18 @@ export default {
       this.close()
     },
     getColor(status) {
-      if (status == 'VE') return 'vacation'
-      else if (status == 'WH') return 'other'
-      else return 'online'
+      let status_color = '';
+      switch(status) {
+        case "VA":
+          status_color = 'vacation'
+          break
+        case "OF":
+          status_color = 'online'
+          break
+        default:
+          status_color = 'other'
+      }
+      return status_color
     },
   },
 }
