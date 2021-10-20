@@ -1,16 +1,108 @@
 const bcrypt = require('bcrypt');
 const { Op } = require('sequelize');
-const { User, Verification } = require('../models');
+const { User, Verification, Profile } = require('../models');
 const emailService = require('../services/email.service');
 const authService = require('../services/auth.service');
+
+const findUsers = async () => {
+  return User.findAll({
+    attributes: {
+      exclude: ['password'],
+    },
+  });
+};
+
+const findUserById = async id => {
+  return User.findOne({
+    where: {
+      id,
+    },
+    attributes: {
+      exclude: ['password'],
+    },
+    include: [
+      {
+        model: Profile,
+        attributes: ['department', 'position', 'phone'],
+      },
+    ],
+  });
+};
+
+const findUserByEmail = async email => {
+  return User.findOne({
+    where: {
+      email,
+    },
+  });
+};
+
+const findVerificationToVerify = async userId => {
+  return Verification.findOne({
+    where: {
+      UserId: userId,
+      status: 'CR',
+      expiredAt: {
+        [Op.gt]: new Date(),
+      },
+    },
+  });
+};
+
+const verifyStatus = async (user, userVerification) => {
+  await user.update({ status: 'VE' });
+  await userVerification.update({ status: 'VE' });
+};
+
+const findUserProfile = async userId => {
+  return Profile.findOne({
+    where: {
+      UserId: userId,
+    },
+  });
+};
+
+const createUserProfile = async (userId, data) => {
+  return Profile.create({
+    UserId: userId,
+    name: data.name,
+    department: data.department,
+    position: data.position,
+    phone: data.phone,
+    phone_ext: data.phone_ext,
+    status: data.status,
+  });
+};
+
+const updateUserProfile = async (profile, data) => {
+  return profile.update({
+    name: data.name,
+    department: data.department,
+    position: data.position,
+    phone: data.phone,
+    phone_ext: data.phone_ext,
+    status: data.status,
+  });
+};
 
 const validateEmail = email => {
   return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
 };
 
+const createUser = async (email, password) => {
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const newUser = await User.create({
+    email,
+    password: hashedPassword,
+  });
+  delete newUser.dataValues.password;
+
+  return newUser;
+};
+
 exports.create = async (req, res) => {
   try {
-    const { email } = req.body;
+    const { email, password } = req.body;
     if (!validateEmail(email)) {
       return res.status(400).json({
         code: 400,
@@ -18,7 +110,6 @@ exports.create = async (req, res) => {
       });
     }
 
-    const { password } = req.body;
     if (password.length < 8) {
       return res.status(400).json({
         code: 400,
@@ -26,11 +117,7 @@ exports.create = async (req, res) => {
       });
     }
 
-    const user = await User.findOne({
-      where: {
-        email,
-      },
-    });
+    const user = await findUserByEmail(email);
     if (user) {
       return res.status(400).json({
         code: 400,
@@ -38,12 +125,7 @@ exports.create = async (req, res) => {
       });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await User.create({
-      email,
-      password: hashedPassword,
-    });
-    delete newUser.dataValues.password;
+    const newUser = await createUser(email, password);
 
     await emailService.sendVerificationCode(newUser);
 
@@ -63,16 +145,16 @@ exports.create = async (req, res) => {
 
 exports.getUsers = async (req, res) => {
   try {
-    const users = await User.findAll({
-      attributes: {
-        exclude: ['password'],
-      },
-    });
+    const users = await findUsers();
 
-    return res.status(200).json(users);
+    return res.status(200).json({
+      code: 200,
+      message: 'Found all users',
+      users,
+    });
   } catch (error) {
     console.error(error);
-    return res.status(500).send({
+    return res.status(500).json({
       code: 500,
       message: 'Server error',
     });
@@ -81,14 +163,7 @@ exports.getUsers = async (req, res) => {
 
 exports.getUserById = async (req, res) => {
   try {
-    const user = await User.findOne({
-      where: {
-        id: parseInt(req.params.id, 10),
-      },
-      attributes: {
-        exclude: ['password'],
-      },
-    });
+    const user = await findUserById(req.params.id);
     if (!user) {
       return res.status(204).json({
         code: 204,
@@ -96,7 +171,11 @@ exports.getUserById = async (req, res) => {
       });
     }
 
-    return res.status(202).json(user);
+    return res.status(200).json({
+      code: 200,
+      message: 'Found the user',
+      user,
+    });
   } catch (error) {
     console.error(error);
     return res.status(500).json({
@@ -111,14 +190,7 @@ exports.verify = async (req, res) => {
     const userId = req.params.id;
     const { code } = req.body;
 
-    const user = await User.findOne({
-      where: {
-        id: userId,
-      },
-      attributes: {
-        exclude: ['password'],
-      },
-    });
+    const user = await findUserById(userId);
     if (!user) {
       return res.status(400).json({
         code: 400,
@@ -126,38 +198,53 @@ exports.verify = async (req, res) => {
       });
     }
 
-    const userVerification = await Verification.findOne({
-      where: {
-        UserId: userId,
-        status: 'CR',
-        expiredAt: {
-          [Op.gt]: new Date(),
-        },
-      },
-    });
-
-    if (!userVerification) {
-      return res.status(400).json({
-        code: 400,
-        message: 'Cannot find a code for the user',
-      });
-    }
-
-    if (userVerification.code !== code) {
+    const userVerification = await findVerificationToVerify(userId);
+    if (!userVerification || userVerification.code !== code) {
       return res.status(400).json({
         code: 400,
         message: 'Invalid code',
       });
     }
 
-    await user.update({ status: 'VE' });
-    await userVerification.update({ status: 'VE' });
+    await verifyStatus(user, userVerification);
 
     return res.status(200).json({
       code: 200,
       message: 'Verified the user email',
       user,
       token: authService.generateToken(user.id),
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      code: 500,
+      message: 'Server error',
+    });
+  }
+};
+
+exports.updateProfile = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const user = await findUserById(userId);
+    if (!user) {
+      return res.status(400).json({
+        code: 400,
+        message: 'Cannot find the user',
+      });
+    }
+
+    let profile = await findUserProfile(userId);
+    if (profile) {
+      profile = await updateUserProfile(profile, req.body);
+    } else {
+      profile = await createUserProfile(userId, req.body);
+    }
+
+    return res.status(200).json({
+      code: 200,
+      message: 'Updated the profile',
+      profile,
     });
   } catch (error) {
     console.error(error);

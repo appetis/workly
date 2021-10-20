@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
       avatar: {
         type: DataTypes.STRING(200),
       },
+      department: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+      },
       position: {
         type: DataTypes.STRING(50),
         allowNull: false,
