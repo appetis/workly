@@ -15,7 +15,7 @@ const opts = {
       light: {
         primary: '#474747',
         secondary: '#EEEEEE',
-        accent: colors.shades.black,
+        accent: '#042F31',
         error: colors.red.accent3,
       },
       dark: {

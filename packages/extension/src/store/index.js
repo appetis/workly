@@ -8,7 +8,7 @@ export default new Vuex.Store({
   state: {
     user: {
       id: 0,
-      token: '',
+      token: ''
     },
     ready: false,
     isGuest: false,
@@ -17,11 +17,18 @@ export default new Vuex.Store({
     SET_USER(state, data) {
       console.log('SET_USER ===>', data.user, data.token)
       state.user.id = data.user.id
+      let user = {
+        id: data.user.id,
+        teams: []
+      }
       if (data.token) {
         state.user.token = data.token
         localStorage.token = data.token
         localStorage.removeItem('isGuest')
         state.isGuest = false
+        user.teams = data.user.Teams
+
+        localStorage.setItem('user', JSON.stringify(user))
       }
       //state.ready = true
     },

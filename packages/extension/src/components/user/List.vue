@@ -111,6 +111,7 @@
 
 <script>
 import UserService from '@/services/UserService'
+import TeamService from '@/services/TeamService'
 
 export default {
   name: 'User',
@@ -172,6 +173,7 @@ export default {
 
   methods: {
     created() {
+      console.log("User Created")
       UserService.getUsers()
         .then((response) => {
           this.users = response.data
@@ -181,11 +183,12 @@ export default {
         })
     },
     initialize() {
-      //console.log("======> initialize", this.$store.state.user.token)
-      if(this.$store.state.user.token) {
-        UserService.getUsers()
+      //console.log("======> initialize", this.$store.state.user.teams.length, this.$store.state.user.teams[0].id)
+      const user = JSON.parse(localStorage.getItem('user'))
+      if(this.$store.state.user.token && (user.teams.length > 0)) {
+        TeamService.getTeams(user.teams[0].id)
             .then((response) => {
-              this.users = response.data
+              this.users = response.data.team.members
             })
             .catch((error) => {
               throw error

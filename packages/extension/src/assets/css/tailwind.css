@@ -177,7 +177,7 @@
         @apply text-right
     }
     .btn-add-member {
-        @apply inline-block bg-black text-white py-1 px-3 rounded cursor-pointer
+        @apply inline-block bg-wk-dark text-white py-1 px-3 rounded cursor-pointer
     }
     .btn-add-member .icon {
         @apply mr-1;

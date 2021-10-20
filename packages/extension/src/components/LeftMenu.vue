@@ -3,40 +3,29 @@
     <div>
       <img :src="logo" />
     </div>
-    <div class="mt-10 px-1" v-show="!$store.state.isGuest">
+    <div class="mt-10 px-1">
       <router-link to="/" class="menu-icon-button" id="menu-icon-calendar"
         ><v-icon name="calendar" base-class="v-icon"></v-icon
-      ></router-link>
-      <router-link to="/user" class="menu-icon-button" id="menu-icon-user"
-        ><v-icon name="users" base-class="v-icon"></v-icon
       ></router-link>
       <router-link to="/link" class="menu-icon-button" id="menu-icon-link"
         ><v-icon name="link" base-class="v-icon"></v-icon
       ></router-link>
-    </div>
-    <div class="mt-10 px-1" v-show="$store.state.isGuest">
-      <router-link to="/" class="menu-icon-button" id="menu-icon-guest-calendar"
-        ><v-icon name="calendar" base-class="v-icon"></v-icon
+      <router-link to="/user" class="menu-icon-button" id="menu-icon-user" v-show="!$store.state.isGuest"
+      ><v-icon name="users" base-class="v-icon"></v-icon
       ></router-link>
       <div
-        class="menu-icon-button cursor-pointer member_only"
-        id="menu-icon-guest-user"
-        @click="onMemberOnly($event)"
+          class="menu-icon-button cursor-pointer member_only"
+          id="menu-icon-guest-user"
+          @click="onMemberOnly($event)"
+          v-show="$store.state.isGuest"
       >
-        <v-icon name="user" base-class="v-icon"></v-icon>
-      </div>
-      <div
-        class="menu-icon-button cursor-pointer member_only"
-        id="menu-icon-guest-link"
-        @click="onMemberOnly($event)"
-      >
-        <v-icon name="link" base-class="v-icon"></v-icon>
+        <v-icon name="users" base-class="v-icon"></v-icon>
       </div>
     </div>
 
     <!--    ifGuest: {{ $store.state.isGuest }}-->
 
-    <div class="absolute bottom-0 px-1">
+    <div class="absolute bottom-0 px-1" v-show="!$store.state.isGuest">
       <router-link to="/setting" class="menu-icon-button" id="menu-icon-setting"
         ><v-icon name="settings" base-class="v-icon"></v-icon
       ></router-link>

@@ -73,9 +73,9 @@
               <v-list-item @click="type = 'week'">
                 <v-list-item-title>Week</v-list-item-title>
               </v-list-item>
-<!--              <v-list-item @click="type = 'day'">-->
-<!--                <v-list-item-title>Day</v-list-item-title>-->
-<!--              </v-list-item>-->
+              <v-list-item @click="type = 'day'">
+                <v-list-item-title>Day</v-list-item-title>
+              </v-list-item>
             </v-list>
           </v-menu>
         </v-toolbar>
@@ -122,6 +122,8 @@
               </v-btn>
             </v-card-actions>
           </v-card>
+
+
         </v-menu>
       </v-sheet>
     </v-col>
@@ -140,7 +142,7 @@ export default {
     typeToLabel: {
       month: 'Month',
       week: 'Week',
-    //  day: 'Day',
+      day: 'Day',
     },
     selectedEvent: {},
     selectedElement: null,
@@ -172,7 +174,7 @@ export default {
   methods: {
     viewDay({ date }) {
       this.focus = date
-      //this.type = 'day'
+      this.type = 'day'
     },
     getEventColor(event) {
       return event.color
@@ -214,7 +216,7 @@ export default {
       const eventCount = this.rnd(days, days + 20)
       console.log(eventCount)
 
-      /*      for (let i = 0; i < eventCount; i++) {
+   /*         for (let i = 0; i < eventCount; i++) {
         const allDay = this.rnd(0, 3) === 0
         const firstTimestamp = this.rnd(min.getTime(), max.getTime())
         const first = new Date(firstTimestamp - (firstTimestamp % 900000))
