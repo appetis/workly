@@ -11,6 +11,7 @@ module.exports = {
           light: '#EEEEEE',
           dark: '#042F31',
           'gray-box': '#AEAEAE',
+          'gray-text': '#474747',
         },
       },
       fontWeight: {

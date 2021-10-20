@@ -80,7 +80,7 @@
           </v-menu>
         </v-toolbar>
       </v-sheet>
-      <v-sheet height="600">
+      <v-sheet height="650">
         <v-calendar
           ref="calendar"
           v-model="focus"
@@ -147,13 +147,13 @@ export default {
     selectedOpen: false,
     events: [],
     colors: [
-      'blue',
-      'indigo',
-      'deep-purple',
-      'cyan',
-      'green',
-      'orange',
-      'grey darken-1',
+      'ca-white',
+      'ca-green',
+      'ca-blue',
+      'ca-purple',
+      'ca-orange',
+      // 'orange',
+      // 'grey darken-1',
     ],
     names: [
       'Meeting',
@@ -214,7 +214,7 @@ export default {
       const eventCount = this.rnd(days, days + 20)
       console.log(eventCount)
 
-      /*      for (let i = 0; i < eventCount; i++) {
+            for (let i = 0; i < eventCount; i++) {
         const allDay = this.rnd(0, 3) === 0
         const firstTimestamp = this.rnd(min.getTime(), max.getTime())
         const first = new Date(firstTimestamp - (firstTimestamp % 900000))
@@ -228,7 +228,7 @@ export default {
           color: this.colors[this.rnd(0, this.colors.length - 1)],
           timed: !allDay,
         })
-      }*/
+      }
       console.log(events)
 
       this.events = events

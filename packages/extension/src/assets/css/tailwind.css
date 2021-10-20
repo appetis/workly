@@ -107,10 +107,12 @@
     .v-application .primary--text {
         @apply text-wk-secondary;
     }
+    .theme--light.v-calendar-weekly .v-calendar-weekly__head-weekday,
     .theme--light.v-calendar-weekly .v-calendar-weekly__head-weekday.v-outside,
-    .v-calendar-weekly__head-weekday.v-future,
-    .v-calendar-weekly__head-weekday.v-present {
-        @apply bg-wk-light text-wk-secondary py-3
+    .theme--light.v-calendar-weekly .v-calendar-weekly__head-weekday.v-future,
+    .theme--light.v-calendar-weekly .v-calendar-weekly__head-weekday.v-present,
+    .theme--light.v-calendar-weekly .v-calendar-weekly__head-weekday.v-past {
+        @apply bg-wk-light text-black py-3
     }
     .v-application--wrap {
         min-height: auto;
@@ -226,4 +228,66 @@ img, svg, video, canvas, audio, iframe, embed, object {
 }
 .h-18 {
     height: 4.5rem;
+}
+.v-application .ca-white.white--text,
+.ca-white {
+    background-color: #FFF;
+    border: solid 1px #CACACA;
+}
+.ca-green {
+    background-color: #E6F2F3;
+}
+.ca-blue {
+    background-color: #D7EBFF;
+}
+.ca-purple {
+    background-color: #E1DFEF;
+}
+.ca-orange {
+    background-color: #FFDFBE;
+}
+.v-application .ca-white.white--text {
+    color: #151515!important;
+}
+.v-application .ca-green.white--text {
+    color: #042F31!important;
+}
+.v-application .ca-blue.white--text {
+    color: #1B5289!important;
+}
+.v-application .ca-purple.white--text {
+    color: #4B37C3!important;
+}
+.v-application .ca-orange.white--text {
+    color: #BB6811!important;
+}
+.v-application .ca-white .pl-1,
+.v-application .ca-green .pl-1,
+.v-application .ca-blue .pl-1,
+.v-application .ca-purple .pl-1,
+.v-application .ca-orange .pl-1 {
+    padding-left: 6px!important;
+}
+.v-application .ca-white.white--text,
+.theme--light.v-calendar-events .v-event-timed.ca-white {
+    border: 1px solid #CACACA!important;
+}
+.v-application .ca-green.white--text,
+.theme--light.v-calendar-events .v-event-timed.ca-green {
+    border: 1px solid #cddcdd !important;
+}
+.v-application .ca-blue.white--text,
+.theme--light.v-calendar-events .v-event-timed.ca-blue {
+    border: 1px solid #bad5f1!important;
+}
+.v-application .ca-purple.white--text,
+.theme--light.v-calendar-events .v-event-timed.ca-purple {
+    border: 1px solid #c5c2d3!important;
+}
+.v-application .ca-orange.white--text,
+.theme--light.v-calendar-events .v-event-timed.ca-orange {
+    border: 1px solid #ffcf9d!important;
+}
+.theme--light.v-calendar-events .v-event-more {
+    border-left: 1px solid #CACACA;
 }
