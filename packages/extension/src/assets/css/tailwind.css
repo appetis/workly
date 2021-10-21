@@ -29,10 +29,10 @@
         @apply w-full h-20 text-wk-dark border-b border-gray-200
     }
     .header-title {
-        @apply float-left font-semi-bold text-xl p-6
+        @apply float-left font-semi-bold text-2xl p-6
     }
     .header-menus {
-        @apply flex items-center float-right text-gray-500 px-4 py-1
+        @apply flex items-center float-right text-gray-500 px-6 py-1
     }
     .header-icons {
         @apply px-2 cursor-pointer
@@ -88,8 +88,8 @@
         @apply mx-auto flex-shrink-0 flex items-center justify-center rounded-full
     }
     .profile-online,
-    .profile-leave,
-    .profile-meeting {
+    .profile-vacation,
+    .profile-other {
         @apply rounded-full border-4 table;
         padding: 2px;
     }
@@ -122,7 +122,7 @@
         width: 30px;
     }
     .v-toolbar__content, .v-toolbar__extension {
-        padding-right: 25px;
+        @apply pr-6
     }
     .v-btn {
         text-transform: capitalize;
@@ -161,6 +161,42 @@
         @apply bg-gray-200 text-center text-xs
     }
 
+    .page-title {
+        @apply flex py-4 px-6
+    }
+    .page-title .page-title-l,
+    .page-title .page-title-r {
+        @apply flex-1
+    }
+    .page-title .page-title-l .primary-title {
+        @apply text-xl
+    }
+    .sub-title {
+        @apply text-sm ml-3 text-wk-defgray
+    }
+    .page-title .page-title-r {
+        @apply text-right
+    }
+    .btn-add-member {
+        @apply inline-block bg-wk-dark text-white py-1 px-3 rounded cursor-pointer
+    }
+    .btn-add-member .icon {
+        @apply mr-1;
+        width: 16px;
+        margin-bottom: 2px;
+    }
+    .action-box {
+        @apply rounded-full bg-wk-lightgray shadow-b-sm inline-block px-2 py-1 cursor-pointer m-1.5
+    }
+    .icon-12 {
+        width: 12px;
+    }
+    .icon-16 {
+        width: 16px;
+    }
+    .icon-20 {
+        width: 20px;
+    }
     /* guest */
     .member-only-form {
         @apply absolute border rounded border-solid p-3 w-48 bg-white text-wk-secondary left-28 border-red-500;
@@ -178,6 +214,37 @@
         /*position: absolute;*/
         /*top: 5px;*/
         /*right: 5px*/
+    }
+
+    .v-data-table-header th {
+        @apply bg-wk-light text-left;
+        font-weight: normal;
+    }
+    .v-data-table-header th span {
+        color: #151515;
+    }
+    .v-data-table>.v-data-table__wrapper>table>tbody>tr:nth-child(even) {
+        @apply bg-wk-lightgray
+    }
+    .v-data-table>.v-data-table__wrapper>table>tbody>tr>td,
+    .v-data-table>.v-data-table__wrapper>table>tbody>tr>th,
+    .v-data-table>.v-data-table__wrapper>table>tfoot>tr>td,
+    .v-data-table>.v-data-table__wrapper>table>tfoot>tr>th,
+    .v-data-table>.v-data-table__wrapper>table>thead>tr>td,
+    .v-data-table>.v-data-table__wrapper>table>thead>tr>th {
+        font-size: .79rem;
+        height: 40px;
+    }
+    .v-data-table>.v-data-table__wrapper>table>tbody>tr>td:first-child,
+    .v-data-table>.v-data-table__wrapper>table>tbody>tr>th:first-child,
+    .v-data-table>.v-data-table__wrapper>table>tfoot>tr>td:first-child,
+    .v-data-table>.v-data-table__wrapper>table>tfoot>tr>th:first-child,
+    .v-data-table>.v-data-table__wrapper>table>thead>tr>td:first-child,
+    .v-data-table>.v-data-table__wrapper>table>thead>tr>th:first-child {
+        @apply pl-6
+    }
+    .v-simple-checkbox {
+        @apply flex;
     }
 }
 @layer utilities {
@@ -209,13 +276,30 @@ img, svg, video, canvas, audio, iframe, embed, object {
 .profile-online {
     border-color: #01C314;
 }
-
-.profile-leave {
-    border-color: #ef3434;
+.profile-vacation {
+    border-color: #DA000B;
 }
-
-.profile-meeting {
-    border-color: #dac12f;
+.profile-other {
+    border-color: #FF9900;
+}
+.theme--dark.v-chip:not(.v-chip--active).online {
+    background-color: #01C314;
+}
+.theme--dark.v-chip:not(.v-chip--active).vacation {
+    background-color: #DA000B;
+}
+.theme--dark.v-chip:not(.v-chip--active).other {
+    background-color: #FF9900;
+}
+.theme--dark.v-chip:not(.v-chip--active) {
+    background: #555;
+}
+.v-chip {
+    padding: 0 7px;
+    margin-right: 5px;
+}
+.v-chip.v-size--default {
+    height: 14px;
 }
 .w-22 {
     width: 5.5rem;

@@ -14,7 +14,8 @@
   },
   "devDependencies": {
     "concurrently": "^6.1.0",
-    "lerna": "^4.0.0"
+    "lerna": "^4.0.0",
+    "sass": "^1.39.2"
   },
   "dependencies": {
     "vue-icon": "^2.2.0"

@@ -3,6 +3,7 @@ import Vuetify from 'vuetify'
 import colors from 'vuetify/lib/util/colors'
 
 import 'vuetify/dist/vuetify.min.css'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 import '@/assets/css/tailwind.css'
 
@@ -21,6 +22,9 @@ const opts = {
         primary: colors.blue.lighten3,
       },
     },
+  },
+  icons: {
+    iconfont: 'md',
   },
 }
 

@@ -1,6 +1,5 @@
 <template>
-  <div class="w-full">
-    <h1>This is an user page</h1>
+  <div class="w-full" data-app>
     <List />
   </div>
 </template>
@@ -15,6 +14,11 @@ export default {
   components: {
     List,
     //    customIcon,
+  },
+  methods: {
+    addMember() {
+      console.log('add member')
+    },
   },
 }
 </script>
