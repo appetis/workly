@@ -105,6 +105,7 @@ export default {
       this.$store.state.ready = true
       this.$store.state.isGuest = true
       localStorage.isGuest = true
+      this.$router.push('/')
     },
     openCalendar() {
       this.showInit = false
@@ -112,6 +113,7 @@ export default {
       this.showSignup = false
       this.showSignin = false
       this.showVerification = false
+      this.$router.push('/')
     },
   },
 }

@@ -3,6 +3,7 @@ import Vuetify from 'vuetify'
 import colors from 'vuetify/lib/util/colors'
 
 import 'vuetify/dist/vuetify.min.css'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 import '@/assets/css/tailwind.css'
 
@@ -14,13 +15,16 @@ const opts = {
       light: {
         primary: '#474747',
         secondary: '#EEEEEE',
-        accent: colors.shades.black,
+        accent: '#042F31',
         error: colors.red.accent3,
       },
       dark: {
         primary: colors.blue.lighten3,
       },
     },
+  },
+  icons: {
+    iconfont: 'md',
   },
 }
 

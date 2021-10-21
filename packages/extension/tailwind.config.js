@@ -25,6 +25,7 @@ module.exports = {
       },
       boxShadow: {
         sm: '2px 2px 4px #333',
+        'b-sm': '2px 2px 3px #AEAEAE',
         DEFAULT: '3px 3px 10px #333',
       },
     },
