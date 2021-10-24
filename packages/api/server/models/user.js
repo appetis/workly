@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
 
   User.associate = db => {
     db.User.belongsToMany(db.Link, { through: 'UserLink' });
-    db.User.hasOne(db.Profile);
+    db.User.hasOne(db.Profile, { foreignKey: { unique: true, allowNull: false } });
     db.User.hasMany(db.Verification);
     db.User.hasMany(db.UserRole);
     db.User.hasMany(db.Dashboard);
