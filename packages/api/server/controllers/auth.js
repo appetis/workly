@@ -1,6 +1,43 @@
 const bcrypt = require('bcrypt');
-const { User, Team } = require('../models');
+const { User, Team, Token } = require('../models');
 const authService = require('../services/auth.service');
+
+const findToken = async token => {
+  return Token.findOne({
+    where: {
+      token,
+    },
+  });
+};
+
+exports.refresh = async (req, res) => {
+  const { refreshToken } = req.body;
+
+  const token = await findToken(refreshToken);
+  if (!token) {
+    return res.status(401).json({
+      code: 401,
+      message: 'Invalid token',
+    });
+  }
+
+  const verified = authService.verifyExpiration(token.expiredAt);
+  if (!verified) {
+    await token.destroy();
+    return res.status(461).json({
+      code: 461,
+      message: 'Token expired',
+    });
+  }
+
+  const accessToken = authService.generateAccessToken(token.UserId);
+  return res.status(200).json({
+    code: 200,
+    message: 'Access token generated',
+    accessToken,
+    refreshToken: token.token,
+  });
+};
 
 exports.login = async (req, res) => {
   try {
@@ -36,12 +73,15 @@ exports.login = async (req, res) => {
     delete user.dataValues.password;
 
     if (user.status === 'VE') {
-      const token = authService.generateToken(user.id);
+      const accessToken = authService.generateAccessToken(user.id);
+      const refreshToken = await authService.generateRefreshToken(user.id);
+
       return res.status(200).json({
         code: 200,
-        message: 'Logged in successfully',
+        message: 'Authenticated',
         user,
-        token,
+        accessToken,
+        refreshToken,
       });
     }
     return res.status(200).json({

@@ -17,6 +17,7 @@ db.Profile = require('./profile')(sequelize, Sequelize);
 db.Dashboard = require('./dashboard')(sequelize, Sequelize);
 db.Link = require('./link')(sequelize, Sequelize);
 db.Event = require('./event')(sequelize, Sequelize);
+db.Token = require('./token')(sequelize, Sequelize);
 
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
