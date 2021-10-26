@@ -97,3 +97,22 @@ exports.login = async (req, res) => {
     });
   }
 };
+
+exports.logout = async (req, res) => {
+  const { refreshToken } = req.body;
+
+  const token = await findToken(refreshToken);
+  if (!token) {
+    return res.status(401).json({
+      code: 401,
+      message: 'Invalid token',
+    });
+  }
+
+  await token.destroy();
+
+  return res.status(200).json({
+    code: 200,
+    message: 'Refresh token deleted',
+  });
+};
