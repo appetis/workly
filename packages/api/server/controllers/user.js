@@ -1,60 +1,9 @@
 const bcrypt = require('bcrypt');
 const { Op } = require('sequelize');
-const { User, Verification, Profile, Code } = require('../models');
-const emailService = require('../services/email.service');
+const { User, Verification, Profile } = require('../models');
+const userService = require('../services/user.service');
 const authService = require('../services/auth.service');
-
-const findUsers = async () => {
-  return User.findAll({
-    attributes: {
-      exclude: ['password'],
-    },
-  });
-};
-
-const findNameByStatusCode = async statusCode => {
-  const code = await Code.findOne({
-    where: {
-      code: statusCode,
-    },
-    attributes: ['name'],
-  });
-
-  return code.name;
-};
-
-const addProfileStatusName = async profile => {
-  const statusName = await findNameByStatusCode(profile.status);
-  profile.setDataValue('statusName', statusName);
-};
-
-const findUserWithProfileById = async id => {
-  const user = await User.findByPk(id, {
-    attributes: {
-      exclude: ['password'],
-    },
-    include: [
-      {
-        model: Profile,
-        attributes: ['name', 'avatar', 'department', 'position', 'phone', 'phone_ext', 'status'],
-      },
-    ],
-  });
-
-  if (user.Profile) {
-    await addProfileStatusName(user.Profile);
-  }
-
-  return user;
-};
-
-const findUserByEmail = async email => {
-  return User.findOne({
-    where: {
-      email,
-    },
-  });
-};
+const emailService = require('../services/email.service');
 
 const findVerificationToVerify = async userId => {
   return Verification.findOne({
@@ -73,14 +22,6 @@ const verifyStatus = async (user, userVerification) => {
   await userVerification.update({ status: 'VE' });
 };
 
-const findUserProfile = async userId => {
-  return Profile.findOne({
-    where: {
-      UserId: userId,
-    },
-  });
-};
-
 const createOrUpdateUserProfile = async (userId, data) => {
   const profileData = {
     UserId: userId,
@@ -92,14 +33,14 @@ const createOrUpdateUserProfile = async (userId, data) => {
     status: data.status,
   };
 
-  let profile = await findUserProfile(userId);
+  let profile = await userService.getUserProfile(userId);
   if (profile) {
     profile = await profile.update(profileData);
   } else {
     profile = await Profile.create(profileData);
   }
 
-  await addProfileStatusName(profile);
+  await userService.addProfileStatusName(profile);
 
   return profile;
 };
@@ -136,7 +77,7 @@ exports.create = async (req, res) => {
       });
     }
 
-    const user = await findUserByEmail(email);
+    const user = await userService.getUserByEmail(email);
     if (user) {
       return res.status(400).json({
         code: 400,
@@ -164,7 +105,7 @@ exports.create = async (req, res) => {
 
 exports.getUsers = async (req, res) => {
   try {
-    const users = await findUsers();
+    const users = await userService.getUsers();
 
     return res.status(200).json({
       code: 200,
@@ -182,7 +123,7 @@ exports.getUsers = async (req, res) => {
 
 exports.getUserById = async (req, res) => {
   try {
-    const user = await findUserWithProfileById(req.params.id);
+    const user = await userService.getUserWithProfileById(req.params.id);
     if (!user) {
       return res.status(204).json({
         code: 204,
@@ -209,7 +150,7 @@ exports.verify = async (req, res) => {
     const userId = req.params.id;
     const { code } = req.body;
 
-    const user = await findUserWithProfileById(userId);
+    const user = await userService.getUserWithProfileById(userId);
     if (!user) {
       return res.status(400).json({
         code: 400,
@@ -245,7 +186,7 @@ exports.verify = async (req, res) => {
 exports.updateProfile = async (req, res) => {
   try {
     const userId = req.params.id;
-    const user = await findUserWithProfileById(userId);
+    const user = await userService.getUserWithProfileById(userId);
     if (!user) {
       return res.status(400).json({
         code: 400,

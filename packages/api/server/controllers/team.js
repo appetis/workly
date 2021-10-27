@@ -1,4 +1,25 @@
-const { Team, User, Profile } = require('../models');
+const { Team, User } = require('../models');
+const userService = require('../services/user.service');
+
+const addMemberProfiles = async team => {
+  const newTeam = {
+    id: team.id,
+    name: team.name,
+    status: team.status,
+    createdAt: team.createdAt,
+    updatedAt: team.updatedAt,
+    members: [],
+  };
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const member of team.members) {
+    // eslint-disable-next-line no-await-in-loop
+    const user = await userService.getUserWithProfileById(member.id);
+    newTeam.members.push(user);
+  }
+
+  return newTeam;
+};
 
 exports.create = async (req, res) => {
   try {
@@ -41,7 +62,7 @@ exports.create = async (req, res) => {
 exports.getMembersById = async (req, res) => {
   try {
     const { id } = req.params;
-    const team = await Team.findOne({
+    let team = await Team.findOne({
       where: {
         id,
       },
@@ -49,16 +70,10 @@ exports.getMembersById = async (req, res) => {
         {
           model: User,
           as: 'members',
-          attributes: ['id', 'email', 'status'],
+          attributes: ['id'], // 'email', 'status'],
           through: {
             attributes: [],
           },
-          include: [
-            {
-              model: Profile,
-              attributes: ['department', 'position', 'phone'],
-            },
-          ],
         },
       ],
     });
@@ -69,8 +84,11 @@ exports.getMembersById = async (req, res) => {
       });
     }
 
+    team = await addMemberProfiles(team);
+
     return res.status(200).json({
       code: 200,
+      message: 'Success',
       team,
     });
   } catch (error) {
