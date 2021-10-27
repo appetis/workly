@@ -105,7 +105,7 @@ export default {
       this.$store.state.ready = true
       this.$store.state.isGuest = true
       localStorage.isGuest = true
-      this.$router.push('/')
+      if (this.$route.path !== '/') this.$router.push('/')
     },
     openCalendar() {
       this.showInit = false
@@ -113,7 +113,9 @@ export default {
       this.showSignup = false
       this.showSignin = false
       this.showVerification = false
-      this.$router.push('/')
+      //this.$root.$refs.header.getInfo()
+      this.$root.$emit('getProfileInfo')
+      if (this.$route.path !== '/') this.$router.push('/')
     },
   },
 }

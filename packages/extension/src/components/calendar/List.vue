@@ -122,8 +122,6 @@
               </v-btn>
             </v-card-actions>
           </v-card>
-
-
         </v-menu>
       </v-sheet>
     </v-col>

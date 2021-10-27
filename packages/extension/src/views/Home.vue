@@ -24,10 +24,3 @@ export default {
   },
 }
 </script>
-
-<style>
-.v-icon,
-.custom-icon {
-  width: 40px;
-}
-</style>

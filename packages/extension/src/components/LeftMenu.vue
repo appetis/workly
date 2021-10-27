@@ -10,14 +10,18 @@
       <router-link to="/link" class="menu-icon-button" id="menu-icon-link"
         ><v-icon name="link" base-class="v-icon"></v-icon
       ></router-link>
-      <router-link to="/user" class="menu-icon-button" id="menu-icon-user" v-show="!$store.state.isGuest"
-      ><v-icon name="users" base-class="v-icon"></v-icon
+      <router-link
+        to="/user"
+        class="menu-icon-button"
+        id="menu-icon-user"
+        v-show="!$store.state.isGuest"
+        ><v-icon name="users" base-class="v-icon"></v-icon
       ></router-link>
       <div
-          class="menu-icon-button cursor-pointer member_only"
-          id="menu-icon-guest-user"
-          @click="onMemberOnly($event)"
-          v-show="$store.state.isGuest"
+        class="menu-icon-button cursor-pointer member_only"
+        id="menu-icon-guest-user"
+        @click="onMemberOnly($event)"
+        v-show="$store.state.isGuest"
       >
         <v-icon name="users" base-class="v-icon"></v-icon>
       </div>

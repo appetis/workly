@@ -1,41 +1,9 @@
 const bcrypt = require('bcrypt');
 const { Op } = require('sequelize');
 const { User, Verification, Profile } = require('../models');
-const emailService = require('../services/email.service');
+const userService = require('../services/user.service');
 const authService = require('../services/auth.service');
-
-const findUsers = async () => {
-  return User.findAll({
-    attributes: {
-      exclude: ['password'],
-    },
-  });
-};
-
-const findUserById = async id => {
-  return User.findOne({
-    where: {
-      id,
-    },
-    attributes: {
-      exclude: ['password'],
-    },
-    include: [
-      {
-        model: Profile,
-        attributes: ['department', 'position', 'phone'],
-      },
-    ],
-  });
-};
-
-const findUserByEmail = async email => {
-  return User.findOne({
-    where: {
-      email,
-    },
-  });
-};
+const emailService = require('../services/email.service');
 
 const findVerificationToVerify = async userId => {
   return Verification.findOne({
@@ -54,16 +22,8 @@ const verifyStatus = async (user, userVerification) => {
   await userVerification.update({ status: 'VE' });
 };
 
-const findUserProfile = async userId => {
-  return Profile.findOne({
-    where: {
-      UserId: userId,
-    },
-  });
-};
-
-const createUserProfile = async (userId, data) => {
-  return Profile.create({
+const createOrUpdateUserProfile = async (userId, data) => {
+  const profileData = {
     UserId: userId,
     name: data.name,
     department: data.department,
@@ -71,18 +31,18 @@ const createUserProfile = async (userId, data) => {
     phone: data.phone,
     phone_ext: data.phone_ext,
     status: data.status,
-  });
-};
+  };
 
-const updateUserProfile = async (profile, data) => {
-  return profile.update({
-    name: data.name,
-    department: data.department,
-    position: data.position,
-    phone: data.phone,
-    phone_ext: data.phone_ext,
-    status: data.status,
-  });
+  let profile = await userService.getUserProfile(userId);
+  if (profile) {
+    profile = await profile.update(profileData);
+  } else {
+    profile = await Profile.create(profileData);
+  }
+
+  await userService.addProfileStatusName(profile);
+
+  return profile;
 };
 
 const validateEmail = email => {
@@ -117,7 +77,7 @@ exports.create = async (req, res) => {
       });
     }
 
-    const user = await findUserByEmail(email);
+    const user = await userService.getUserByEmail(email);
     if (user) {
       return res.status(400).json({
         code: 400,
@@ -145,7 +105,7 @@ exports.create = async (req, res) => {
 
 exports.getUsers = async (req, res) => {
   try {
-    const users = await findUsers();
+    const users = await userService.getUsers();
 
     return res.status(200).json({
       code: 200,
@@ -163,7 +123,7 @@ exports.getUsers = async (req, res) => {
 
 exports.getUserById = async (req, res) => {
   try {
-    const user = await findUserById(req.params.id);
+    const user = await userService.getUserWithProfileById(req.params.id);
     if (!user) {
       return res.status(204).json({
         code: 204,
@@ -190,7 +150,7 @@ exports.verify = async (req, res) => {
     const userId = req.params.id;
     const { code } = req.body;
 
-    const user = await findUserById(userId);
+    const user = await userService.getUserWithProfileById(userId);
     if (!user) {
       return res.status(400).json({
         code: 400,
@@ -226,7 +186,7 @@ exports.verify = async (req, res) => {
 exports.updateProfile = async (req, res) => {
   try {
     const userId = req.params.id;
-    const user = await findUserById(userId);
+    const user = await userService.getUserWithProfileById(userId);
     if (!user) {
       return res.status(400).json({
         code: 400,
@@ -234,12 +194,7 @@ exports.updateProfile = async (req, res) => {
       });
     }
 
-    let profile = await findUserProfile(userId);
-    if (profile) {
-      profile = await updateUserProfile(profile, req.body);
-    } else {
-      profile = await createUserProfile(userId, req.body);
-    }
+    const profile = await createOrUpdateUserProfile(userId, req.body);
 
     return res.status(200).json({
       code: 200,

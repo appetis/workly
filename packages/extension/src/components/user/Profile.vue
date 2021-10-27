@@ -13,10 +13,20 @@
         <span class="modal-close" @click="close">
           <v-icon name="x" base-class="v-icon"></v-icon>
         </span>
-        <div class="modal-body">
+        <div class="modal-body" v-if="profile">
           <div>
-            <div class="profile-photo profile-online">
-              <img :src="displayImage" class="profile-avatar" />
+            <div
+              class="profile-photo"
+              v-bind:class="profile.Profile.status_class"
+            >
+              <div class="header-no-avatar" v-show="!profile.Profile.avatar">
+                <v-icon name="user" base-class="profile-no-icon"></v-icon>
+              </div>
+              <img
+                :src="profile.Profile.avatar"
+                class="profile-avatar"
+                v-show="profile.Profile.avatar"
+              />
               <!--              <div class="profile-online"></div>-->
             </div>
             <div class="profile-top">
@@ -24,7 +34,7 @@
                 class="text-lg leading-6 font-medium text-gray-900"
                 id="profile-name"
               >
-                Susan Guerrero
+                {{ profile.Profile.name }}
               </h3>
               <div class="mt-0">
                 <span
@@ -43,9 +53,11 @@
                   class="inline-block text-sm text-brand-defgray"
                   id="profile-position"
                 >
-                  Project Manager
+                  {{ profile.Profile.position }}
                 </p>
               </div>
+
+              <!-- // For version 2
               <div class="mt-3">
                 <div class="profile-icon">
                   <v-icon name="calendar" base-class="vb-icon"></v-icon>
@@ -57,6 +69,7 @@
                   <v-icon name="message-square" base-class="vb-icon"></v-icon>
                 </div>
               </div>
+              -->
             </div>
           </div>
           <div class="mt-8 text-sm">
@@ -76,7 +89,10 @@
                 base-class="pv-icon"
                 class="text-brand-defgray"
               ></v-icon>
-              <span class="ml-3 align-middle"> Team - Project Manager </span>
+              <span class="ml-3 align-middle">
+                {{ profile.Profile.department }} -
+                {{ profile.Profile.position }}
+              </span>
             </div>
             <div class="mb-3 inline-block w-full">
               <v-icon
@@ -84,7 +100,7 @@
                 base-class="pv-icon"
                 class="text-brand-defgray"
               ></v-icon>
-              <span class="ml-3 align-middle"> random@email.com </span>
+              <span class="ml-3 align-middle"> {{ profile.email }} </span>
             </div>
             <div class="mb-3 inline-block w-full">
               <v-icon
@@ -92,7 +108,9 @@
                 base-class="pv-icon"
                 class="text-brand-defgray"
               ></v-icon>
-              <span class="ml-3 align-middle"> Ext.335 </span>
+              <span class="ml-3 align-middle">
+                Ext.{{ profile.Profile.phone_ext }}
+              </span>
             </div>
             <div class="mb-3 inline-block w-full">
               <v-icon
@@ -100,7 +118,9 @@
                 base-class="pv-icon"
                 class="text-brand-defgray"
               ></v-icon>
-              <span class="ml-3 align-middle"> 647-999-1234 </span>
+              <span class="ml-3 align-middle">
+                {{ profile.Profile.phone }}
+              </span>
             </div>
           </div>
         </div>
@@ -121,10 +141,7 @@
 export default {
   name: 'Profile',
   props: {
-    avatar: {
-      required: true,
-      type: String,
-    },
+    profile: null,
   },
   data() {
     return {}
@@ -132,11 +149,6 @@ export default {
   methods: {
     close() {
       this.$emit('close')
-    },
-  },
-  computed: {
-    displayImage() {
-      return this.avatar
     },
   },
 }
