@@ -15,13 +15,18 @@
         </span>
         <div class="modal-body" v-if="profile">
           <div>
-            <div class="profile-photo" v-bind:class="profile.Profile.status_class">
+            <div
+              class="profile-photo"
+              v-bind:class="profile.Profile.status_class"
+            >
               <div class="header-no-avatar" v-show="!profile.Profile.avatar">
-                <v-icon name="user" base-class="profile-no-icon"
-                ></v-icon
-                >
+                <v-icon name="user" base-class="profile-no-icon"></v-icon>
               </div>
-              <img :src="profile.Profile.avatar" class="profile-avatar" v-show="profile.Profile.avatar" />
+              <img
+                :src="profile.Profile.avatar"
+                class="profile-avatar"
+                v-show="profile.Profile.avatar"
+              />
               <!--              <div class="profile-online"></div>-->
             </div>
             <div class="profile-top">
@@ -65,7 +70,6 @@
                 </div>
               </div>
               -->
-
             </div>
           </div>
           <div class="mt-8 text-sm">
@@ -85,7 +89,10 @@
                 base-class="pv-icon"
                 class="text-brand-defgray"
               ></v-icon>
-              <span class="ml-3 align-middle">  {{ profile.Profile.department }} -  {{ profile.Profile.position }} </span>
+              <span class="ml-3 align-middle">
+                {{ profile.Profile.department }} -
+                {{ profile.Profile.position }}
+              </span>
             </div>
             <div class="mb-3 inline-block w-full">
               <v-icon
@@ -93,7 +100,7 @@
                 base-class="pv-icon"
                 class="text-brand-defgray"
               ></v-icon>
-              <span class="ml-3 align-middle">  {{ profile.email }} </span>
+              <span class="ml-3 align-middle"> {{ profile.email }} </span>
             </div>
             <div class="mb-3 inline-block w-full">
               <v-icon
@@ -101,7 +108,9 @@
                 base-class="pv-icon"
                 class="text-brand-defgray"
               ></v-icon>
-              <span class="ml-3 align-middle"> Ext.{{ profile.Profile.phone_ext }} </span>
+              <span class="ml-3 align-middle">
+                Ext.{{ profile.Profile.phone_ext }}
+              </span>
             </div>
             <div class="mb-3 inline-block w-full">
               <v-icon
@@ -109,7 +118,9 @@
                 base-class="pv-icon"
                 class="text-brand-defgray"
               ></v-icon>
-              <span class="ml-3 align-middle"> {{ profile.Profile.phone }} </span>
+              <span class="ml-3 align-middle">
+                {{ profile.Profile.phone }}
+              </span>
             </div>
           </div>
         </div>
@@ -133,8 +144,7 @@ export default {
     profile: null,
   },
   data() {
-    return {
-    }
+    return {}
   },
   methods: {
     close() {

@@ -39,8 +39,8 @@
                   </v-col>
                   <v-col cols="12" sm="6" md="6">
                     <v-text-field
-                        v-model="editedItem.department"
-                        label="Department"
+                      v-model="editedItem.department"
+                      label="Department"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="6">
@@ -97,11 +97,11 @@
         </v-dialog>
         <v-dialog v-model="dialogProfile" max-width="500px">
           <Profile
-              v-show="dialogProfile"
-              @close="closeProfile"
-              :profile="editedItem"
-              id="modal-profile"
-              ref="profile"
+            v-show="dialogProfile"
+            @close="closeProfile"
+            :profile="editedItem"
+            id="modal-profile"
+            ref="profile"
           />
         </v-dialog>
       </v-toolbar>
@@ -125,19 +125,16 @@
       -->
     </template>
 
-
     <template v-slot:no-data>
       <v-btn color="primary" @click="initialize"> Reset </v-btn>
     </template>
-
-
   </v-data-table>
 </template>
 
 <script>
 import UserService from '@/services/UserService'
 import TeamService from '@/services/TeamService'
-import Profile from "./Profile";
+import Profile from './Profile'
 
 export default {
   name: 'User',
@@ -331,7 +328,8 @@ export default {
       this.editedIndex = this.users.indexOf(user)
       this.editedItem = Object.assign({}, user)
       this.selectedProfile = user
-      this.selectedProfile.Profile.status_class = 'profile-' + this.getProfileClass(user.Profile.status)
+      this.selectedProfile.Profile.status_class =
+        'profile-' + this.getProfileClass(user.Profile.status)
       this.dialogProfile = true
     },
 

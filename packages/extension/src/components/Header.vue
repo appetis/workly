@@ -23,16 +23,21 @@
       ></v-icon>
       -->
 
-      <div class="ml-4 profile-photo" v-if="profile" v-bind:class="profile.Profile.status_class">
-        <div class="header-no-avatar" v-if="!profile.Profile.avatar"
-             @click="openProfile()"
-             id="header-no-profile">
-          <v-icon name="user" base-class="profile-no-icon"
-                  ></v-icon
-          >
+      <div
+        class="ml-4 profile-photo"
+        v-if="profile"
+        v-bind:class="profile.Profile.status_class"
+      >
+        <div
+          class="header-no-avatar"
+          v-if="!profile.Profile.avatar"
+          @click="openProfile()"
+          id="header-no-profile"
+        >
+          <v-icon name="user" base-class="profile-no-icon"></v-icon>
         </div>
         <img
-            v-if="profile.Profile.avatar"
+          v-if="profile.Profile.avatar"
           :src="profile.Profile.avatar"
           class="header-avatar"
           @click="openProfile()"
@@ -48,7 +53,8 @@
       ref="profile"
     />
   </div>
-</template>Ω
+</template>
+Ω
 <script>
 import Profile from './user/Profile'
 import UserService from '@/services/UserService'
@@ -74,17 +80,19 @@ export default {
     },
     getInfo() {
       const user = JSON.parse(localStorage.getItem('user'))
-      console.log("===== getInfo", user)
-      if(user) {
+      console.log('===== getInfo', user)
+      if (user) {
         UserService.getUser(user.id)
-            .then((response) => {
-              //this.avatar = require('../assets/images/profile.jpeg')
-              this.profile = response.data.user
-              this.profile.Profile.status_class = this.getProfileClass(response.data.user.Profile.status)
-            })
-            .catch((error) => {
-              throw error
-            })
+          .then((response) => {
+            //this.avatar = require('../assets/images/profile.jpeg')
+            this.profile = response.data.user
+            this.profile.Profile.status_class = this.getProfileClass(
+              response.data.user.Profile.status
+            )
+          })
+          .catch((error) => {
+            throw error
+          })
       }
     },
     getProfileClass(status) {
@@ -102,7 +110,7 @@ export default {
       return `profile-${status_color}`
     },
   },
-  mounted: function() {
+  mounted: function () {
     this.getInfo()
 
     // if (document.getElementById('my-datatable')) return; // was already loaded
@@ -114,6 +122,6 @@ export default {
     window.setInterval(() => {
       this.getInfo()
     }, 100000)
-  }
+  },
 }
 </script>
