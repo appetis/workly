@@ -172,7 +172,7 @@ exports.verify = async (req, res) => {
       code: 200,
       message: 'Verified the user email',
       user,
-      token: authService.generateToken(user.id),
+      token: authService.generateAccessToken(user.id),
     });
   } catch (error) {
     console.error(error);
