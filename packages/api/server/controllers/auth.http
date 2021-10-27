@@ -1,4 +1,16 @@
-POST http://localhost:3000/api/login
+POST http://localhost:3000/api/auth/logout
+Content-Type: application/json
+
+{"refreshToken": "244246b8-4024-4044-bd71-6fa00731ad6f"}
+
+###
+POST http://localhost:3000/api/auth/refresh
+Content-Type: application/json
+
+{"refreshToken": "244246b8-4024-4044-bd71-6fa00731ad6f"}
+
+###
+POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {"email": "test@test.com", "password": "test1234"}
