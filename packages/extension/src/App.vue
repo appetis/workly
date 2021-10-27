@@ -6,7 +6,8 @@
       <LeftMenu class="table-cell align-top" />
 
       <div class="h-screen w-full table-cell">
-        <Header />
+        <Header
+            ref="topHeader" />
         <router-view class="w-full" />
       </div>
     </div>
@@ -40,6 +41,13 @@ export default {
 
     // get array from LocalStorage
     console.log(JSON.parse(localStorage.getItem('events') || '[]'))
+
+
+    const thisInstance = this
+    this.$root.$on('getProfileInfo', function(){
+      //thisInstance.incrementCount()
+      thisInstance.$refs.topHeader.getInfo()
+    })
   },
   watch: {},
   methods: {

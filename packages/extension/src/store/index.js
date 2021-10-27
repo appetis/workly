@@ -8,7 +8,7 @@ export default new Vuex.Store({
   state: {
     user: {
       id: 0,
-      token: ''
+      token: '',
     },
     ready: false,
     isGuest: false,
@@ -19,7 +19,7 @@ export default new Vuex.Store({
       state.user.id = data.user.id
       let user = {
         id: data.user.id,
-        teams: []
+        teams: [],
       }
       if (data.token) {
         state.user.token = data.token

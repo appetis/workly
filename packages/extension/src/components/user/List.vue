@@ -5,12 +5,11 @@
     sort-by="department"
     :single-select="singleSelect"
     item-key="name"
-    show-select
     class="elevation-1"
   >
-    <template v-slot:item.status="{ item }">
-      <v-chip :color="getColor(item.status)" dark> </v-chip>
-      {{ item.status_name }}
+    <template v-slot:item.Profile.status="{ item }">
+      <v-chip :color="getProfileClass(item.Profile.status)" dark> </v-chip>
+      {{ item.Profile.status }}
     </template>
     <template v-slot:top>
       <v-toolbar flat>
@@ -36,6 +35,12 @@
                     <v-text-field
                       v-model="editedItem.name"
                       label="Name"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field
+                        v-model="editedItem.department"
+                        label="Department"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="6">
@@ -90,9 +95,24 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+        <v-dialog v-model="dialogProfile" max-width="500px">
+          <Profile
+              v-show="dialogProfile"
+              @close="closeProfile"
+              :profile="editedItem"
+              id="modal-profile"
+              ref="profile"
+          />
+        </v-dialog>
       </v-toolbar>
     </template>
+
     <template v-slot:item.actions="{ item }">
+      <div class="action-box" @click="openProfile(item)">
+        <v-icon name="user" base-class="icon-12"></v-icon>
+      </div>
+
+      <!-- For version 2
       <div class="action-box" @click="editItem(item)">
         <v-icon name="calendar" base-class="icon-12"></v-icon>
       </div>
@@ -102,42 +122,54 @@
       <div class="action-box" @click="deleteItem(item)">
         <v-icon name="message-square" base-class="icon-12"></v-icon>
       </div>
+      -->
     </template>
+
+
     <template v-slot:no-data>
       <v-btn color="primary" @click="initialize"> Reset </v-btn>
     </template>
+
+
   </v-data-table>
 </template>
 
 <script>
 import UserService from '@/services/UserService'
 import TeamService from '@/services/TeamService'
+import Profile from "./Profile";
 
 export default {
   name: 'User',
+  components: {
+    Profile,
+  },
   data() {
     return {
       singleSelect: false,
       selected: [],
       dialog: false,
       dialogDelete: false,
+      dialogProfile: false,
       headers: [
         {
           text: 'Name',
           align: 'start',
           sortable: false,
-          value: 'name',
+          value: 'Profile.name',
         },
-        { text: 'Position', value: 'position' },
+        { text: 'Department', value: 'Profile.department' },
+        { text: 'Position', value: 'Profile.position' },
         { text: 'Email', value: 'email' },
-        { text: 'Phone', value: 'phone' },
-        { text: 'Status', value: 'status' },
-        { text: '', value: 'actions', sortable: false },
+        { text: 'Phone', value: 'Profile.phone' },
+        { text: 'Status', value: 'Profile.status' },
+        { text: 'Action', value: 'actions', sortable: false },
       ],
       users: [],
       editedIndex: -1,
       editedItem: {
         name: '',
+        department: '',
         position: '',
         email: '',
         phone: '',
@@ -145,12 +177,15 @@ export default {
       },
       defaultItem: {
         name: '',
+        department: '',
         position: '',
         email: '',
         phone: '',
         status: '',
       },
       totalCount: 0,
+      selectedAvatar: null,
+      selectedProfile: null,
     }
   },
   computed: {
@@ -165,6 +200,9 @@ export default {
     dialogDelete(val) {
       val || this.closeDelete()
     },
+    dialogProfile(val) {
+      val || this.closeProfile()
+    },
   },
 
   created() {
@@ -173,7 +211,7 @@ export default {
 
   methods: {
     created() {
-      console.log("User Created")
+      console.log('User Created')
       UserService.getUsers()
         .then((response) => {
           this.users = response.data
@@ -185,15 +223,15 @@ export default {
     initialize() {
       //console.log("======> initialize", this.$store.state.user.teams.length, this.$store.state.user.teams[0].id)
       const user = JSON.parse(localStorage.getItem('user'))
-      if(this.$store.state.user.token && (user.teams.length > 0)) {
+      if (this.$store.state.user.token && user.teams.length > 0) {
         TeamService.getTeams(user.teams[0].id)
-            .then((response) => {
-              console.log(response.data.team);
-              this.users = response.data.team.members
-            })
-            .catch((error) => {
-              throw error
-            })
+          .then((response) => {
+            console.log(response.data.team)
+            this.users = response.data.team.members
+          })
+          .catch((error) => {
+            throw error
+          })
       }
       /*this.users = [
         {
@@ -284,11 +322,17 @@ export default {
       this.editedItem = Object.assign({}, user)
       this.dialog = true
     },
-
     deleteItem(user) {
       this.editedIndex = this.users.indexOf(user)
       this.editedItem = Object.assign({}, user)
       this.dialogDelete = true
+    },
+    openProfile(user) {
+      this.editedIndex = this.users.indexOf(user)
+      this.editedItem = Object.assign({}, user)
+      this.selectedProfile = user
+      this.selectedProfile.Profile.status_class = 'profile-' + this.getProfileClass(user.Profile.status)
+      this.dialogProfile = true
     },
 
     messageUser(user) {
@@ -318,6 +362,14 @@ export default {
       })
     },
 
+    closeProfile() {
+      this.dialogProfile = false
+      this.$nextTick(() => {
+        // this.editedItem = Object.assign({}, this.defaultItem)
+        // this.editedIndex = -1
+      })
+    },
+
     save() {
       if (this.editedIndex > -1) {
         Object.assign(this.users[this.editedIndex], this.editedItem)
@@ -326,13 +378,13 @@ export default {
       }
       this.close()
     },
-    getColor(status) {
-      let status_color = '';
-      switch(status) {
-        case "VA":
+    getProfileClass(status) {
+      let status_color = ''
+      switch (status) {
+        case 'VA':
           status_color = 'vacation'
           break
-        case "OF":
+        case 'OF':
           status_color = 'online'
           break
         default:
