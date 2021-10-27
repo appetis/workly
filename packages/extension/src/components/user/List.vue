@@ -9,7 +9,7 @@
   >
     <template v-slot:item.Profile.status="{ item }">
       <v-chip :color="getProfileClass(item.Profile.status)" dark> </v-chip>
-      {{ item.Profile.status }}
+      {{ item.Profile.statusName }}
     </template>
     <template v-slot:top>
       <v-toolbar flat>
