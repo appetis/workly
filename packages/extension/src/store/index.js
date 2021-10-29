@@ -8,10 +8,12 @@ export default new Vuex.Store({
   state: {
     user: {
       id: 0,
-      token: '',
+      tokens: {},
+      teams: []
     },
     ready: false,
     isGuest: false,
+    loading: false
   },
   mutations: {
     SET_USER(state, data) {
@@ -21,13 +23,13 @@ export default new Vuex.Store({
         id: data.user.id,
         teams: [],
       }
-      if (data.token) {
-        state.user.token = data.token
-        localStorage.token = data.token
+      if (data.accessToken) {
+        state.user.tokens.accessToken = data.accessToken
+        state.user.tokens.refreshToken = data.refreshToken
+        localStorage.setItem('tokens', JSON.stringify(state.user.tokens))
         localStorage.removeItem('isGuest')
         state.isGuest = false
-        user.teams = data.user.Teams
-
+        state.user.teams = user.teams = data.user.Teams
         localStorage.setItem('user', JSON.stringify(user))
       }
       //state.ready = true
@@ -35,6 +37,9 @@ export default new Vuex.Store({
     SET_READY(state) {
       state.ready = true
     },
+    SET_LOADING(state, loading) {
+      state.loading = loading
+    }
   },
   actions: {
     login({ commit }, user) {
@@ -42,6 +47,7 @@ export default new Vuex.Store({
         .then((response) => {
           commit('SET_USER', response.data)
           if (response.data.user.status === 'VE') commit('SET_READY')
+
           return response
         })
         .catch((error) => {

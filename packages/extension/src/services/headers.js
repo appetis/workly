@@ -1,5 +1,5 @@
 const headers = {
-  Authorization: 'Bearer ' + localStorage.token,
+  Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('tokens')).accessToken,
   'My-Custom-Header': 'foobar',
 }
 console.log('===>', headers)

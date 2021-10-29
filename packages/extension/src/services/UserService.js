@@ -3,7 +3,13 @@ import apiClient from './apiClient'
 
 export default {
   login(data) {
-    return apiClient.post('/api/login', data)
+    return apiClient.post('/api/auth/login', data)
+  },
+  refresh(data) {
+    return apiClient.post('/api/auth/refresh', data)
+  },
+  logout(data) {
+    return apiClient.post('/api/auth/logout', data)
   },
   getUsers() {
     return apiClient.get('/api/users')

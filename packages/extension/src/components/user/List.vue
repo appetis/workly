@@ -219,9 +219,10 @@ export default {
     },
     initialize() {
       //console.log("======> initialize", this.$store.state.user.teams.length, this.$store.state.user.teams[0].id)
-      const user = JSON.parse(localStorage.getItem('user'))
-      if (this.$store.state.user.token && user.teams.length > 0) {
-        TeamService.getTeams(user.teams[0].id)
+      console.log("===== init List ", this.$store.state)
+      if(this.$store.state.user.tokens.accessToken && this.$store.state.user.teams.length) {
+        const team_id = this.$store.state.user.teams[0].id
+        TeamService.getTeams(team_id)
           .then((response) => {
             console.log(response.data.team)
             this.users = response.data.team.members
