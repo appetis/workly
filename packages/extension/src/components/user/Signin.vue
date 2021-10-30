@@ -218,7 +218,6 @@ export default {
       this.showPassword = false
     },
     onSubmit() {
-      console.log('submit')
       let empty = 0
       empty += this.onBlurEmail()
       empty += this.onBlurPassword()
@@ -230,6 +229,10 @@ export default {
           this.freshUserObject()
           if (response.data.user.status === 'VE') this.openCalendar()
           else this.goVerification()
+
+          this.isLoading = false
+
+          this.$root.$emit('openCalendar')
         })
         .catch((error) => {
           this.showAuthenticationFailMessage = error.response.data.message

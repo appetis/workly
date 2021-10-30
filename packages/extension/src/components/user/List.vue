@@ -219,8 +219,8 @@ export default {
     },
     initialize() {
       //console.log("======> initialize", this.$store.state.user.teams.length, this.$store.state.user.teams[0].id)
-      console.log("===== init List ", this.$store.state)
-      if(this.$store.state.user.tokens.accessToken && this.$store.state.user.teams.length) {
+      console.log('===== init List ', this.$store.state)
+      if (this.$store.state.user.teams.length) {
         const team_id = this.$store.state.user.teams[0].id
         TeamService.getTeams(team_id)
           .then((response) => {

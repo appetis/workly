@@ -54,7 +54,6 @@
     />
   </div>
 </template>
-Ω
 <script>
 import Profile from './user/Profile'
 import UserService from '@/services/UserService'
@@ -78,9 +77,9 @@ export default {
     closeProfile() {
       this.showProfile = false
     },
-    getInfo() {
+    getInfoData() {
       const user = JSON.parse(localStorage.getItem('user'))
-      console.log('===== getInfo', user)
+      //const user = this.$store.state.user
       if (user) {
         UserService.getUser(user.id)
           .then((response) => {
@@ -94,6 +93,13 @@ export default {
             throw error
           })
       }
+    },
+    getInfo() {
+      this.getInfoData()
+
+      window.setInterval(() => {
+        this.getInfoData()
+      }, 100000)
     },
     getProfileClass(status) {
       let status_color = ''
@@ -118,10 +124,6 @@ export default {
     // scriptTag.src = "https://cdn.datatables.net/v/dt/dt-1.10.16/sl-1.2.5/datatables.min.js";
     // scriptTag.id = "my-datatable";
     // document.getElementsByTagName('head')[0].appendChild(scriptTag);
-
-    window.setInterval(() => {
-      this.getInfo()
-    }, 100000)
   },
 }
 </script>
