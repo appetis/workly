@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-screen">
-    <Page v-show="!$store.state.ready" />
+    <Page v-show="!$store.state.ready" ref="initPage" />
 
     <div class="brand table" v-show="$store.state.ready">
       <LeftMenu class="table-cell align-top" />
@@ -24,35 +24,23 @@ export default {
     Header,
   },
   mounted() {
-    if (localStorage.token || localStorage.isGuest) {
-      this.$store.state.ready = true
-      this.$store.state.user.token = localStorage.token
-    }
-    if (localStorage.isGuest) this.$store.state.isGuest = true
-    var events = [
-      { id: 1, value: 'hello' },
-      { id: 2, value: 'hello2' },
-      { id: 3, value: 'hello3' },
-    ]
-
-    // set array to LocalStorage
-    localStorage.setItem('events', JSON.stringify(events))
-
-    // get array from LocalStorage
-    console.log(JSON.parse(localStorage.getItem('events') || '[]'))
+    this.$store.dispatch('setInit', this.user)
 
     const thisInstance = this
     this.$root.$on('getProfileInfo', function () {
       //thisInstance.incrementCount()
       thisInstance.$refs.topHeader.getInfo()
     })
+
+    this.$root.$on('resetPage', function () {
+      thisInstance.$refs.initPage.goSignin()
+    })
+
+    this.$root.$on('openCalendar', function () {
+      thisInstance.$refs.initPage.openCalendar()
+    })
   },
   watch: {},
-  methods: {
-    // getImgUrl(pet) {
-    //   var images = require.context('../assets/images/', false, /\.png$/)
-    //   return images('./' + pet + ".png")
-    // }
-  },
+  methods: {},
 }
 </script>
