@@ -14,7 +14,7 @@ export default new Vuex.Store({
     },
     ready: false,
     isGuest: false,
-    loading: false,
+    loading: true,
   },
   mutations: {
     SET_USER(state, data) {
@@ -140,6 +140,9 @@ export default new Vuex.Store({
     setInit({ commit }) {
       commit('SET_INIT')
     },
+    setLoading({ commit }, isLoading) {
+      commit('SET_LOADING', isLoading)
+    }
   },
   modules: {},
 })

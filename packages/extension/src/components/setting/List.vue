@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Loading />
     <p>Setting List</p>
 
     <div class="ml-4 font-bold cursor-pointer" @click="logout()">Logout</div>
@@ -7,13 +8,27 @@
 </template>
 
 <script>
+import Loading from "../loading/Loading";
 export default {
   name: 'Setting',
   // mounted() {
   //   browser.runtime.sendMessage({});
   // },
+  components: {
+    Loading
+  },
   computed: {},
+  created() {
+    this.initialize()
+  },
   methods: {
+    initialize() {
+      console.log("Setting page init")
+
+      window.setTimeout(() => {
+        this.$store.dispatch('setLoading', false)
+      }, 3000)
+    },
     logout() {
       this.$store
         .dispatch('logout')

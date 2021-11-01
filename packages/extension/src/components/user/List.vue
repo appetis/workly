@@ -1,145 +1,155 @@
 <template>
-  <v-data-table
-    :headers="headers"
-    :items="users"
-    sort-by="department"
-    :single-select="singleSelect"
-    item-key="name"
-    class="elevation-1"
-  >
-    <template v-slot:item.Profile.status="{ item }">
-      <v-chip :color="getProfileClass(item.Profile.status)" dark> </v-chip>
-      {{ item.Profile.statusName }}
-    </template>
-    <template v-slot:top>
-      <v-toolbar flat>
-        <v-toolbar-title>Members</v-toolbar-title>
-        <span class="sub-title"> {{ users.length }} members </span>
-        <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" max-width="500px">
-          <template v-slot:activator="{ on, attrs }">
-            <div class="btn-add-member" v-bind="attrs" v-on="on">
-              <v-icon name="user-plus" base-class="icon"></v-icon>
-              Add Member
-            </div>
-          </template>
-          <v-card>
-            <v-card-title>
-              <span class="text-h5">{{ formTitle }}</span>
-            </v-card-title>
 
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12" sm="12" md="12">
-                    <v-text-field
-                      v-model="editedItem.name"
-                      label="Name"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="6">
-                    <v-text-field
-                      v-model="editedItem.department"
-                      label="Department"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="6">
-                    <v-text-field
-                      v-model="editedItem.position"
-                      label="Position"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="6">
-                    <v-text-field
-                      v-model="editedItem.email"
-                      label="Email"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="6">
-                    <v-text-field
-                      v-model="editedItem.phone"
-                      label="Phone"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="6">
-                    <v-text-field
-                      v-model="editedItem.status"
-                      label="Status"
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card-text>
+  <div>
+    <Loading />
+    <v-data-table
+      :headers="headers"
+      :items="users"
+      sort-by="department"
+      :single-select="singleSelect"
+      item-key="name"
+      loading
+      loading-text="Loading... Please wait"
+    >
 
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="close"> Cancel </v-btn>
-              <v-btn color="blue darken-1" text @click="save"> Save </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-        <v-dialog v-model="dialogDelete" max-width="500px">
-          <v-card>
-            <v-card-title class="text-h5"
-              >Are you sure you want to delete this item?</v-card-title
-            >
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="closeDelete"
-                >Cancel</v-btn
+      <v-progress-linear v-show="false" :size="70" :width="7" slot="progress" color="#385859" indeterminate></v-progress-linear>
+      <template v-slot:item.Profile.status="{ item }">
+        <v-chip :color="getProfileClass(item.Profile.status)" dark> </v-chip>
+        {{ item.Profile.statusName }}
+      </template>
+      <template v-slot:top>
+        <v-toolbar flat>
+          <v-toolbar-title>Members</v-toolbar-title>
+          <span class="sub-title"> {{ users.length }} members </span>
+          <v-spacer></v-spacer>
+          <v-dialog v-model="dialog" max-width="500px">
+            <template v-slot:activator="{ on, attrs }">
+              <div class="btn-add-member" v-bind="attrs" v-on="on">
+                <v-icon name="user-plus" base-class="icon"></v-icon>
+                Add Member
+              </div>
+            </template>
+            <v-card>
+              <v-card-title>
+                <span class="text-h5">{{ formTitle }}</span>
+              </v-card-title>
+
+              <v-card-text>
+                <v-container>
+                  <v-row>
+                    <v-col cols="12" sm="12" md="12">
+                      <v-text-field
+                        v-model="editedItem.name"
+                        label="Name"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="6">
+                      <v-text-field
+                        v-model="editedItem.department"
+                        label="Department"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="6">
+                      <v-text-field
+                        v-model="editedItem.position"
+                        label="Position"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="6">
+                      <v-text-field
+                        v-model="editedItem.email"
+                        label="Email"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="6">
+                      <v-text-field
+                        v-model="editedItem.phone"
+                        label="Phone"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="6">
+                      <v-text-field
+                        v-model="editedItem.status"
+                        label="Status"
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-text>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" text @click="close"> Cancel </v-btn>
+                <v-btn color="blue darken-1" text @click="save"> Save </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <v-dialog v-model="dialogDelete" max-width="500px">
+            <v-card>
+              <v-card-title class="text-h5"
+                >Are you sure you want to delete this item?</v-card-title
               >
-              <v-btn color="blue darken-1" text @click="deleteItemConfirm"
-                >OK</v-btn
-              >
-              <v-spacer></v-spacer>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-        <v-dialog v-model="dialogProfile" max-width="500px">
-          <Profile
-            v-show="dialogProfile"
-            @close="closeProfile"
-            :profile="editedItem"
-            id="modal-profile"
-            ref="profile"
-          />
-        </v-dialog>
-      </v-toolbar>
-    </template>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" text @click="closeDelete"
+                  >Cancel</v-btn
+                >
+                <v-btn color="blue darken-1" text @click="deleteItemConfirm"
+                  >OK</v-btn
+                >
+                <v-spacer></v-spacer>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <v-dialog v-model="dialogProfile" max-width="500px">
+            <Profile
+              v-show="dialogProfile"
+              @close="closeProfile"
+              :profile="editedItem"
+              id="modal-profile"
+              ref="profile"
+            />
+          </v-dialog>
+        </v-toolbar>
+      </template>
 
-    <template v-slot:item.actions="{ item }">
-      <div class="action-box" @click="openProfile(item)">
-        <v-icon name="user" base-class="icon-12"></v-icon>
-      </div>
+      <template v-slot:item.actions="{ item }">
+        <div class="action-box" @click="openProfile(item)">
+          <v-icon name="user" base-class="icon-12"></v-icon>
+        </div>
 
-      <!-- For version 2
-      <div class="action-box" @click="editItem(item)">
-        <v-icon name="calendar" base-class="icon-12"></v-icon>
-      </div>
-      <div class="action-box" @click="deleteItem(item)">
-        <v-icon name="mail" base-class="icon-12"></v-icon>
-      </div>
-      <div class="action-box" @click="deleteItem(item)">
-        <v-icon name="message-square" base-class="icon-12"></v-icon>
-      </div>
-      -->
-    </template>
+        <!-- For version 2
+        <div class="action-box" @click="editItem(item)">
+          <v-icon name="calendar" base-class="icon-12"></v-icon>
+        </div>
+        <div class="action-box" @click="deleteItem(item)">
+          <v-icon name="mail" base-class="icon-12"></v-icon>
+        </div>
+        <div class="action-box" @click="deleteItem(item)">
+          <v-icon name="message-square" base-class="icon-12"></v-icon>
+        </div>
+        -->
+      </template>
 
-    <template v-slot:no-data>
-      <v-btn color="primary" @click="initialize"> Reset </v-btn>
-    </template>
-  </v-data-table>
+      <template v-slot:no-data>
+        <v-btn color="primary" @click="initialize"> Reset </v-btn>
+      </template>
+    </v-data-table>
+  </div>
 </template>
 
 <script>
 import UserService from '@/services/UserService'
 import TeamService from '@/services/TeamService'
 import Profile from './Profile'
+import Loading from '../loading/Loading'
+//import { Circle2 } from 'vue-loading-spinner'
 
 export default {
   name: 'User',
   components: {
     Profile,
+    Loading
   },
   data() {
     return {
@@ -226,6 +236,7 @@ export default {
           .then((response) => {
             console.log(response.data.team)
             this.users = response.data.team.members
+            this.$store.dispatch('setLoading', false)
           })
           .catch((error) => {
             throw error

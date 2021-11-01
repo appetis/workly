@@ -1,6 +1,7 @@
 <template>
   <v-row class="fill-height">
     <v-col>
+      <Loading />
       <v-sheet height="64">
         <v-toolbar flat>
           <v-btn fab small depressed @click="prev" class="mr-2 ml-1 py-5 px-5">
@@ -80,7 +81,10 @@
           </v-menu>
         </v-toolbar>
       </v-sheet>
+
+
       <v-sheet height="650">
+
         <v-calendar
           ref="calendar"
           v-model="focus"
@@ -93,6 +97,7 @@
           @click:date="viewDay"
           @change="updateRange"
         ></v-calendar>
+
         <v-menu
           v-model="selectedOpen"
           :close-on-content-click="false"
@@ -128,7 +133,11 @@
   </v-row>
 </template>
 <script>
+import Loading from "../loading/Loading";
 export default {
+  components: {
+    Loading
+  },
   data: () => ({
     focus: '',
     me_type: 'me',
@@ -169,7 +178,13 @@ export default {
   mounted() {
     this.$refs.calendar.checkChange()
   },
+  created() {
+    this.initialize()
+  },
   methods: {
+    initialize() {
+      console.log("calendar page init")
+    },
     viewDay({ date }) {
       this.focus = date
       this.type = 'day'
@@ -231,6 +246,7 @@ export default {
       console.log(events)
 
       this.events = events
+      this.$store.dispatch('setLoading', false)
     },
     rnd(a, b) {
       return Math.floor((b - a + 1) * Math.random()) + a

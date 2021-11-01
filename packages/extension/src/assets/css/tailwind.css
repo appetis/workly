@@ -384,3 +384,6 @@ img, svg, video, canvas, audio, iframe, embed, object {
 .theme--light.v-calendar-events .v-event-more {
     border-left: 1px solid #CACACA;
 }
+.v-calendar-weekly__day-label .primary .v-btn__content {
+    letter-spacing: -1.5px;
+}

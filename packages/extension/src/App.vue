@@ -7,7 +7,9 @@
 
       <div class="h-screen w-full table-cell">
         <Header ref="topHeader" />
-        <router-view class="w-full" />
+        <v-app class="home">
+          <router-view class="w-full" />
+        </v-app>
       </div>
     </div>
   </div>
