@@ -1,8 +1,8 @@
 <template>
-  <v-app class="home">
+  <div>
     <List />
     <Add v-show="$store.state.ready" />
-  </v-app>
+  </div>
 </template>
 
 <script>
