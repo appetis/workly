@@ -211,17 +211,18 @@ exports.updateProfile = async (req, res) => {
 };
 
 exports.getUserStatusById = async (req, res) => {
-  const statusName = await userService.getUserStatusNameById(req.params.id);
-  if (!statusName || statusName.length === 0) {
+  const userStatus = await userService.getUserStatusById(req.params.id);
+  if (!userStatus) {
     return res.status(400).json({
       code: 400,
-      message: 'Cannot find the status name',
+      message: 'Cannot find the status',
     });
   }
 
   return res.status(200).json({
     code: 200,
     message: 'Success',
-    statusName,
+    statusCode: userStatus.statusCode,
+    statusName: userStatus.statusName,
   });
 };
