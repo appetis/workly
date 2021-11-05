@@ -30,6 +30,8 @@ module.exports = {
         updatedAt: dateUtil.addDaysFomNow(-3),
       },
     ]);
+
+    await queryInterface.sequelize.query('ALTER SEQUENCE "Profiles_id_seq" RESTART WITH 100');
   },
 
   down: async (queryInterface, Sequelize) => {

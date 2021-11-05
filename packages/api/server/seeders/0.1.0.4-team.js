@@ -9,6 +9,8 @@ module.exports = {
         updatedAt: new Date(),
       },
     ]);
+
+    await queryInterface.sequelize.query('ALTER SEQUENCE "Teams_id_seq" RESTART WITH 100');
   },
 
   down: async (queryInterface, Sequelize) => {
