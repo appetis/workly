@@ -1,6 +1,37 @@
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
+const multerS3 = require('multer-s3');
+const AWS = require('aws-sdk');
 const path = require('path');
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+const AWS_S3_CONFIG = {
+  accessKeyId: process.env.AWS_S3_IMAGES_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_S3_IMAGES_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION,
+};
+
+exports.upload = multer({
+  storage: multerS3({
+    s3: new AWS.S3(AWS_S3_CONFIG),
+    bucket: 'workly-images',
+    key(req, file, cb) {
+      cb(null, `avatars/${Date.now()}_${path.basename(file.originalname)}`);
+    },
+  }),
+  fileFilter: (req, file, cb) => {
+    const ext = path.extname(file.originalname).toLowerCase();
+    if (ext === '.png' || ext === '.jpg' || ext === '.jpeg') {
+      return cb(null, true);
+    }
+    return cb('Only jpg, jpeg, png images are allowed');
+  },
+  limits: {
+    fileSize: 5 * 1024 * 1024,
+  },
+});
 
 exports.verifyToken = (req, res, next) => {
   try {
@@ -22,18 +53,3 @@ exports.verifyToken = (req, res, next) => {
     });
   }
 };
-
-exports.upload = multer({
-  storage: multer.diskStorage({
-    destination(req, file, cb) {
-      cb(null, 'uploads/');
-    },
-    filename(req, file, cb) {
-      const ext = path.extname(file.originalname);
-      cb(null, `${path.basename(file.originalname, ext)}_${Date.now()}${ext}`);
-    },
-  }),
-  limits: {
-    fileSize: 5 * 1024 * 1024,
-  },
-});

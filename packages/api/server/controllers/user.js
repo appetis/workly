@@ -232,7 +232,7 @@ exports.updateAvatar = async (req, res) => {
     return res.status(200).json({
       code: 200,
       message: 'Updated the avatar',
-      avatar: req.file.path,
+      avatar: req.file.location,
     });
   } catch (error) {
     console.error(error);
