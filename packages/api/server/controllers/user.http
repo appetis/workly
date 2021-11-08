@@ -1,3 +1,13 @@
+POST http://localhost:3000/api/users/1/avatar
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="avatar"; filename="avatar.png"
+
+< /Users/wonho/Downloads/avatar.png
+--WebAppBoundary--
+
+###
 POST http://localhost:3000/api/users/1/profile
 Content-Type: application/json
 Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM1Mzc0MjQ1LCJleHAiOjE2MzUzNzYwNDUsImlzcyI6IndvcmtseSJ9.OWhcPpOOBE-vMhBmwu8c54CE8mkWnYB3GInlrwZ9ibk

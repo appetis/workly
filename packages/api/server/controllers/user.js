@@ -225,3 +225,20 @@ exports.getUserStatusById = async (req, res) => {
     statusName,
   });
 };
+
+exports.updateAvatar = async (req, res) => {
+  console.log('updateAvatar - file:', req.file);
+  try {
+    return res.status(200).json({
+      code: 200,
+      message: 'Updated the avatar',
+      avatar: req.file.path,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      code: 500,
+      message: 'Cannot update the avatar',
+    });
+  }
+};
