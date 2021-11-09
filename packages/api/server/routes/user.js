@@ -8,7 +8,7 @@ module.exports = app => {
   router.get('/users/:id', verifyToken, userController.getUserById);
   router.get('/users/:id/status', verifyToken, userController.getUserStatusById);
   router.post('/users/:id/verify', userController.verify);
-  router.post('/users/:id/profile', userController.updateProfile);
+  router.post('/users/:id/profile', verifyToken, userController.updateProfile);
   router.post('/users/:id/avatar', verifyToken, upload.single('avatar'), userController.updateAvatar);
 
   app.use('/api', router);

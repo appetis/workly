@@ -1,6 +1,6 @@
 POST http://localhost:3000/api/users/1/avatar
 Content-Type: multipart/form-data; boundary=WebAppBoundary
-Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2MzQyODE3LCJleHAiOjE2MzYzNDQ2MTcsImlzcyI6IndvcmtseSJ9.BnamWiaKMFUimW3qTEH6Ag5oLX4SRhqTa_JJUkNFtxM
+Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2NDMzMDEzLCJleHAiOjE2MzY0MzQ4MTMsImlzcyI6IndvcmtseSJ9.TNpDA_0h4eRVcWkSWf_yxQ0L1jnVJaXdvRFmPKTduNM
 
 --WebAppBoundary
 Content-Disposition: form-data; name="avatar"; filename="avatar.png"
@@ -11,11 +11,10 @@ Content-Disposition: form-data; name="avatar"; filename="avatar.png"
 ###
 POST http://localhost:3000/api/users/1/profile
 Content-Type: application/json
-Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2MzQyODE3LCJleHAiOjE2MzYzNDQ2MTcsImlzcyI6IndvcmtseSJ9.BnamWiaKMFUimW3qTEH6Ag5oLX4SRhqTa_JJUkNFtxM
+Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2NDMzMDEzLCJleHAiOjE2MzY0MzQ4MTMsImlzcyI6IndvcmtseSJ9.TNpDA_0h4eRVcWkSWf_yxQ0L1jnVJaXdvRFmPKTduNM
 
 {
   "name": "Wonho Lee",
-  "avatar": "",
   "department": "IT",
   "position": "Developer",
   "phone": "111-333-2222",
@@ -38,17 +37,17 @@ Content-Type: application/json
 ###
 GET http://localhost:3000/api/users
 Accept: application/json
-Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2MzQyODE3LCJleHAiOjE2MzYzNDQ2MTcsImlzcyI6IndvcmtseSJ9.BnamWiaKMFUimW3qTEH6Ag5oLX4SRhqTa_JJUkNFtxM
+Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2NDMzMDEzLCJleHAiOjE2MzY0MzQ4MTMsImlzcyI6IndvcmtseSJ9.TNpDA_0h4eRVcWkSWf_yxQ0L1jnVJaXdvRFmPKTduNM
 
 ###
 GET http://localhost:3000/api/users/1
 Accept: application/json
-Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2MzQyODE3LCJleHAiOjE2MzYzNDQ2MTcsImlzcyI6IndvcmtseSJ9.BnamWiaKMFUimW3qTEH6Ag5oLX4SRhqTa_JJUkNFtxM
+Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2NDMzMDEzLCJleHAiOjE2MzY0MzQ4MTMsImlzcyI6IndvcmtseSJ9.TNpDA_0h4eRVcWkSWf_yxQ0L1jnVJaXdvRFmPKTduNM
 
 ###
 
 GET http://localhost:3000/api/users/1/status
 Accept: application/json
-Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2MzQyODE3LCJleHAiOjE2MzYzNDQ2MTcsImlzcyI6IndvcmtseSJ9.BnamWiaKMFUimW3qTEH6Ag5oLX4SRhqTa_JJUkNFtxM
+Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2NDMzMDEzLCJleHAiOjE2MzY0MzQ4MTMsImlzcyI6IndvcmtseSJ9.TNpDA_0h4eRVcWkSWf_yxQ0L1jnVJaXdvRFmPKTduNM
 
 ###

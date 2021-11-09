@@ -1,9 +1,11 @@
 const bcrypt = require('bcrypt');
+const path = require('path');
 const { Op } = require('sequelize');
 const { User, Verification, Profile } = require('../models');
 const userService = require('../services/user.service');
 const authService = require('../services/auth.service');
 const emailService = require('../services/email.service');
+const s3Service = require('../services/s3.service');
 
 const findVerificationToVerify = async userId => {
   return Verification.findOne({
@@ -228,11 +230,30 @@ exports.getUserStatusById = async (req, res) => {
 
 exports.updateAvatar = async (req, res) => {
   console.log('updateAvatar - file:', req.file);
+  const filename = path.basename(req.file.location);
+  const userId = req.params.id;
+
   try {
+    const profile = await userService.getUserProfile(userId);
+    if (!profile) {
+      return res.status(400).json({
+        code: 400,
+        message: 'Cannot find the user profile',
+      });
+    }
+
+    const { avatar } = profile;
+    console.log('userId:', userId, ', avatar:', avatar);
+    if (avatar) {
+      await s3Service.deleteAvatar(avatar);
+    }
+
+    await profile.update({ avatar: filename });
+
     return res.status(200).json({
       code: 200,
       message: 'Updated the avatar',
-      avatar: req.file.location,
+      avatar: filename,
     });
   } catch (error) {
     console.error(error);
