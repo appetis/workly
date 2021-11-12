@@ -1,10 +1,20 @@
+POST http://localhost:3000/api/users/1/avatar
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2NDMzMDEzLCJleHAiOjE2MzY0MzQ4MTMsImlzcyI6IndvcmtseSJ9.TNpDA_0h4eRVcWkSWf_yxQ0L1jnVJaXdvRFmPKTduNM
+
+--WebAppBoundary
+Content-Disposition: form-data; name="avatar"; filename="avatar.png"
+
+< /Users/wonho/Downloads/avatar.png
+--WebAppBoundary--
+
+###
 POST http://localhost:3000/api/users/1/profile
 Content-Type: application/json
-Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM1Mzc0MjQ1LCJleHAiOjE2MzUzNzYwNDUsImlzcyI6IndvcmtseSJ9.OWhcPpOOBE-vMhBmwu8c54CE8mkWnYB3GInlrwZ9ibk
+Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2NDMzMDEzLCJleHAiOjE2MzY0MzQ4MTMsImlzcyI6IndvcmtseSJ9.TNpDA_0h4eRVcWkSWf_yxQ0L1jnVJaXdvRFmPKTduNM
 
 {
   "name": "Wonho Lee",
-  "avatar": "",
   "department": "IT",
   "position": "Developer",
   "phone": "111-333-2222",
@@ -27,17 +37,17 @@ Content-Type: application/json
 ###
 GET http://localhost:3000/api/users
 Accept: application/json
-Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM1Mzc0MjQ1LCJleHAiOjE2MzUzNzYwNDUsImlzcyI6IndvcmtseSJ9.OWhcPpOOBE-vMhBmwu8c54CE8mkWnYB3GInlrwZ9ibk
+Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2NDMzMDEzLCJleHAiOjE2MzY0MzQ4MTMsImlzcyI6IndvcmtseSJ9.TNpDA_0h4eRVcWkSWf_yxQ0L1jnVJaXdvRFmPKTduNM
 
 ###
 GET http://localhost:3000/api/users/1
 Accept: application/json
-Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM1Mzc0MjQ1LCJleHAiOjE2MzUzNzYwNDUsImlzcyI6IndvcmtseSJ9.OWhcPpOOBE-vMhBmwu8c54CE8mkWnYB3GInlrwZ9ibk
+Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2NDMzMDEzLCJleHAiOjE2MzY0MzQ4MTMsImlzcyI6IndvcmtseSJ9.TNpDA_0h4eRVcWkSWf_yxQ0L1jnVJaXdvRFmPKTduNM
 
 ###
 
 GET http://localhost:3000/api/users/1/status
 Accept: application/json
-Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM1Mzc0MjQ1LCJleHAiOjE2MzUzNzYwNDUsImlzcyI6IndvcmtseSJ9.OWhcPpOOBE-vMhBmwu8c54CE8mkWnYB3GInlrwZ9ibk
+Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2NDMzMDEzLCJleHAiOjE2MzY0MzQ4MTMsImlzcyI6IndvcmtseSJ9.TNpDA_0h4eRVcWkSWf_yxQ0L1jnVJaXdvRFmPKTduNM
 
 ###

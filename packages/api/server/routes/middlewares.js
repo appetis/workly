@@ -1,4 +1,30 @@
 const jwt = require('jsonwebtoken');
+const { v4: uuidv4 } = require('uuid');
+const multer = require('multer');
+const multerS3 = require('multer-s3');
+const path = require('path');
+const s3Service = require('../services/s3.service');
+
+exports.upload = multer({
+  storage: multerS3({
+    s3: s3Service.getAwsS3(),
+    bucket: s3Service.getBucket(),
+    key(req, file, cb) {
+      const ext = path.extname(file.originalname);
+      cb(null, `${s3Service.getOriginalPath()}${uuidv4()}${ext}`);
+    },
+  }),
+  fileFilter: (req, file, cb) => {
+    const ext = path.extname(file.originalname).toLowerCase();
+    if (ext === '.png' || ext === '.jpg' || ext === '.jpeg') {
+      return cb(null, true);
+    }
+    return cb('Only jpg, jpeg, png images are allowed');
+  },
+  limits: {
+    fileSize: 5 * 1024 * 1024,
+  },
+});
 
 exports.verifyToken = (req, res, next) => {
   try {
