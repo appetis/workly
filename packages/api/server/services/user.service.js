@@ -64,7 +64,7 @@ exports.getUserWithProfileById = async id => {
   return user;
 };
 
-exports.getUserStatusNameById = async id => {
+exports.getUserStatusById = async id => {
   const user = await User.findByPk(id, {
     attributes: [],
     include: [
@@ -75,10 +75,12 @@ exports.getUserStatusNameById = async id => {
     ],
   });
 
-  let statusName;
-  if (user && user.Profile) {
-    statusName = await getStatusNameByCode(user.Profile.status);
+  if (!user || !user.Profile) {
+    return null;
   }
 
-  return statusName;
+  const statusCode = user.Profile.status;
+  const statusName = await getStatusNameByCode(statusCode);
+
+  return { statusCode, statusName };
 };
