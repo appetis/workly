@@ -22,7 +22,9 @@ describe('init/Profile', () => {
 
     expect(wrapper.find('#profile-name').text()).toBe(user.Profile.name)
     expect(wrapper.find('.profile-position').text()).toBe(user.Profile.position)
-    expect(wrapper.find('#profile-department').text()).toBe(user.Profile.department)
+    expect(wrapper.find('#profile-department').text()).toBe(
+      user.Profile.department
+    )
     expect(wrapper.find('#profile-email').text()).toBe(user.email)
     expect(wrapper.find('#profile-phone-ext').text()).toBe(
       user.Profile.phone_ext

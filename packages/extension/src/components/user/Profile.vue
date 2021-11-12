@@ -50,7 +50,11 @@
                   Admin
                 </span>
                 <p
-                  class="inline-block text-sm text-brand-defgray profile-position"
+                  class="
+                    inline-block
+                    text-sm text-brand-defgray
+                    profile-position
+                  "
                 >
                   {{ profile.Profile.position }}
                 </p>
@@ -91,8 +95,13 @@
                 class="text-brand-defgray"
               ></v-icon>
               <span class="ml-3 align-middle">
-                <span id="profile-department">{{ profile.Profile.department }}</span> -
-                <span class="profile-position">{{ profile.Profile.position }}</span>
+                <span id="profile-department">{{
+                  profile.Profile.department
+                }}</span>
+                -
+                <span class="profile-position">{{
+                  profile.Profile.position
+                }}</span>
               </span>
             </div>
             <div class="mb-3 inline-block w-full">

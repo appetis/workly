@@ -27,7 +27,11 @@ exports[`init/Profile profile modal snapshot 1`] = `
                 ">
                 Admin
               </span>
-              <p class="inline-block text-sm text-brand-defgray profile-position">
+              <p class="
+                  inline-block
+                  text-sm text-brand-defgray
+                  profile-position
+                ">
                 Developer
               </p>
             </div>
@@ -40,7 +44,8 @@ exports[`init/Profile profile modal snapshot 1`] = `
           <div class="mb-3 inline-block w-full"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-defgray pv-icon icon-user">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
               <circle cx="12" cy="7" r="4"></circle>
-            </svg> <span class="ml-3 align-middle"><span id="profile-department">IT</span> -
+            </svg> <span class="ml-3 align-middle"><span id="profile-department">IT</span>
+            -
             <span class="profile-position">Developer</span></span>
           </div>
           <div class="mb-3 inline-block w-full"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-defgray pv-icon icon-mail">
