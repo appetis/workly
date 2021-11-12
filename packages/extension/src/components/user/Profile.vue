@@ -50,8 +50,7 @@
                   Admin
                 </span>
                 <p
-                  class="inline-block text-sm text-brand-defgray"
-                  id="profile-position"
+                  class="inline-block text-sm text-brand-defgray profile-position"
                 >
                   {{ profile.Profile.position }}
                 </p>
@@ -81,7 +80,9 @@
                   class="text-brand-defgray"
                 ></v-icon>
               </span>
-              <span class="ml-3 align-middle"> In office </span>
+              <span class="ml-3 align-middle" id="profile-status">
+                In office
+              </span>
             </div>
             <div class="mb-3 inline-block w-full">
               <v-icon
@@ -90,8 +91,8 @@
                 class="text-brand-defgray"
               ></v-icon>
               <span class="ml-3 align-middle">
-                {{ profile.Profile.department }} -
-                {{ profile.Profile.position }}
+                <span id="profile-department">{{ profile.Profile.department }}</span> -
+                <span class="profile-position">{{ profile.Profile.position }}</span>
               </span>
             </div>
             <div class="mb-3 inline-block w-full">
@@ -100,7 +101,9 @@
                 base-class="pv-icon"
                 class="text-brand-defgray"
               ></v-icon>
-              <span class="ml-3 align-middle"> {{ profile.email }} </span>
+              <span class="ml-3 align-middle" id="profile-email">
+                {{ profile.email }}
+              </span>
             </div>
             <div class="mb-3 inline-block w-full">
               <v-icon
@@ -109,7 +112,10 @@
                 class="text-brand-defgray"
               ></v-icon>
               <span class="ml-3 align-middle">
-                Ext.{{ profile.Profile.phone_ext }}
+                Ext.
+                <span id="profile-phone-ext">{{
+                  profile.Profile.phone_ext
+                }}</span>
               </span>
             </div>
             <div class="mb-3 inline-block w-full">
@@ -118,7 +124,7 @@
                 base-class="pv-icon"
                 class="text-brand-defgray"
               ></v-icon>
-              <span class="ml-3 align-middle">
+              <span class="ml-3 align-middle" id="profile-phone">
                 {{ profile.Profile.phone }}
               </span>
             </div>

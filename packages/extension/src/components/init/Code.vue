@@ -86,7 +86,9 @@
             </div>
 
             <div class="mt-7">
-              <button class="btn-black-full">Continue</button>
+              <button class="btn-black-full" id="btn-code-continue">
+                Continue
+              </button>
             </div>
           </form>
         </div>
@@ -94,13 +96,15 @@
           Don't have an invite code?
           <span
             class="text-blue cursor-pointer font-semibold underline"
-            @click="goSignup"
+            @click="$emit('goSignup')"
+            id="text-register"
             >Register</span
           >
           |
           <span
             class="text-blue cursor-pointer font-semibold underline"
-            @click="goSignin"
+            @click="$emit('goSignin')"
+            id="text-login"
             >Login</span
           >
         </div>
@@ -110,12 +114,8 @@
 </template>
 
 <script>
-//import CodeInput from "./CodeInput";
 export default {
   name: 'Code',
-  components: {
-    //  CodeInput
-  },
   props: ['callFocus'],
   data() {
     return {
@@ -138,7 +138,7 @@ export default {
       this.goNextFocus('code_1')
     },
     goNextFocus(next) {
-      console.log('===>', next)
+      //console.log('===>', next)
       this.$refs[next].focus()
     },
     onFocus(num) {
@@ -170,16 +170,10 @@ export default {
 
       this.goNextFocus('code_' + this.current)
     },
-    goSignup() {
-      this.$emit('goSignup')
-    },
-    goSignin() {
-      this.$emit('goSignin')
-    },
     onSubmit() {
       const code = this.setCode()
       if (code.length < 6) return false
-      console.log(code)
+      //console.log(code)
 
       this.$store
         .dispatch('verifyCode', code)

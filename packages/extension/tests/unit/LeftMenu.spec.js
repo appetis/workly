@@ -1,96 +1,130 @@
 import LeftMenu from '@/components/LeftMenu'
 import App from '@/App'
-import { mount, createLocalVue } from '@vue/test-utils'
-import router from '@/router'
+import { mount, createLocalVue, shallowMount } from '@vue/test-utils'
+import VueRouter from 'vue-router'
+import routes from '@/router/routes'
 import Home from '@/views/Home'
 import User from '@/views/User'
 import Link from '@/views/Link'
 import Setting from '@/views/Setting'
-import VueRouter from 'vue-router'
+import Vuex from 'vuex'
+import Vuetify from 'vuetify'
+import flushPromises from 'flush-promises'
+import UserService from '@/services/UserService'
+import { mockUser } from '../data'
 
 const localVue = createLocalVue()
+localVue.use(Vuex)
 localVue.use(VueRouter)
 
-const leftWrapper = mount(LeftMenu, {
-  localVue,
-  router,
+jest.mock('@/services/UserService')
+jest.mock('@/services/TeamService')
+
+let store
+let actions
+let getters
+let vuetify
+
+beforeEach(() => {
+  jest.clearAllMocks()
+  //jest.mockReturnValue(Promise.resolve({}));
+
+  actions = {
+    setInit: jest.fn(),
+    setLoading: jest.fn(),
+  }
+
+  getters = {
+    getLocalStorageUser: () => ({
+      id: 2,
+      teams: [{ id: 1 }],
+    }),
+    getTeams: () => [],
+    getTeamsCount: () => 0,
+  }
+  store = new Vuex.Store({
+    state: {
+      user: {
+        id: 2,
+        teams: [{ id: 1 }],
+      },
+      ready: true,
+      isGuest: false,
+    },
+    getters,
+    actions,
+  })
+  vuetify = new Vuetify()
 })
-const wrapper = mount(App, {
-  localVue,
-  router,
-})
+const router = new VueRouter({ routes })
+
+const shallowFactory = (className) => {
+  return shallowMount(className, { store, localVue, vuetify, router })
+}
+const factory = (className) => {
+  return mount(className, { store, localVue, vuetify, router })
+}
+
+const fnMockUser = async (className) => {
+  UserService.getUser.mockResolvedValueOnce({ data: mockUser() })
+  const wrapper = factory(className)
+  await flushPromises()
+  return wrapper
+}
 
 describe('LeftMenu', () => {
-  test('If calendar menu is shown', () => {
-    expect(leftWrapper.get('#menu-icon-calendar').isVisible()).toBe(true)
-  }),
-    test('If user menu is shown', () => {
+  describe('Menu icons', () => {
+    it('If calendar menu is shown', () => {
+      const leftWrapper = shallowFactory(LeftMenu)
+      expect(leftWrapper.get('#menu-icon-calendar').isVisible()).toBe(true)
+    })
+    it('If user menu is shown', () => {
+      const leftWrapper = shallowFactory(LeftMenu)
       expect(leftWrapper.get('#menu-icon-user').isVisible()).toBe(true)
     }),
-    test('If link menu is shown', () => {
-      expect(leftWrapper.get('#menu-icon-link').isVisible()).toBe(true)
-    }),
-    test('If setting menu is shown', () => {
-      expect(leftWrapper.get('#menu-icon-setting').isVisible()).toBe(true)
-    }),
+      it('If link menu is shown', () => {
+        const leftWrapper = shallowFactory(LeftMenu)
+        expect(leftWrapper.get('#menu-icon-link').isVisible()).toBe(true)
+      }),
+      it('If setting menu is shown', () => {
+        const leftWrapper = shallowFactory(LeftMenu)
+        expect(leftWrapper.get('#menu-icon-setting').isVisible()).toBe(true)
+      })
+  })
+
+  describe('Routing', () => {
     it('renders a child component via routing /', async () => {
-      router.push('/')
+      const wrapper = await fnMockUser(App)
+      router.push('/').catch(() => {})
       await wrapper.vm.$nextTick()
 
+      expect(UserService.getUser).toHaveBeenCalledTimes(1)
       expect(wrapper.findComponent(Home).exists()).toBe(true)
-    }),
+    })
     it('renders a child component via routing /user', async () => {
+      const wrapper = await fnMockUser(App)
       router.push('/user')
       await wrapper.vm.$nextTick()
-      await wrapper.find('#menu-icon-user').trigger('click')
 
+      expect(UserService.getUser).toHaveBeenCalledTimes(1)
       expect(wrapper.findComponent(User).exists()).toBe(true)
-    }),
+    })
     it('renders a child component via routing /link', async () => {
+      const wrapper = await fnMockUser(App)
       router.push('/link')
       await wrapper.vm.$nextTick()
-      await wrapper.find('#menu-icon-link').trigger('click')
 
+      expect(UserService.getUser).toHaveBeenCalledTimes(1)
       expect(wrapper.findComponent(Link).exists()).toBe(true)
-    }),
-    it('renders a child component via routing /setting', async () => {
-      router.push('/setting')
-      await wrapper.vm.$nextTick()
-      await wrapper.find('#menu-icon-setting').trigger('click')
-
-      expect(wrapper.findComponent(Setting).exists()).toBe(true)
     })
 
-  //   test('routing / ', async () => {
-  //     router.push('/')
-  //     await appWrapper.vm.$nextTick()
-  //
-  //     console.log("===>", appWrapper.findComponent(Home));
-  //     expect(appWrapper.findComponent(Home).exists()).toBe(true)
-  //     console.log(router.currentRoute)
-  //   })
-  //   test('routing /user', async () => {
-  //     router.push('/user')
-  //     await router.isReady()
-  //
-  //     await wrapper.find('#menu-icon-user').trigger('click')
-  //     await flushPromises()
-  //     expect(appWrapper.html()).toContain('This is an user page')
-  //   }),
-  //   test('routing /link', async () => {
-  //     router.push('/link')
-  //     await router.isReady()
-  //
-  //     await wrapper.find('#menu-icon-link').trigger('click')
-  //     await flushPromises()
-  //     expect(appWrapper.html()).toContain('This is an link page')
-  //   }),
-  //   test('routing /setting', async () => {
-  //     router.push('/setting')
-  //     await router.isReady()
-  //
-  //     await wrapper.find('#menu-icon-setting').trigger('click')
-  //     await flushPromises()
-  //     expect(appWrapper.html()).toContain('This is an setting page')
-  //   })
+    it('renders a child component via routing /setting', async () => {
+      const wrapper = await fnMockUser(App)
+      router.push('/setting')
+      await wrapper.vm.$nextTick()
+
+      expect(UserService.getUser).toHaveBeenCalledTimes(1)
+      expect(wrapper.findComponent(Setting).exists()).toBe(true)
+    })
+  })
 })

@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <div class="header-title">HW Project (Workly)</div>
+    <div class="header-title" data-testid="project-name">{{ projectName }}</div>
     <div class="header-menus">
       <!-- For version 2
       <v-icon
@@ -22,22 +22,25 @@
         id="header-icon-bell"
       ></v-icon>
       -->
-
+      <div class="mr-4 mt-3 profile-photo" v-show="isLoading">
+        <DoubleBounce class="mx-auto" v-show="isLoading"></DoubleBounce>
+      </div>
       <div
         class="ml-4 profile-photo"
         v-if="profile"
         v-bind:class="profile.Profile.status_class"
+        v-show="!isLoading"
       >
         <div
           class="header-no-avatar"
-          v-if="!profile.Profile.avatar"
+          v-show="!profile.Profile.avatar"
           @click="openProfile()"
           id="header-no-profile"
         >
           <v-icon name="user" base-class="profile-no-icon"></v-icon>
         </div>
         <img
-          v-if="profile.Profile.avatar"
+          v-show="profile.Profile.avatar"
           :src="profile.Profile.avatar"
           class="header-avatar"
           @click="openProfile()"
@@ -57,17 +60,26 @@
 <script>
 import Profile from './user/Profile'
 import UserService from '@/services/UserService'
+import { DoubleBounce } from 'vue-loading-spinner'
+import { mapGetters } from 'vuex'
 export default {
   components: {
     Profile,
+    DoubleBounce,
   },
   data() {
     return {
       //avatar: require('@/assets/images/avatar.png'),
+      isLoading: this.$store.state.isGuest ? false : true,
+      projectName: 'My project',
       avatar: null,
       profile: null,
       showProfile: false,
+      isGuest: this.$store.state.isGuest,
     }
+  },
+  computed: {
+    ...mapGetters(['getLocalStorageUser']),
   },
   methods: {
     openProfile() {
@@ -77,29 +89,53 @@ export default {
     closeProfile() {
       this.showProfile = false
     },
-    getInfoData() {
-      const user = JSON.parse(localStorage.getItem('user'))
+    async getInfoData() {
+      const user = this.getLocalStorageUser
       //const user = this.$store.state.user
-      if (user) {
-        UserService.getUser(user.id)
+
+      //console.log("user ===>", this.$store.state.user, JSON.stringify(user))
+      if (user && user.id && !this.isGuest) {
+        await UserService.getUser(user.id)
           .then((response) => {
             //this.avatar = require('../assets/images/profile.jpeg')
+            //console.log("response data ===>", response.data)
             this.profile = response.data.user
             this.profile.Profile.status_class = this.getProfileClass(
-              response.data.user.Profile.status
+              this.profile.Profile.status
             )
+            this.isLoading = false
           })
           .catch((error) => {
+            this.isLoading = false
             throw error
           })
       }
     },
-    getInfo() {
-      this.getInfoData()
-
-      window.setInterval(() => {
-        this.getInfoData()
-      }, 100000)
+    async getUserStatus() {
+      const user = this.getLocalStorageUser
+      if (user && user.id) {
+        await UserService.getUserStatus(user.id)
+          .then((response) => {
+            this.profile.Profile.status_class = this.getProfileClass(
+              response.data.status
+            )
+            this.isLoading = false
+          })
+          .catch((error) => {
+            this.isLoading = false
+            throw error
+          })
+      }
+    },
+    getStatus(exec) {
+      let interval
+      if (exec) {
+        interval = window.setInterval(() => {
+          this.getUserStatus()
+        }, 100000)
+      } else {
+        clearInterval(interval)
+      }
     },
     getProfileClass(status) {
       let status_color = ''
@@ -116,14 +152,18 @@ export default {
       return `profile-${status_color}`
     },
   },
-  mounted: function () {
-    this.getInfo()
+  mounted: async function () {
+    if (this.isGuest) this.isLoading = false
+    else this.getStatus(true)
 
     // if (document.getElementById('my-datatable')) return; // was already loaded
     // var scriptTag = document.createElement("script");
     // scriptTag.src = "https://cdn.datatables.net/v/dt/dt-1.10.16/sl-1.2.5/datatables.min.js";
     // scriptTag.id = "my-datatable";
     // document.getElementsByTagName('head')[0].appendChild(scriptTag);
+  },
+  async created() {
+    await this.getInfoData()
   },
 }
 </script>

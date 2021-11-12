@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`init/Code code modal snapshot 1`] = `
+<div aria-labelledby="modal-title" role="dialog" aria-modal="true" class="fixed inset-0 overflow-y-auto z-10">
+  <div aria-hidden="true" class="init-modal-background"></div>
+  <div class="modal">
+    <div class="modal-content-sm">
+      <div class="modal-header init-modal-header">
+        <div class="w-1/10 bg-wk-gray-box px-2 rounded mr-2 align-middle pt-1">
+          W
+        </div>
+        <div class="w-9/10 pt-1">Unlock Workly with Invite Code</div>
+      </div>
+      <div class="modal-body">
+        <p class="text-sm">Do you have an invite code?</p>
+        <form>
+          <div class="flex mt-6">
+            <div class="w-1/6 px-1"><input type="text" maxlength="1" class="input-code"></div>
+            <div class="w-1/6 px-1"><input type="text" maxlength="1" class="input-code"></div>
+            <div class="w-1/6 px-1"><input type="text" maxlength="1" class="input-code"></div>
+            <div class="w-1/6 px-1"><input type="text" maxlength="1" class="input-code"></div>
+            <div class="w-1/6 px-1"><input type="text" maxlength="1" class="input-code"></div>
+            <div class="w-1/6 px-1"><input type="text" maxlength="1" class="input-code"></div>
+          </div>
+          <div class="mt-7"><button id="btn-code-continue" class="btn-black-full">
+              Continue
+            </button></div>
+        </form>
+      </div>
+      <div class="modal-footer init-modal-footer">
+        Don't have an invite code?
+        <span id="text-register" class="text-blue cursor-pointer font-semibold underline">Register</span>
+        |
+        <span id="text-login" class="text-blue cursor-pointer font-semibold underline">Login</span>
+      </div>
+    </div>
+  </div>
+</div>
+`;

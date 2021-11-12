@@ -107,12 +107,16 @@
 
           <div class="flex pt-6" v-show="!$store.state.isGuest">
             <div class="w-1/2 pr-1">
-              <button class="btn-border-black" @click="goAsGuest">
+              <button
+                class="btn-border-black"
+                @click="goAsGuest"
+                id="btn-quest"
+              >
                 Continue as a guest
               </button>
             </div>
             <div class="w-1/2 pl-1">
-              <button class="btn-border-black" @click="goHasCode">
+              <button class="btn-border-black" @click="goHasCode" id="btn-code">
                 Continue with a code
               </button>
             </div>
@@ -124,6 +128,7 @@
           <span
             class="text-blue cursor-pointer underline font-semibold"
             @click="goSignup"
+            id="text-register"
             >Register</span
           >
         </div>

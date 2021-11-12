@@ -1,7 +1,7 @@
 <template>
   <v-row class="fill-height">
     <v-col>
-      <Loading />
+      <Loading :isLoading="isLoading" />
       <v-sheet height="64">
         <v-toolbar flat>
           <v-btn fab small depressed @click="prev" class="mr-2 ml-1 py-5 px-5">
@@ -82,9 +82,7 @@
         </v-toolbar>
       </v-sheet>
 
-
       <v-sheet height="650">
-
         <v-calendar
           ref="calendar"
           v-model="focus"
@@ -133,12 +131,13 @@
   </v-row>
 </template>
 <script>
-import Loading from "../loading/Loading";
+import Loading from '../loading/Loading'
 export default {
   components: {
-    Loading
+    Loading,
   },
   data: () => ({
+    isLoading: true,
     focus: '',
     me_type: 'me',
     typeToMe: {
@@ -183,7 +182,7 @@ export default {
   },
   methods: {
     initialize() {
-      console.log("calendar page init")
+      console.log('calendar page init')
     },
     viewDay({ date }) {
       this.focus = date
@@ -243,7 +242,7 @@ export default {
           timed: !allDay,
         })
       }
-      console.log(events)
+      //      console.log(events)
 
       this.events = events
       this.$store.dispatch('setLoading', false)

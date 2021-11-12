@@ -3,10 +3,20 @@
     <Page v-show="!$store.state.ready" ref="initPage" />
 
     <div class="brand table" v-show="$store.state.ready">
-      <LeftMenu class="table-cell align-top" />
+      <LeftMenu
+        v-if="
+          ($store.state.user && $store.state.user.id) || $store.state.isGuest
+        "
+        class="table-cell align-top"
+      />
 
       <div class="h-screen w-full table-cell">
-        <Header ref="topHeader" />
+        <Header
+          v-if="
+            ($store.state.user && $store.state.user.id) || $store.state.isGuest
+          "
+          ref="topHeader"
+        />
         <v-app class="home">
           <router-view class="w-full" />
         </v-app>
@@ -26,23 +36,26 @@ export default {
     Header,
   },
   mounted() {
-    this.$store.dispatch('setInit', this.user)
+    this.$store.dispatch('setInit')
 
     const thisInstance = this
-    this.$root.$on('getProfileInfo', function () {
-      //thisInstance.incrementCount()
-      thisInstance.$refs.topHeader.getInfo()
-    })
 
+    this.$root.$on('getStatusStop', async function () {
+      await thisInstance.$refs.topHeader.getStatus(false)
+    })
     this.$root.$on('resetPage', function () {
       thisInstance.$refs.initPage.goSignin()
     })
 
-    this.$root.$on('openCalendar', function () {
+    this.$root.$on('openCalendar', async function () {
+      await thisInstance.$refs.topHeader.getInfoData()
       thisInstance.$refs.initPage.openCalendar()
     })
   },
   watch: {},
   methods: {},
+  created() {
+    //console.log('APP ===>', this.$store.state.ready)
+  },
 }
 </script>

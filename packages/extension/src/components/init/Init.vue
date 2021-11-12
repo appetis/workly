@@ -15,10 +15,22 @@
 
           <div class="text-right flex">
             <div class="w-1/2 px-1">
-              <button class="btn-border-black" @click="goSignup">No</button>
+              <button
+                class="btn-border-black"
+                @click="$emit('goSignup')"
+                id="btn-no"
+              >
+                No
+              </button>
             </div>
             <div class="w-1/2 px-1">
-              <button class="btn-border-black" @click="goHasCode">Yes</button>
+              <button
+                class="btn-border-black"
+                @click="$emit('goHasCode')"
+                id="btn-yes"
+              >
+                Yes
+              </button>
             </div>
           </div>
         </div>
@@ -33,14 +45,6 @@ export default {
   props: {},
   data() {
     return {}
-  },
-  methods: {
-    goHasCode() {
-      this.$emit('goHasCode')
-    },
-    goSignup() {
-      this.$emit('goSignup')
-    },
   },
 }
 </script>

@@ -17,6 +17,9 @@ export default {
   getUser(id) {
     return apiClient.get('/api/users/' + id)
   },
+  getUserStatus(id) {
+    return apiClient.get(`/api/users/${id}/status`)
+  },
   addUser(data) {
     return apiClient.post('/api/users', data)
   },

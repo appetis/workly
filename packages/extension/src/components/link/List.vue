@@ -1,32 +1,37 @@
 <template>
   <div>
-    <Loading />
+    <Loading :isLoading="isLoading" />
     <p>Link List</p>
   </div>
 </template>
 
 <script>
-import Loading from "../loading/Loading";
+import Loading from '../loading/Loading'
 export default {
   name: 'Link',
   // mounted() {
   //   browser.runtime.sendMessage({});
   // },
+  data() {
+    return {
+      isLoading: true,
+    }
+  },
   computed: {},
   components: {
-    Loading
+    Loading,
   },
   created() {
     this.initialize()
   },
   methods: {
     initialize() {
-      console.log("Link page init")
+      console.log('Link page init')
       window.setTimeout(() => {
         this.$store.dispatch('setLoading', false)
       }, 3000)
-    }
-  }
+    },
+  },
 }
 </script>
 
