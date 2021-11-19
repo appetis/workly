@@ -19,6 +19,7 @@ export default new Vuex.Store({
   mutations: {
     SET_USER(state, data) {
       //console.log('SET_USER ===>', data.user, data)
+      console.log('1 SET_USER ==== > start ')
       state.user.id = data.user.id
       let user = {
         id: data.user.id,
@@ -37,8 +38,13 @@ export default new Vuex.Store({
         state.user.teams = user.teams = data.user.Teams
         //localStorage.setItem('user', JSON.stringify(user))
         LocalStorageService.setData('user', user)
+        console.log(
+          '2 user set data === ',
+          JSON.parse(localStorage.getItem('user'))
+        )
       }
       //state.ready = true
+      console.log('1 SET_USER ==== > end ')
     },
     SET_READY(state) {
       state.ready = true
@@ -48,13 +54,18 @@ export default new Vuex.Store({
     },
     SET_INIT(state) {
       const user = LocalStorageService.getData('user')
-      if (user || localStorage.isGuest) {
+      if (user || LocalStorageService.getData('isGuest')) {
         state.ready = true
         state.user = user
         //state.user.tokens = tokens
       }
+      if (LocalStorageService.getData('isGuest')) state.isGuest = true
 
-      if (localStorage.isGuest) state.isGuest = true
+      console.log(
+        'is Guest === >',
+        LocalStorageService.getData('isGuest'),
+        state.isGuest
+      )
       var events = [
         { id: 1, value: 'hello' },
         { id: 2, value: 'hello2' },
@@ -80,8 +91,8 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    login({ commit }, user) {
-      return UserService.login(user)
+    async login({ commit }, user) {
+      return await UserService.login(user)
         .then((response) => {
           commit('SET_USER', response.data)
           if (response.data.user.status === 'VE') commit('SET_READY')
@@ -92,11 +103,11 @@ export default new Vuex.Store({
           throw error
         })
     },
-    logout({ commit }) {
+    async logout({ commit }) {
       const data = {
         refreshToken: LocalStorageService.getData('tokens').refreshToken,
       }
-      return UserService.logout(data)
+      return await UserService.logout(data)
         .then((response) => {
           commit('RESET_USER')
           return response
@@ -105,8 +116,8 @@ export default new Vuex.Store({
           throw error
         })
     },
-    verifyCode({ commit }, data) {
-      return UserService.verify(data.id, data.req)
+    async verifyCode({ commit }, data) {
+      return await UserService.verify(data.id, data.req)
         .then((response) => {
           //console.log('VERIFY --->', response)
           commit('SET_USER', response.data)
@@ -116,8 +127,8 @@ export default new Vuex.Store({
           throw error
         })
     },
-    createUser({ commit }, user) {
-      return UserService.addUser(user)
+    async createUser({ commit }, user) {
+      return await UserService.addUser(user)
         .then((response) => {
           const data = {
             user: response.data,
@@ -128,8 +139,8 @@ export default new Vuex.Store({
           throw error
         })
     },
-    joinTeamByCode({ commit }, code) {
-      return UserService.verify(code)
+    async joinTeamByCode({ commit }, code) {
+      return await UserService.verify(code)
         .then((response) => {
           commit('SET_USER', response.data)
         })
@@ -142,7 +153,19 @@ export default new Vuex.Store({
     },
     setLoading({ commit }, isLoading) {
       commit('SET_LOADING', isLoading)
-    }
+    },
+  },
+  getters: {
+    getLocalStorageUser: (state) => {
+      return state.user
+    },
+    getTeams: () => {
+      //return state.user.teams
+      return LocalStorageService.getData('user').teams
+    },
+    getTeamsCount: (state, getters) => {
+      return getters.getTeams.length
+    },
   },
   modules: {},
 })

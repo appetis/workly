@@ -1,7 +1,6 @@
 <template>
-
   <div>
-    <Loading />
+    <Loading :isLoading="isLoading" />
     <v-data-table
       :headers="headers"
       :items="users"
@@ -11,8 +10,14 @@
       loading
       loading-text="Loading... Please wait"
     >
-
-      <v-progress-linear v-show="false" :size="70" :width="7" slot="progress" color="#385859" indeterminate></v-progress-linear>
+      <v-progress-linear
+        v-show="false"
+        :size="70"
+        :width="7"
+        slot="progress"
+        color="#385859"
+        indeterminate
+      ></v-progress-linear>
       <template v-slot:item.Profile.status="{ item }">
         <v-chip :color="getProfileClass(item.Profile.status)" dark> </v-chip>
         {{ item.Profile.statusName }}
@@ -24,12 +29,17 @@
           <v-spacer></v-spacer>
           <v-dialog v-model="dialog" max-width="500px">
             <template v-slot:activator="{ on, attrs }">
-              <div class="btn-add-member" v-bind="attrs" v-on="on">
+              <div
+                class="btn-add-member"
+                v-bind="attrs"
+                v-on="on"
+                v-show="isReady"
+              >
                 <v-icon name="user-plus" base-class="icon"></v-icon>
                 Add Member
               </div>
             </template>
-            <v-card>
+            <v-card id="modal-add-member">
               <v-card-title>
                 <span class="text-h5">{{ formTitle }}</span>
               </v-card-title>
@@ -79,8 +89,17 @@
 
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="close"> Cancel </v-btn>
-                <v-btn color="blue darken-1" text @click="save"> Save </v-btn>
+                <v-btn color="blue darken-1" text @click="close">
+                  Cancel
+                </v-btn>
+                <v-btn
+                  color="blue darken-1"
+                  id="btn-save-member"
+                  text
+                  @click="save"
+                >
+                  Save
+                </v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -139,7 +158,7 @@
 </template>
 
 <script>
-import UserService from '@/services/UserService'
+import { mapGetters } from 'vuex'
 import TeamService from '@/services/TeamService'
 import Profile from './Profile'
 import Loading from '../loading/Loading'
@@ -149,10 +168,12 @@ export default {
   name: 'User',
   components: {
     Profile,
-    Loading
+    Loading,
   },
   data() {
     return {
+      isLoading: true,
+      isReady: false,
       singleSelect: false,
       selected: [],
       dialog: false,
@@ -175,12 +196,12 @@ export default {
       users: [],
       editedIndex: -1,
       editedItem: {
-        name: '',
-        department: '',
-        position: '',
-        email: '',
-        phone: '',
-        status: '',
+        name: '1',
+        department: '2',
+        position: '3',
+        email: '4',
+        phone: '5',
+        status: '6',
       },
       defaultItem: {
         name: '',
@@ -199,6 +220,7 @@ export default {
     formTitle() {
       return this.editedIndex === -1 ? 'Add User' : 'Edit User'
     },
+    ...mapGetters(['getTeams', 'getTeamsCount']),
   },
   watch: {
     dialog(val) {
@@ -217,26 +239,18 @@ export default {
   },
 
   methods: {
-    created() {
-      console.log('User Created')
-      UserService.getUsers()
-        .then((response) => {
-          this.users = response.data
-        })
-        .catch((error) => {
-          console.log('There was an error: ', error.response)
-        })
-    },
-    initialize() {
+    async initialize() {
       //console.log("======> initialize", this.$store.state.user.teams.length, this.$store.state.user.teams[0].id)
-      console.log('===== init List ', this.$store.state)
-      if (this.$store.state.user.teams.length) {
-        const team_id = this.$store.state.user.teams[0].id
-        TeamService.getTeams(team_id)
+      //console.log('===== init List ', this.$store.state, this.getTeams, this.getTeamsCount)
+
+      if (this.getTeamsCount) {
+        const team_id = this.getTeams[0].id
+        await TeamService.getTeams(team_id)
           .then((response) => {
-            console.log(response.data.team)
+            //console.log(response.data.team)
             this.users = response.data.team.members
             this.$store.dispatch('setLoading', false)
+            this.isReady = true
           })
           .catch((error) => {
             throw error
@@ -384,7 +398,13 @@ export default {
       if (this.editedIndex > -1) {
         Object.assign(this.users[this.editedIndex], this.editedItem)
       } else {
-        this.users.push(this.editedItem)
+        const profile = this.editedItem
+        const user = {
+          id: 0,
+          email: this.editedItem.email,
+          Profile: profile,
+        }
+        this.users.push(user)
       }
       this.close()
     },

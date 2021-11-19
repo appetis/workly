@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`init/Verification verification modal snapshot 1`] = `
+<div aria-labelledby="modal-title" role="dialog" aria-modal="true" class="fixed inset-0 overflow-y-auto z-10">
+  <div aria-hidden="true" class="init-modal-background"></div>
+  <div class="modal">
+    <div class="modal-content-sm">
+      <div class="modal-header init-modal-header">
+        <div class="w-1/10 bg-wk-gray-box px-2 rounded mr-2 align-middle pt-1">
+          W
+        </div>
+        <div class="w-9/10 pt-1">Unlock Workly with Verification Code</div>
+      </div>
+      <div class="modal-body">
+        <p class="text-sm">
+          Verification code has been sent to your email address. Please check
+          your email.
+        </p>
+        <form>
+          <div class="flex mt-6">
+            <div class="w-1/6 px-1"><input type="text" maxlength="1" class="input-code"></div>
+            <div class="w-1/6 px-1"><input type="text" maxlength="1" class="input-code"></div>
+            <div class="w-1/6 px-1"><input type="text" maxlength="1" class="input-code"></div>
+            <div class="w-1/6 px-1"><input type="text" maxlength="1" class="input-code"></div>
+            <div class="w-1/6 px-1"><input type="text" maxlength="1" class="input-code"></div>
+            <div class="w-1/6 px-1"><input type="text" maxlength="1" class="input-code"></div>
+          </div>
+          <div class="
+              text-red-700
+              mt-4
+              border border-red-700
+              rounded
+              w-full
+              py-2
+              px-3
+            " style="display: none;">
+
+          </div>
+          <div class="mt-7"><button class="btn-black-full">
+              Continue
+            </button>
+            <div class="spinner spinner--circle-2 mx-auto" style="width: 40px; height: 40px; border: 5px solid #41b883; border-top-color: #35495e; display: none;"></div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer init-modal-footer"></div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Loading />
+    <Loading :isLoading="isLoading" />
     <p>Setting List</p>
 
     <div class="ml-4 font-bold cursor-pointer" @click="logout()">Logout</div>
@@ -8,14 +8,19 @@
 </template>
 
 <script>
-import Loading from "../loading/Loading";
+import Loading from '../loading/Loading'
 export default {
   name: 'Setting',
   // mounted() {
   //   browser.runtime.sendMessage({});
   // },
   components: {
-    Loading
+    Loading,
+  },
+  data() {
+    return {
+      isLoading: false,
+    }
   },
   computed: {},
   created() {
@@ -23,22 +28,24 @@ export default {
   },
   methods: {
     initialize() {
-      console.log("Setting page init")
+      console.log('Setting page init')
 
-      window.setTimeout(() => {
-        this.$store.dispatch('setLoading', false)
-      }, 3000)
+      this.$store.dispatch('setLoading', false)
     },
     logout() {
+      this.$root.$emit('getStatusStop')
+      this.$store.dispatch('setLoading', true)
       this.$store
         .dispatch('logout')
         .then((response) => {
           console.log('logout --->', response)
           this.$root.$emit('resetPage')
+          this.$store.dispatch('setLoading', false)
         })
         .catch((error) => {
           this.showAuthenticationFailMessage = error.response.data.message
           this.isLoading = false
+          this.$store.dispatch('setLoading', false)
         })
     },
   },

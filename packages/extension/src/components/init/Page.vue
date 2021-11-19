@@ -32,7 +32,7 @@
     />
     <Verification
       v-show="showVerification"
-      id="modal-signup"
+      id="modal-verification"
       @openCalendar="openCalendar"
     />
   </div>
@@ -114,7 +114,7 @@ export default {
       this.showSignin = false
       this.showVerification = false
       //this.$root.$refs.header.getInfo()
-      this.$root.$emit('getProfileInfo')
+      //this.$root.$emit('getProfileInfo')
       if (this.$route.path !== '/') this.$router.push('/')
     },
   },

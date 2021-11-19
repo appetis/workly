@@ -148,5 +148,8 @@ export default {
       this.showVerification = false
     },
   },
+  created() {
+    //console.log('LeftMenu ===>', this.$store.state.isGuest)
+  },
 }
 </script>
