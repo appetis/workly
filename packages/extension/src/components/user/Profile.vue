@@ -15,20 +15,7 @@
         </span>
         <div class="modal-body" v-if="profile">
           <div>
-            <div
-              class="profile-photo"
-              v-bind:class="profile.Profile.status_class"
-            >
-              <div class="header-no-avatar" v-show="!profile.Profile.avatar">
-                <v-icon name="user" base-class="profile-no-icon"></v-icon>
-              </div>
-              <img
-                :src="profile.Profile.avatar"
-                class="profile-avatar"
-                v-show="profile.Profile.avatar"
-              />
-              <!--              <div class="profile-online"></div>-->
-            </div>
+            <Avatar :Profile="profile.Profile" />
             <div class="profile-top">
               <h3
                 class="text-lg leading-6 font-medium text-gray-900"
@@ -153,10 +140,14 @@
 </template>
 
 <script>
+import Avatar from './Avatar'
 export default {
   name: 'Profile',
   props: {
     profile: null,
+  },
+  components: {
+    Avatar,
   },
   data() {
     return {}

@@ -18,6 +18,24 @@
         color="#385859"
         indeterminate
       ></v-progress-linear>
+      <template v-slot:item.Profile.name="{ item }">
+        <div class="sm-profile-photo" v-bind:class="item.status_class">
+          <div class="inline-block">
+            <div class="header-no-avatar" v-show="!item.Profile.avatar">
+              <v-icon name="user" base-class="profile-no-icon"></v-icon>
+            </div>
+            <img
+              :src="item.Profile.avatar"
+              class="profile-avatar"
+              v-show="item.Profile.avatar"
+            />
+          </div>
+
+          <div class="inline-block ml-3">
+            {{ item.Profile.name }}
+          </div>
+        </div>
+      </template>
       <template v-slot:item.Profile.status="{ item }">
         <v-chip :color="getProfileClass(item.Profile.status)" dark> </v-chip>
         {{ item.Profile.statusName }}
@@ -191,7 +209,7 @@ export default {
         { text: 'Email', value: 'email' },
         { text: 'Phone', value: 'Profile.phone' },
         { text: 'Status', value: 'Profile.status' },
-        { text: 'Action', value: 'actions', sortable: false },
+        //{ text: 'Action', value: 'actions', sortable: false },
       ],
       users: [],
       editedIndex: -1,
