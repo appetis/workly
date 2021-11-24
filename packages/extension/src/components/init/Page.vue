@@ -57,7 +57,7 @@ export default {
       showInit: false,
       showCode: false,
       showSignup: false,
-      showSignin: false,
+      showSignin: true,
       showVerification: false,
       callFocus: true,
     }
