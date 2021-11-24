@@ -9,135 +9,129 @@
     <div class="modal">
       <!--      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>-->
 
-      <div class="modal-content-sm">
-        <div class="modal-header init-modal-header">
-          <div class="w-1/10 bg-wk-gray-box px-2 rounded mr-2">w</div>
-          <div class="w-9/10 text-base pt-1 font-semibold">
-            Register with Workly
-          </div>
-        </div>
-        <div class="modal-body">
-          <!--
-          <div class="mb-4">
-            <button class="btn-border-black">Continue with Google</button>
+      <div class="modal-content-xl">
+        <div class="flex">
+          <Left />
+          <div class="w-6/12 relative">
+            <Header title="Register" />
+            <div class="modal-body">
+              <!--
+              <div class="mb-4">
+                <button class="btn-border-black">Continue with Google</button>
 
-            <div class="border-b border-solid border-gray-200 h-6 text-center">
-              <span class="relative top-3 bg-white px-10">or</span>
-            </div>
-          </div>
-          -->
-
-          <form @submit.prevent="onSubmit">
-            <div>
-              <label for="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                ref="email"
-                class="white-board-rounded"
-                v-model="user.email"
-                v-bind:class="{ 'border-red-700': showRequiredEmail }"
-                @blur.prevent="onBlurEmail"
-              />
-              <span class="text-red-700 ml-1" v-show="showRequiredEmail">{{
-                showRequiredEmailMessage
-              }}</span>
-            </div>
-            <div class="pt-2">
-              <div class="relative">
-                <label for="password">Password</label>
-                <input
-                  type="password"
-                  id="password"
-                  ref="password"
-                  class="white-board-rounded"
-                  v-model="user.password"
-                  v-bind:class="{ 'border-red-700': showRequiredPassword }"
-                  @blur.prevent="onBlurPassword"
-                />
-                <div @click="hidePlainPassword">
-                  <v-icon
-                    name="eye-off"
-                    base-class="input-icon"
-                    class="input-icons cursor-pointer"
-                    id="password-icon-eye-off"
-                    v-show="showPassword"
-                  ></v-icon>
-                </div>
-                <div @click="showPlainPassword">
-                  <v-icon
-                    name="eye"
-                    base-class="input-icon"
-                    class="input-icons cursor-pointer"
-                    id="password-icon-eye"
-                    v-show="!showPassword"
-                  ></v-icon>
+                <div class="border-b border-solid border-gray-200 h-6 text-center">
+                  <span class="relative top-3 bg-white px-10">or</span>
                 </div>
               </div>
-              <span class="text-red-700 ml-1" v-show="showRequiredPassword">{{
-                showRequiredPasswordMessage
-              }}</span>
-            </div>
-            <div
-              class="
-                text-red-700
-                mt-4
-                border border-red-700
-                rounded
-                w-full
-                py-2
-                px-3
-              "
-              v-show="showSignupFailMessage != ''"
-            >
-              {{ showSignupFailMessage }}
-            </div>
-            <div class="pt-5">
-              <button class="btn-black-full" v-show="!isLoading">
-                Sign up with email
-              </button>
-              <circle2 class="mx-auto" v-show="isLoading"></circle2>
-              <div class="text-xs mt-1">
-                By signing up, you agree to the Worlky's
-                <span class="underline cursor-pointer">Terms of Use</span> and
-                <span class="underline cursor-pointer">Privacy Policy</span>.
-              </div>
-            </div>
-          </form>
+              -->
 
-          <div
-            class="border-b border-solid border-gray-200 h-6 text-center"
-            v-show="!$store.state.isGuest"
-          >
-            <span class="relative top-3 bg-white px-10">or</span>
-          </div>
+              <form @submit.prevent="onSubmit">
+                <div>
+                  <label for="email">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    ref="email"
+                    class="white-board-rounded"
+                    v-model="user.email"
+                    v-bind:class="{ 'border-red-700': showRequiredEmail }"
+                    @blur.prevent="onBlurEmail"
+                  />
+                  <span class="text-red-700 ml-1" v-show="showRequiredEmail" id="message-required-email">{{
+                    showRequiredEmailMessage
+                  }}</span>
+                </div>
+                <div class="pt-2">
+                  <div class="relative">
+                    <label for="password">Password</label>
+                    <input
+                      type="password"
+                      id="password"
+                      ref="password"
+                      class="white-board-rounded"
+                      v-model="user.password"
+                      v-bind:class="{ 'border-red-700': showRequiredPassword }"
+                      @blur.prevent="onBlurPassword"
+                    />
+                    <div @click="hidePlainPassword" v-show="showPassword" id="hide-plain-password">
+                      <span class="input-icons cursor-pointer">
+                        Hide
+                      </span>
+                    </div>
+                    <div @click="showPlainPassword" v-show="!showPassword" id="show-plain-password">
+                      <span class="input-icons cursor-pointer">
+                        Show
+                      </span>
+                    </div>
+                  </div>
+                  <span class="text-red-700 ml-1"
+                        id="message-required-password"
+                        v-show="showRequiredPassword">{{
+                    showRequiredPasswordMessage
+                  }}</span>
+                </div>
+                <div
+                  class="
+                    text-red-700
+                    mt-4
+                    border border-red-700
+                    rounded
+                    w-full
+                    py-2
+                    px-3
+                  "
+                  v-show="showSignupFailMessage != ''"
+                >
+                  {{ showSignupFailMessage }}
+                </div>
+                <div class="pt-5">
+                  <button class="btn-black-full" v-show="!isLoading">
+                    Sign up with email
+                  </button>
+                  <circle2 class="mx-auto" v-show="isLoading"></circle2>
+                  <div class="text-xs mt-1">
+                    By signing up, you agree to the Worlky's
+                    <span class="underline cursor-pointer">Terms of Use</span> and
+                    <span class="underline cursor-pointer">Privacy Policy</span>.
+                  </div>
+                </div>
+              </form>
 
-          <div class="flex pt-6" v-show="!$store.state.isGuest">
-            <div class="w-1/2 pr-1">
-              <button
-                class="btn-border-black"
-                @click="goAsGuest"
-                id="btn-quest"
+              <div
+                class="border-b border-solid border-gray-200 h-6 text-center"
+                v-show="!$store.state.isGuest"
               >
-                Continue as a guest
-              </button>
+                <span class="relative top-3 bg-white px-10">or</span>
+              </div>
+
+              <div class="flex pt-6" v-show="!$store.state.isGuest">
+                <div class="w-1/2 pr-1">
+                  <button
+                    class="btn-border-black"
+                    @click="goAsGuest"
+                    id="btn-quest"
+                  >
+                    Continue as a guest
+                  </button>
+                </div>
+                <div class="w-1/2 pl-1">
+                  <button class="btn-border-black" @click="goHasCode" id="btn-code">
+                    Continue with a code
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="w-1/2 pl-1">
-              <button class="btn-border-black" @click="goHasCode" id="btn-code">
-                Continue with a code
-              </button>
+
+            <div class="modal-footer init-modal-footer">
+              Already have an account?
+              <a
+                class="text-blue cursor-pointer underline font-semibold"
+                @click="goSignin"
+                id="text-login"
+                >Login</a
+              >
             </div>
           </div>
-        </div>
-
-        <div class="modal-footer init-modal-footer">
-          Already have an account?
-          <a
-            class="text-blue cursor-pointer underline font-semibold"
-            @click="goSignin"
-            id="text-login"
-            >Login</a
-          >
         </div>
       </div>
     </div>
@@ -146,11 +140,15 @@
 
 <script>
 import { Circle2 } from 'vue-loading-spinner'
+import Left from '@/components/init/Left'
+import Header from '@/components/init/Header'
 export default {
   name: 'Signup',
   props: {},
   components: {
     Circle2,
+    Left,
+    Header
   },
   data() {
     return {
