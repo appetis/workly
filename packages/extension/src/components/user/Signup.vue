@@ -37,9 +37,12 @@
                     v-bind:class="{ 'border-red-700': showRequiredEmail }"
                     @blur.prevent="onBlurEmail"
                   />
-                  <span class="text-red-700 ml-1" v-show="showRequiredEmail" id="message-required-email">{{
-                    showRequiredEmailMessage
-                  }}</span>
+                  <span
+                    class="text-red-700 ml-1"
+                    v-show="showRequiredEmail"
+                    id="message-required-email"
+                    >{{ showRequiredEmailMessage }}</span
+                  >
                 </div>
                 <div class="pt-2">
                   <div class="relative">
@@ -53,22 +56,27 @@
                       v-bind:class="{ 'border-red-700': showRequiredPassword }"
                       @blur.prevent="onBlurPassword"
                     />
-                    <div @click="hidePlainPassword" v-show="showPassword" id="hide-plain-password">
-                      <span class="input-icons cursor-pointer">
-                        Hide
-                      </span>
+                    <div
+                      @click="hidePlainPassword"
+                      v-show="showPassword"
+                      id="hide-plain-password"
+                    >
+                      <span class="input-icons cursor-pointer"> Hide </span>
                     </div>
-                    <div @click="showPlainPassword" v-show="!showPassword" id="show-plain-password">
-                      <span class="input-icons cursor-pointer">
-                        Show
-                      </span>
+                    <div
+                      @click="showPlainPassword"
+                      v-show="!showPassword"
+                      id="show-plain-password"
+                    >
+                      <span class="input-icons cursor-pointer"> Show </span>
                     </div>
                   </div>
-                  <span class="text-red-700 ml-1"
-                        id="message-required-password"
-                        v-show="showRequiredPassword">{{
-                    showRequiredPasswordMessage
-                  }}</span>
+                  <span
+                    class="text-red-700 ml-1"
+                    id="message-required-password"
+                    v-show="showRequiredPassword"
+                    >{{ showRequiredPasswordMessage }}</span
+                  >
                 </div>
                 <div
                   class="
@@ -91,8 +99,10 @@
                   <circle2 class="mx-auto" v-show="isLoading"></circle2>
                   <div class="text-xs mt-1">
                     By signing up, you agree to the Worlky's
-                    <span class="underline cursor-pointer">Terms of Use</span> and
-                    <span class="underline cursor-pointer">Privacy Policy</span>.
+                    <span class="underline cursor-pointer">Terms of Use</span>
+                    and
+                    <span class="underline cursor-pointer">Privacy Policy</span
+                    >.
                   </div>
                 </div>
               </form>
@@ -115,7 +125,11 @@
                   </button>
                 </div>
                 <div class="w-1/2 pl-1">
-                  <button class="btn-border-black" @click="goHasCode" id="btn-code">
+                  <button
+                    class="btn-border-black"
+                    @click="goHasCode"
+                    id="btn-code"
+                  >
                     Continue with a code
                   </button>
                 </div>
@@ -148,7 +162,7 @@ export default {
   components: {
     Circle2,
     Left,
-    Header
+    Header,
   },
   data() {
     return {

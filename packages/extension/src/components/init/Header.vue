@@ -1,6 +1,6 @@
 <template>
   <div class="modal-header">
-    <img :src="require('@/assets/images/w.png')" alt="worlky small logo">
+    <img :src="require('@/assets/images/w.png')" alt="worlky small logo" />
     <div class="modal-title">{{ title }}</div>
   </div>
 </template>
@@ -10,8 +10,8 @@ export default {
   props: {
     title: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 }
 </script>

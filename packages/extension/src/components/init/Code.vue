@@ -14,96 +14,99 @@
           <Left />
           <div class="w-6/12 relative">
             <Header title="Unlock with Invite Code" />
-              <div class="modal-body">
-                <p>Please enter the 6-digit code your team sent to your email to join your team dashboard in workly.</p>
+            <div class="modal-body">
+              <p>
+                Please enter the 6-digit code your team sent to your email to
+                join your team dashboard in workly.
+              </p>
 
-                <form @submit.prevent="onSubmit">
-                  <div class="flex mt-6">
-                    <div class="w-1/6 px-1">
-                      <input
-                        type="text"
-                        maxlength="1"
-                        class="input-code"
-                        ref="code_1"
-                        @keyup="codeKeyup(1)"
-                        @focus="onFocus(1)"
-                      />
-                    </div>
-                    <div class="w-1/6 px-1">
-                      <input
-                        type="text"
-                        maxlength="1"
-                        class="input-code"
-                        ref="code_2"
-                        @keyup="codeKeyup(2)"
-                        @focus="onFocus(2)"
-                      />
-                    </div>
-                    <div class="w-1/6 px-1">
-                      <input
-                        type="text"
-                        maxlength="1"
-                        class="input-code"
-                        ref="code_3"
-                        @keyup="codeKeyup(3)"
-                        @focus="onFocus(3)"
-                      />
-                    </div>
-                    <div class="w-1/6 px-1">
-                      <input
-                        type="text"
-                        maxlength="1"
-                        class="input-code"
-                        ref="code_4"
-                        @keyup="codeKeyup(4)"
-                        @focus="onFocus(4)"
-                      />
-                    </div>
-                    <div class="w-1/6 px-1">
-                      <input
-                        type="text"
-                        maxlength="1"
-                        class="input-code"
-                        ref="code_5"
-                        @keyup="codeKeyup(5)"
-                        @focus="onFocus(5)"
-                      />
-                    </div>
-                    <div class="w-1/6 px-1">
-                      <input
-                        type="text"
-                        maxlength="1"
-                        class="input-code"
-                        ref="code_6"
-                        @keyup="codeKeyup(6)"
-                        @focus="onFocus(6)"
-                      />
-                    </div>
+              <form @submit.prevent="onSubmit">
+                <div class="flex mt-6">
+                  <div class="w-1/6 px-1">
+                    <input
+                      type="text"
+                      maxlength="1"
+                      class="input-code"
+                      ref="code_1"
+                      @keyup="codeKeyup(1)"
+                      @focus="onFocus(1)"
+                    />
                   </div>
+                  <div class="w-1/6 px-1">
+                    <input
+                      type="text"
+                      maxlength="1"
+                      class="input-code"
+                      ref="code_2"
+                      @keyup="codeKeyup(2)"
+                      @focus="onFocus(2)"
+                    />
+                  </div>
+                  <div class="w-1/6 px-1">
+                    <input
+                      type="text"
+                      maxlength="1"
+                      class="input-code"
+                      ref="code_3"
+                      @keyup="codeKeyup(3)"
+                      @focus="onFocus(3)"
+                    />
+                  </div>
+                  <div class="w-1/6 px-1">
+                    <input
+                      type="text"
+                      maxlength="1"
+                      class="input-code"
+                      ref="code_4"
+                      @keyup="codeKeyup(4)"
+                      @focus="onFocus(4)"
+                    />
+                  </div>
+                  <div class="w-1/6 px-1">
+                    <input
+                      type="text"
+                      maxlength="1"
+                      class="input-code"
+                      ref="code_5"
+                      @keyup="codeKeyup(5)"
+                      @focus="onFocus(5)"
+                    />
+                  </div>
+                  <div class="w-1/6 px-1">
+                    <input
+                      type="text"
+                      maxlength="1"
+                      class="input-code"
+                      ref="code_6"
+                      @keyup="codeKeyup(6)"
+                      @focus="onFocus(6)"
+                    />
+                  </div>
+                </div>
 
-                  <div class="mt-7">
-                    <button class="btn-black-full" id="btn-code-continue">
-                      Continue
-                    </button>
-                  </div>
-                </form>
-              </div>
-              <div class="modal-footer init-modal-footer">
-                Don't have an invite code?
-                <span
-                  class="text-blue cursor-pointer font-semibold underline"
-                  @click="$emit('goSignup')"
-                  id="text-register"
-                  >Register</span
-                >
-                |
-                <span
-                  class="text-blue cursor-pointer font-semibold underline"
-                  @click="$emit('goSignin')"
-                  id="text-login"
-                  >Login</span
-                >
-              </div>
+                <div class="mt-7">
+                  <button class="btn-black-full" id="btn-code-continue">
+                    Continue
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer init-modal-footer">
+              Don't have an invite code?
+              <span
+                class="text-blue cursor-pointer font-semibold underline"
+                @click="$emit('goSignup')"
+                id="text-register"
+                >Register</span
+              >
+              |
+              <span
+                class="text-blue cursor-pointer font-semibold underline"
+                @click="$emit('goSignin')"
+                id="text-login"
+                >Login</span
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -120,7 +123,7 @@ export default {
   props: ['callFocus'],
   components: {
     Left,
-    Header
+    Header,
   },
   data() {
     return {

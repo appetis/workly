@@ -35,9 +35,12 @@
                     v-bind:class="{ 'border-red-700': showRequiredEmail }"
                     @blur.prevent="onBlurEmail"
                   />
-                  <span class="text-red-700 ml-1" id="message-required-email" v-show="showRequiredEmail">{{
-                    showRequiredEmailMessage
-                  }}</span>
+                  <span
+                    class="text-red-700 ml-1"
+                    id="message-required-email"
+                    v-show="showRequiredEmail"
+                    >{{ showRequiredEmailMessage }}</span
+                  >
                 </div>
                 <div class="pt-2 relative">
                   <div class="relative">
@@ -51,15 +54,19 @@
                       v-bind:class="{ 'border-red-700': showRequiredPassword }"
                       @blur.prevent="onBlurPassword"
                     />
-                    <div @click="hidePlainPassword" v-show="showPassword" id="hide-plain-password">
-                      <span class="input-icons cursor-pointer">
-                        Hide
-                      </span>
+                    <div
+                      @click="hidePlainPassword"
+                      v-show="showPassword"
+                      id="hide-plain-password"
+                    >
+                      <span class="input-icons cursor-pointer"> Hide </span>
                     </div>
-                    <div @click="showPlainPassword" v-show="!showPassword" id="show-plain-password">
-                      <span class="input-icons cursor-pointer">
-                        Show
-                      </span>
+                    <div
+                      @click="showPlainPassword"
+                      v-show="!showPassword"
+                      id="show-plain-password"
+                    >
+                      <span class="input-icons cursor-pointer"> Show </span>
                     </div>
                   </div>
                   <span
@@ -151,7 +158,7 @@ export default {
   components: {
     Circle2,
     Left,
-    Header
+    Header,
   },
   data() {
     return {

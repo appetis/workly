@@ -32,14 +32,18 @@ describe('init/Signin', () => {
     await wrapper.setData({
       user: {
         email: '',
-        password: ''
-      }
+        password: '',
+      },
     })
     await wrapper.find('#username').trigger('blur')
-    expect(wrapper.find('#message-required-email').text()).toBe('Email address is required')
+    expect(wrapper.find('#message-required-email').text()).toBe(
+      'Email address is required'
+    )
 
     await wrapper.find('#password').trigger('blur')
-    expect(wrapper.find('#message-required-password').text()).toBe('Password is required')
+    expect(wrapper.find('#message-required-password').text()).toBe(
+      'Password is required'
+    )
   })
 
   it('if email or password is incorrect for blur events', async () => {
@@ -47,14 +51,18 @@ describe('init/Signin', () => {
     await wrapper.setData({
       user: {
         email: 'aaaa',
-        password: 'bbbb'
-      }
+        password: 'bbbb',
+      },
     })
     await wrapper.find('#username').trigger('blur')
-    expect(wrapper.find('#message-required-email').text()).toBe('The email address is not correct.')
+    expect(wrapper.find('#message-required-email').text()).toBe(
+      'The email address is not correct.'
+    )
 
     await wrapper.find('#password').trigger('blur')
-    expect(wrapper.find('#message-required-password').text()).toBe('Minimum 8 characters required')
+    expect(wrapper.find('#message-required-password').text()).toBe(
+      'Minimum 8 characters required'
+    )
   })
 
   it('if email or password is empty for submit event', async () => {
@@ -62,12 +70,16 @@ describe('init/Signin', () => {
     await wrapper.setData({
       user: {
         email: '',
-        password: ''
-      }
+        password: '',
+      },
     })
     await wrapper.find('form').trigger('submit')
-    expect(wrapper.find('#message-required-email').text()).toBe('Email address is required')
-    expect(wrapper.find('#message-required-password').text()).toBe('Password is required')
+    expect(wrapper.find('#message-required-email').text()).toBe(
+      'Email address is required'
+    )
+    expect(wrapper.find('#message-required-password').text()).toBe(
+      'Password is required'
+    )
   })
 
   it('if email or password is incorrect for submit event', async () => {
@@ -75,12 +87,16 @@ describe('init/Signin', () => {
     await wrapper.setData({
       user: {
         email: 'aaaa',
-        password: 'bbbb'
-      }
+        password: 'bbbb',
+      },
     })
     await wrapper.find('form').trigger('submit')
-    expect(wrapper.find('#message-required-email').text()).toBe('The email address is not correct.')
-    expect(wrapper.find('#message-required-password').text()).toBe('Minimum 8 characters required')
+    expect(wrapper.find('#message-required-email').text()).toBe(
+      'The email address is not correct.'
+    )
+    expect(wrapper.find('#message-required-password').text()).toBe(
+      'Minimum 8 characters required'
+    )
   })
 
   it('click text of show and hide password', async () => {

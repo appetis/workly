@@ -10,13 +10,15 @@
       <!--      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>-->
 
       <div class="modal-content-xl">
-
         <div class="flex">
           <Left />
           <div class="w-6/12 relative">
             <Header title="Unlock with Verification Code" />
             <div class="modal-body">
-              <p>Please enter the 6-digit code your team sent to your email to join your team dashboard in workly.</p>
+              <p>
+                Please enter the 6-digit code your team sent to your email to
+                join your team dashboard in workly.
+              </p>
               <form @submit.prevent="onSubmit">
                 <div class="flex mt-6">
                   <!--            <CodeInput @codeKeyup="codeKeyup" :current="1" />-->
@@ -123,7 +125,7 @@ export default {
   components: {
     Circle2,
     Left,
-    Header
+    Header,
   },
   props: ['callFocus'],
   data() {

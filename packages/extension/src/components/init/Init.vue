@@ -10,7 +10,6 @@
       <!--      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>-->
 
       <div class="modal-content-xl">
-
         <div class="flex">
           <Left />
           <div class="w-6/12 relative">
@@ -54,7 +53,7 @@ export default {
   props: {},
   components: {
     Left,
-    Header
+    Header,
   },
   data() {
     return {}
