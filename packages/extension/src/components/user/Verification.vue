@@ -16,10 +16,7 @@
           <div class="w-6/12 relative">
             <Header title="Unlock with Verification Code" />
             <div class="modal-body">
-              <p class="text-sm">
-                Verification code has been sent to your email address. Please check
-                your email.
-              </p>
+              <p>Please enter the 6-digit code your team sent to your email to join your team dashboard in workly.</p>
               <form @submit.prevent="onSubmit">
                 <div class="flex mt-6">
                   <!--            <CodeInput @codeKeyup="codeKeyup" :current="1" />-->

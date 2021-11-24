@@ -15,7 +15,7 @@
           <div class="w-6/12 relative">
             <Header title="Unlock with Invite Code" />
               <div class="modal-body">
-                <p>Please enter the 5-digit code your team sent to your email to join your team dashboard in workly.</p>
+                <p>Please enter the 6-digit code your team sent to your email to join your team dashboard in workly.</p>
 
                 <form @submit.prevent="onSubmit">
                   <div class="flex mt-6">
