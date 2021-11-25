@@ -10,6 +10,8 @@ module.exports = {
           defgray: '#808080',
           light: '#EEEEEE',
           dark: '#042F31',
+          header: '#254F51',
+          even: '#F0F5F5',
           'gray-box': '#AEAEAE',
           'gray-text': '#474747',
         },

@@ -40,14 +40,31 @@
     .header-avatar {
         @apply w-14 h-14 cursor-pointer rounded-full
     }
-    .header-no-avatar {
-        @apply w-14 h-14 cursor-pointer rounded-full bg-gray-100 text-center text-gray-400
+    .profile-photo .header-no-avatar,
+    .sm-profile-photo .header-no-avatar {
+        @apply rounded-full bg-gray-100 text-center text-gray-400
     }
     .header-no-avatar .profile-no-icon {
         width: 50px;
     }
-    .profile-avatar {
-        @apply w-16 h-16 cursor-pointer rounded-full
+    .profile-photo .profile-avatar,
+    .sm-profile-photo .profile-avatar {
+        @apply rounded-full
+    }
+    .profile-photo .header-no-avatar {
+        @apply w-14 h-14 cursor-pointer
+    }
+    .profile-photo .profile-avatar {
+        @apply w-16 h-16 cursor-pointer
+    }
+    .sm-profile-photo .header-no-avatar {
+        @apply w-6 h-6 inline-block shadow-sm
+    }
+    .sm-profile-photo .header-no-avatar .profile-no-icon {
+        width: 22px;
+    }
+    .sm-profile-photo .profile-avatar {
+        @apply w-6 h-6 shadow-sm
     }
     .modal {
         @apply flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0
@@ -59,10 +76,6 @@
     .init-modal-background {
         @apply fixed inset-0 bg-black bg-opacity-40 transition-opacity backdrop-filter backdrop-blur-sm
     }
-/*    .modal-background,
-    .modal .modal-background {
-        z-index: 2;
-    }*/
     .modal-content, .modal-content-sm, .modal-content-md, .modal-content-lg, .modal-content-xl {
         @apply inline-block bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:mt-40 sm:mb-8 sm:align-middle sm:w-full
     }
@@ -112,13 +125,26 @@
     .v-application .primary--text {
         @apply text-wk-secondary;
     }
+    /* If header color changes */
+    .theme--light.v-calendar-weekly {
+        @apply border-0
+    }
     .theme--light.v-calendar-weekly .v-calendar-weekly__head-weekday,
     .theme--light.v-calendar-weekly .v-calendar-weekly__head-weekday.v-outside,
     .theme--light.v-calendar-weekly .v-calendar-weekly__head-weekday.v-future,
     .theme--light.v-calendar-weekly .v-calendar-weekly__head-weekday.v-present,
     .theme--light.v-calendar-weekly .v-calendar-weekly__head-weekday.v-past {
+       /* @apply bg-wk-header text-white py-3*/
         @apply bg-wk-light text-black py-3
     }
+    /*.theme--light.v-calendar-weekly .v-calendar-weekly__head-weekday.primary--text,
+    .theme--light.v-calendar-weekly .v-calendar-weekly__head-weekday.v-outside.primary--text,
+    .theme--light.v-calendar-weekly .v-calendar-weekly__head-weekday.v-future.primary--text,
+    .theme--light.v-calendar-weekly .v-calendar-weekly__head-weekday.v-present.primary--text,
+    .theme--light.v-calendar-weekly .v-calendar-weekly__head-weekday.v-past.primary--text {
+       color: #fff !important;
+       caret-color: #fff !important;
+    }*/
     .v-application--wrap {
         min-height: auto;
     }
@@ -226,14 +252,17 @@
     }
 
     .v-data-table-header th {
-        @apply bg-wk-light text-left;
+        @apply bg-wk-header text-left;
         font-weight: normal;
     }
     .v-data-table-header th span {
-        color: #151515;
+        @apply text-white
+    }
+    .theme--light.v-data-table .v-data-table-header th.sortable .v-data-table-header__icon {
+        color: #fff;
     }
     .v-data-table>.v-data-table__wrapper>table>tbody>tr:nth-child(even) {
-        @apply bg-wk-lightgray
+        @apply bg-wk-even
     }
     .v-data-table>.v-data-table__wrapper>table>tbody>tr>td,
     .v-data-table>.v-data-table__wrapper>table>tbody>tr>th,
@@ -283,7 +312,7 @@ img, svg, video, canvas, audio, iframe, embed, object {
     font-size: 10px;
 }
 .profile-online {
-    border-color: #01C314;
+    border-color: #0B700F;
 }
 .profile-vacation {
     border-color: #DA000B;
@@ -292,7 +321,7 @@ img, svg, video, canvas, audio, iframe, embed, object {
     border-color: #FF9900;
 }
 .theme--dark.v-chip:not(.v-chip--active).online {
-    background-color: #01C314;
+    background-color: #0B700F;
 }
 .theme--dark.v-chip:not(.v-chip--active).vacation {
     background-color: #DA000B;

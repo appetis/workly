@@ -47,7 +47,6 @@ exports[`user/List.vue Calls getTeams and displays teams 1`] = `
           <col class="">
           <col class="">
           <col class="">
-          <col class="">
         </colgroup>
         <thead class="v-data-table-header">
           <tr>
@@ -57,12 +56,11 @@ exports[`user/List.vue Calls getTeams and displays teams 1`] = `
             <th role="columnheader" scope="col" aria-label="Email: Not sorted. Activate to sort ascending." aria-sort="none" class="text-start sortable"><span>Email</span><i aria-hidden="true" class="v-icon notranslate v-data-table-header__icon mdi mdi-arrow-up theme--light" style="font-size: 18px;"></i></th>
             <th role="columnheader" scope="col" aria-label="Phone: Not sorted. Activate to sort ascending." aria-sort="none" class="text-start sortable"><span>Phone</span><i aria-hidden="true" class="v-icon notranslate v-data-table-header__icon mdi mdi-arrow-up theme--light" style="font-size: 18px;"></i></th>
             <th role="columnheader" scope="col" aria-label="Status: Not sorted. Activate to sort ascending." aria-sort="none" class="text-start sortable"><span>Status</span><i aria-hidden="true" class="v-icon notranslate v-data-table-header__icon mdi mdi-arrow-up theme--light" style="font-size: 18px;"></i></th>
-            <th role="columnheader" scope="col" aria-label="Action" class="text-start"><span>Action</span></th>
           </tr>
         </thead>
         <thead>
           <tr class="v-data-table__progress">
-            <th colspan="7" class="column">
+            <th colspan="6" class="column">
               <div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="v-progress-linear v-progress-linear--visible theme--light" style="height: 4px; display: none;" size="70" width="7">
                 <div class="v-progress-linear__background" style="opacity: 0.3; left: 0%; width: 100%; background-color: rgb(56, 88, 89); border-color: #385859;"></div>
                 <div class="v-progress-linear__buffer"></div>
@@ -86,12 +84,6 @@ exports[`user/List.vue Calls getTeams and displays teams 1`] = `
             <td class="text-start"><span class="v-chip theme--dark v-size--default online"><span class="v-chip__content"></span></span>
               In office
             </td>
-            <td class="text-start">
-              <div class="action-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-12 icon-user">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="12" cy="7" r="4"></circle>
-                </svg></div>
-            </td>
           </tr>
           <tr class="">
             <td class="text-start">Hyewon Kim</td>
@@ -101,12 +93,6 @@ exports[`user/List.vue Calls getTeams and displays teams 1`] = `
             <td class="text-start">222-222-2222</td>
             <td class="text-start"><span class="v-chip theme--dark v-size--default other"><span class="v-chip__content"></span></span>
               Work from home
-            </td>
-            <td class="text-start">
-              <div class="action-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-12 icon-user">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="12" cy="7" r="4"></circle>
-                </svg></div>
             </td>
           </tr>
         </tbody>
