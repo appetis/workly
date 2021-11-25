@@ -188,8 +188,8 @@ export default {
     openCalendar() {
       this.$emit('openCalendar')
     },
-    goVerification() {
-      this.$emit('goVerification')
+    goVerification(user_id) {
+      this.$emit('goVerification', user_id, this.user.email)
     },
     onBlurEmail() {
       let error = 0
@@ -247,7 +247,7 @@ export default {
         .then((response) => {
           this.freshUserObject()
           if (response.data.user.status === 'VE') this.openCalendar()
-          else this.goVerification()
+          else this.goVerification(response.data.user.id)
 
           this.isLoading = false
 

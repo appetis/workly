@@ -16,8 +16,8 @@
             <Header title="Unlock with Verification Code" />
             <div class="modal-body">
               <p>
-                Please enter the 6-digit code your team sent to your email to
-                join your team dashboard in workly.
+                Enter the 6-digit code that was sent to the email address
+                {{ email }}
               </p>
               <form @submit.prevent="onSubmit">
                 <div class="flex mt-6">
@@ -84,6 +84,26 @@
                   </div>
                 </div>
                 <div
+                  class="mt-3 ml-1 text-wk-dark cursor-pointer"
+                  @click="resendCode"
+                >
+                  Resend code
+                </div>
+                <div
+                  class="
+                    text-green-700
+                    mt-4
+                    border border-green-700
+                    rounded
+                    w-full
+                    py-2
+                    px-3
+                  "
+                  v-show="showResendCodeSuccessMessage"
+                >
+                  {{ showResendCodeSuccessMessage }}
+                </div>
+                <div
                   class="
                     text-red-700
                     mt-4
@@ -106,8 +126,9 @@
                 </div>
               </form>
             </div>
-
-            <div class="modal-footer init-modal-footer"></div>
+            <!--
+            <div class="modal-footer init-modal-footer">
+            </div>-->
           </div>
         </div>
       </div>
@@ -119,6 +140,7 @@
 import { Circle2 } from 'vue-loading-spinner'
 import Left from '@/components/init/Left'
 import Header from '@/components/init/Header'
+import UserService from '@/services/UserService'
 
 export default {
   name: 'Verification',
@@ -127,11 +149,13 @@ export default {
     Left,
     Header,
   },
-  props: ['callFocus'],
+  props: ['callFocus', 'userId', 'email'],
   data() {
     return {
       current: 1,
       showVerifyFailMessage: '',
+      showResendCodeSuccessMessage: '',
+      //showResendCodeSuccessMessage: 'A new verification code has been resent to your email address.',
       isLoading: false,
     }
   },
@@ -190,12 +214,14 @@ export default {
       const code = this.setCode()
       if (code.length < 6) return false
       this.isLoading = true
+      console.log('userId ===>', this.userId)
 
       const data = {
         req: {
           code: code,
         },
-        id: this.$store.state.user.id,
+        //id: this.$store.state.user.id,
+        id: this.userId,
       }
 
       this.$store
@@ -203,6 +229,18 @@ export default {
         .then(() => {
           console.log('Verification --- lsuccess', this.$store.state.user)
           this.openCalendar()
+        })
+        .catch((error) => {
+          this.showVerifyFailMessage = error.response.data.message
+          this.isLoading = false
+        })
+    },
+    async resendCode() {
+      console.log('resend Code ===')
+      await UserService.resendCode(this.userId)
+        .then((response) => {
+          console.log("resendCode ==", response)
+          this.showResendCodeSuccessMessage = 'A new verification code has been resent to your email address.'
         })
         .catch((error) => {
           this.showVerifyFailMessage = error.response.data.message

@@ -134,6 +134,7 @@ export default new Vuex.Store({
             user: response.data,
           }
           commit('SET_USER', data)
+          return response
         })
         .catch((error) => {
           throw error

@@ -9,7 +9,7 @@
       We are all about the team. Organize projects, meetings, and individual
       schedules to get things done in time.
     </p>
-    <div class="text-center mt-14">
+    <div class="text-center mt-14 mb-3">
       <img :src="require('@/assets/images/workly_screens.png')" alt="info" />
     </div>
   </div>

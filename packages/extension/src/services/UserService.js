@@ -29,4 +29,7 @@ export default {
   addProfile(id) {
     return apiClient.post(`/api/users/${id}/profile`)
   },
+  resendCode(userid) {
+    return apiClient.post(`/api/users/${userid}/resend`)
+  },
 }

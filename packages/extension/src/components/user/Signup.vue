@@ -189,8 +189,8 @@ export default {
     goAsGuest() {
       this.$emit('goAsGuest')
     },
-    goVerification() {
-      this.$emit('goVerification')
+    goVerification(user_id) {
+      this.$emit('goVerification', user_id, this.user.email)
     },
     onBlurEmail() {
       let error = 0
@@ -245,9 +245,9 @@ export default {
       this.isLoading = true
       this.$store
         .dispatch('createUser', this.user)
-        .then(() => {
+        .then((response) => {
           this.freshUserObject()
-          this.goVerification()
+          this.goVerification(response.data.user.id)
           console.log('success')
         })
         .catch((error) => {

@@ -33,6 +33,8 @@
     <Verification
       v-show="showVerification"
       id="modal-verification"
+      :userId="userId"
+      :email="email"
       @openCalendar="openCalendar"
     />
   </div>
@@ -60,6 +62,8 @@ export default {
       showSignin: true,
       showVerification: false,
       callFocus: true,
+      userId: 0,
+      email: '',
     }
   },
   methods: {
@@ -89,13 +93,15 @@ export default {
       this.showSignin = true
       console.log('goSignin')
     },
-    goVerification() {
+    goVerification(user_id, email = '') {
       this.showInit = false
       this.showCode = false
       this.callFocus = true
       this.showSignup = false
       this.showSignin = false
       this.showVerification = true
+      this.userId = user_id
+      this.email = email
     },
     goAsGuest() {
       this.showInit = false
