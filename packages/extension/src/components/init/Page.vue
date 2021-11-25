@@ -55,9 +55,9 @@ export default {
   data() {
     return {
       showInit: false,
-      showCode: true,
+      showCode: false,
       showSignup: false,
-      showSignin: false,
+      showSignin: true,
       showVerification: false,
       callFocus: true,
     }

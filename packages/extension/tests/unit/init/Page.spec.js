@@ -26,7 +26,7 @@ describe('init/Page', () => {
   describe('open code modal', () => {
     it('open modal', () => {
       const wrapper = mount(Page, { store, localVue })
-      expect(wrapper.find('#modal-code').isVisible()).toBe(true)
+      expect(wrapper.find('#modal-signin').isVisible()).toBe(true)
     })
   })
   describe('open signup', () => {

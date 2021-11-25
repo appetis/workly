@@ -77,7 +77,7 @@
         @apply fixed inset-0 bg-black bg-opacity-40 transition-opacity backdrop-filter backdrop-blur-sm
     }
     .modal-content, .modal-content-sm, .modal-content-md, .modal-content-lg, .modal-content-xl {
-        @apply inline-block bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:mt-40 sm:mb-8 sm:align-middle sm:w-full
+        @apply inline-block bg-white text-left overflow-hidden shadow-xl transform transition-all sm:mt-40 sm:mb-8 sm:align-middle sm:w-full
     }
     .modal-content-sm {
         @apply sm:max-w-sm
@@ -86,19 +86,22 @@
         @apply sm:max-w-md
     }
     .modal-content-lg {
-        @apply sm:max-w-lg
+        @apply sm:max-w-3xl
     }
     .modal-content-xl {
-        @apply sm:max-w-xl
+        @apply sm:max-w-4xl
     }
     .modal-close {
         @apply absolute right-0 p-4 cursor-pointer
     }
     .modal-header {
-        @apply py-3 px-5 sm:px-6
+        @apply pt-10 px-8 sm:px-10
+    }
+    .modal-title {
+        @apply font-bold px-2 pt-3 text-base
     }
     .modal-body {
-        @apply bg-white py-7 px-5 sm:py-8 sm:px-6 text-black
+        @apply bg-white pt-3 px-8 sm:px-12 text-black
     }
     .modal-footer {
         @apply py-3 px-5 sm:px-6 text-black
@@ -174,10 +177,10 @@
         @apply py-2 px-11 rounded text-sm bg-black text-white border border-solid border-black font-medium hover:bg-white hover:border-black hover:text-black
     }
     .btn-black-full {
-        @apply py-2 px-11 rounded text-sm bg-black text-white border border-solid border-black font-medium w-full hover:bg-white hover:border-black hover:text-black
+        @apply py-2 px-11 rounded text-sm bg-wk-dark text-white border border-solid border-black font-medium w-full hover:bg-white hover:border-wk-dark hover:text-black
     }
     .btn-border-black {
-        @apply  py-2 w-full border border-solid border-black rounded text-sm hover:bg-black hover:text-white font-medium
+        @apply  py-2 w-full border border-solid border-wk-dark rounded text-sm hover:bg-wk-dark hover:text-white font-medium
     }
     .input-icon {
         width: 20px;
@@ -185,11 +188,11 @@
     .input-icons {
         @apply absolute right-2 bottom-2 text-gray-500;
     }
-    .init-modal-header {
-        @apply bg-black text-white flex font-semibold text-base
-    }
+    /*.init-modal-header {*/
+    /*    @apply bg-black text-white flex font-semibold text-base*/
+    /*}*/
     .init-modal-footer {
-        @apply bg-gray-200 text-center text-xs
+        @apply bg-gray-200 text-center text-xs absolute bottom-0 left-0 right-0
     }
     .v-icon,
     .custom-icon {

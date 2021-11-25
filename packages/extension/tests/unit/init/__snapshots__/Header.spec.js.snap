@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`init/Code code modal snapshot 1`] = `
+<div class="modal-header"><img src="" alt="worlky small logo">
+  <div class="modal-title">Login</div>
+</div>
+`;
+
+exports[`init/Header code modal snapshot 1`] = `
+<div class="modal-header"><img src="" alt="worlky small logo">
+  <div class="modal-title">Login</div>
+</div>
+`;
