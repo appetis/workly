@@ -1,4 +1,4 @@
-const { Code, User, Profile } = require('../models');
+const { Code, User, Profile, Team } = require('../models');
 
 const getStatusNameByCode = async statusCode => {
   const code = await Code.findOne({
@@ -44,17 +44,30 @@ exports.getUserByEmail = async email => {
   });
 };
 
+exports.getUserWithTeamById = async id => {
+  return User.findByPk(id, {
+    attributes: {
+      exclude: ['password'],
+    },
+    include: {
+      model: Team,
+      attributes: ['id'],
+      through: {
+        attributes: [],
+      },
+    },
+  });
+};
+
 exports.getUserWithProfileById = async id => {
   const user = await User.findByPk(id, {
     attributes: {
       exclude: ['password'],
     },
-    include: [
-      {
-        model: Profile,
-        attributes: ['name', 'avatar', 'department', 'position', 'phone', 'phone_ext', 'status'],
-      },
-    ],
+    include: {
+      model: Profile,
+      attributes: ['name', 'avatar', 'department', 'position', 'phone', 'phone_ext', 'status'],
+    },
   });
 
   if (user && user.Profile) {

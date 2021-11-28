@@ -152,7 +152,7 @@ exports.verify = async (req, res) => {
     const userId = req.params.id;
     const { code } = req.body;
 
-    const user = await userService.getUserWithProfileById(userId);
+    const user = await userService.getUserWithTeamById(userId);
     if (!user) {
       return res.status(400).json({
         code: 400,
@@ -170,11 +170,15 @@ exports.verify = async (req, res) => {
 
     await verifyStatus(user, userVerification);
 
+    const accessToken = authService.generateAccessToken(user.id);
+    const refreshToken = await authService.generateRefreshToken(user.id);
+
     return res.status(200).json({
       code: 200,
       message: 'Verified the user email',
       user,
-      token: authService.generateAccessToken(user.id),
+      accessToken,
+      refreshToken,
     });
   } catch (error) {
     console.error(error);
