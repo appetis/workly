@@ -11,13 +11,14 @@
       />
 
       <div class="h-screen w-full table-cell">
-        <Header
-          v-if="
-            ($store.state.user && $store.state.user.id) || $store.state.isGuest
-          "
-          ref="topHeader"
-        />
         <v-app class="home">
+          <Header
+            v-if="
+              ($store.state.user && $store.state.user.id) ||
+              $store.state.isGuest
+            "
+            ref="topHeader"
+          />
           <router-view class="w-full" />
         </v-app>
       </div>

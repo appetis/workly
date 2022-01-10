@@ -1,18 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`init/Code code modal snapshot 1`] = `
-<div class="w-7/12 bg-wk-dark p-14 text-white"><img src="" alt="workly logo" class="h-10">
-  <p class="mt-3">
-    We are all about the team. Organize projects, meetings, and individual schedules to get things done in time.
-  </p>
-  <div class="text-center mt-14"><img src="" alt="info"></div>
-</div>
-`;
-
 exports[`init/Left code modal snapshot 1`] = `
 <div class="w-7/12 bg-wk-dark p-14 text-white"><img src="" alt="workly logo" class="h-10">
   <p class="mt-3">
-    We are all about the team. Organize projects, meetings, and individual schedules to get things done in time.
+    We are all about the team. Organize projects, meetings, and individual
+    schedules to get things done in time.
   </p>
   <div class="text-center mt-14"><img src="" alt="info"></div>
 </div>

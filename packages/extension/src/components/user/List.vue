@@ -21,9 +21,11 @@
       <template v-slot:item.Profile.name="{ item }">
         <div class="sm-profile-photo" v-bind:class="item.status_class">
           <div class="inline-block">
-            <div class="header-no-avatar" v-show="!item.Profile.avatar">
-              <v-icon name="user" base-class="profile-no-icon"></v-icon>
-            </div>
+            <v-avatar color="indigo" size="24"
+                      class="header-no-avatar pt-1.5 -mt-2"
+                      v-show="!item.Profile.avatar">
+              <span class="white--text text-xs mt-2">HW</span>
+            </v-avatar>
             <img
               :src="item.Profile.avatar"
               class="profile-avatar"

@@ -1,4 +1,4 @@
-import Signup from '@/components/user/Signup'
+import Signin from '@/components/init/Signin'
 import { mount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 
@@ -18,11 +18,11 @@ beforeEach(() => {
 })
 
 const factory = () => {
-  return mount(Signup, { store, localVue })
+  return mount(Signin, { store, localVue })
 }
 
-describe('init/Signup', () => {
-  it('signup modal snapshot', () => {
+describe('init/Signin', () => {
+  it('signin modal snapshot', () => {
     const wrapper = factory()
     expect(wrapper.html()).toMatchSnapshot()
   })
@@ -35,7 +35,7 @@ describe('init/Signup', () => {
         password: '',
       },
     })
-    await wrapper.find('#email').trigger('blur')
+    await wrapper.find('#username').trigger('blur')
     expect(wrapper.find('#message-required-email').text()).toBe(
       'Email address is required'
     )
@@ -54,7 +54,7 @@ describe('init/Signup', () => {
         password: 'bbbb',
       },
     })
-    await wrapper.find('#email').trigger('blur')
+    await wrapper.find('#username').trigger('blur')
     expect(wrapper.find('#message-required-email').text()).toBe(
       'The email address is not correct.'
     )
@@ -112,7 +112,7 @@ describe('init/Signup', () => {
     expect(wrapper.get('#show-plain-password').isVisible()).toBe(true)
   })
 
-  it('click Sign up button', async () => {
+  it('click Login button', async () => {
     const wrapper = factory()
     const mockOnSubmit = jest.spyOn(wrapper.vm, 'onSubmit')
     await wrapper.find('form').trigger('submit')
@@ -121,13 +121,14 @@ describe('init/Signup', () => {
     expect(mockOnSubmit).toHaveBeenCalled()
   })
 
-  it('click Login text', () => {
+  it('click Register text', () => {
     const wrapper = factory()
-    const mockGoSignin = jest.fn()
-    wrapper.vm.$on('goSignin', mockGoSignin)
-    wrapper.find('#text-login').trigger('click')
+    const mockGoSignup = jest.fn()
+    wrapper.vm.$on('goSignup', mockGoSignup)
+    //const mockGoSignup = jest.spyOn(wrapper.vm, 'goSignup')
+    wrapper.find('#text-register').trigger('click')
 
-    expect(mockGoSignin).toHaveBeenCalledTimes(1)
+    expect(mockGoSignup).toHaveBeenCalledTimes(1)
   })
 
   it("click 'Continue as a guest' button", () => {

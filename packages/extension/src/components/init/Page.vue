@@ -40,8 +40,8 @@
 <script>
 import Init from './Init'
 import Code from './Code'
-import Signup from '../user/Signup'
-import Signin from '../user/Signin'
+import Signup from './Signup'
+import Signin from './Signin'
 import Verification from '../user/Verification'
 
 export default {

@@ -72,14 +72,14 @@
     />
     <Verification
       v-show="showVerification"
-      id="modal-signup"
+      id="modal-verification"
       @openCalendar="openCalendar"
     />
   </div>
 </template>
 <script>
-import Signup from './user/Signup'
-import Signin from './user/Signin'
+import Signup from './init/Signup'
+import Signin from './init/Signin'
 import Verification from './user/Verification'
 export default {
   components: {

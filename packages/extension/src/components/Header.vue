@@ -22,10 +22,10 @@
         id="header-icon-bell"
       ></v-icon>
       -->
-      <div class="mr-4 mt-3 profile-photo" v-show="isLoading">
+      <div class="mr-2 mt-3" v-show="isLoading">
         <DoubleBounce class="mx-auto" v-show="isLoading"></DoubleBounce>
       </div>
-      <div
+      <!--      <div
         class="ml-4 profile-photo"
         v-if="profile"
         v-bind:class="profile.Profile.status_class"
@@ -46,7 +46,14 @@
           @click="openProfile()"
           id="header-profile"
         />
-      </div>
+      </div>-->
+      <Avatar
+        v-if="profile"
+        v-show="!isLoading"
+        :Profile="profile.Profile"
+        @openProfile="openProfile"
+        :cursorPointer="'cursor-pointer'"
+      />
     </div>
     <Profile
       v-show="showProfile"
@@ -60,12 +67,14 @@
 <script>
 import Profile from './user/Profile'
 import UserService from '@/services/UserService'
+import Avatar from '@/components/user/Avatar'
 import { DoubleBounce } from 'vue-loading-spinner'
 import { mapGetters } from 'vuex'
 export default {
   components: {
     Profile,
     DoubleBounce,
+    Avatar,
   },
   data() {
     return {
@@ -76,6 +85,9 @@ export default {
       profile: null,
       showProfile: false,
       isGuest: this.$store.state.isGuest,
+      css: {
+        profileTop: '100px',
+      },
     }
   },
   computed: {
