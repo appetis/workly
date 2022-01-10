@@ -79,7 +79,7 @@ exports[`user/List.vue Calls getTeams and displays teams 1`] = `
             <td class="text-start">
               <div class="sm-profile-photo">
                 <div class="inline-block">
-                  <div class="v-avatar header-no-avatar pt-1.5 -mt-2 indigo" style="height: 24px; min-width: 24px; width: 24px;"><span class="white--text text-xs mt-2">HW</span></div> <img src="" class="profile-avatar" style="display: none;">
+                  <div class="v-avatar header-no-avatar pt-1.5 -mt-2 teal" style="height: 24px; min-width: 24px; width: 24px;"><span class="white--text text-xs mt-2">HW</span></div> <img src="" class="profile-avatar" style="display: none;">
                 </div>
                 <div class="inline-block ml-3">
                   Wonho Lee
@@ -98,7 +98,7 @@ exports[`user/List.vue Calls getTeams and displays teams 1`] = `
             <td class="text-start">
               <div class="sm-profile-photo">
                 <div class="inline-block">
-                  <div class="v-avatar header-no-avatar pt-1.5 -mt-2 indigo" style="height: 24px; min-width: 24px; width: 24px; display: none;"><span class="white--text text-xs mt-2">HW</span></div> <img src="https://www.cnet.com/a/img/liJ9UZA87zs1viJiuEfVnL7YYfw=/940x0/2020/05/18/5bac8cc1-4bd5-4496-a8c3-66a6cd12d0cb/fb-avatar-2.jpg" class="profile-avatar">
+                  <div class="v-avatar header-no-avatar pt-1.5 -mt-2 teal" style="height: 24px; min-width: 24px; width: 24px; display: none;"><span class="white--text text-xs mt-2">HW</span></div> <img src="https://www.cnet.com/a/img/liJ9UZA87zs1viJiuEfVnL7YYfw=/940x0/2020/05/18/5bac8cc1-4bd5-4496-a8c3-66a6cd12d0cb/fb-avatar-2.jpg" class="profile-avatar">
                 </div>
                 <div class="inline-block ml-3">
                   Hyewon Kim

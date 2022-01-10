@@ -1,8 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`user/Avatar avatar modal snapshot 1`] = `
-<div class="relative">
-  <div class="v-avatar header-no-avatar teal" style="height: 48px; min-width: 48px; width: 48px;" id="header-no-profile"><span class="white--text text-h5"> HW</span></div> <img id="header-profile" class="header-avatar rounded-full shadow-sm" style="display: none;">
-  <div></div>
-</div>
-`;

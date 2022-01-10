@@ -53,11 +53,11 @@ describe('Header', () => {
       await flushPromises()
 
       expect(UserService.getUser).toHaveBeenCalledTimes(1)
-      // expect(wrapper.find('#header-profile').isVisible()).toBe(false)
+      expect(wrapper.find('#modal-profile').isVisible()).toBe(false)
       // expect(wrapper.find('#header-no-profile').isVisible()).toBe(true)
     })
 
-/*    it('Profile with no avatar click', async () => {
+    /*    it('Profile with no avatar click', async () => {
       UserService.getUser.mockResolvedValueOnce({ data: mockUser() })
       const wrapper = factory()
       await flushPromises()
@@ -79,7 +79,7 @@ describe('Header', () => {
       // expect(wrapper.find('#header-no-profile').isVisible()).toBe(false)
     })
 
-/*    it('Profile with avatar click', async () => {
+    /*    it('Profile with avatar click', async () => {
       UserService.getUser.mockResolvedValueOnce({ data: mockUserWithAvatar() })
       const wrapper = factory()
       await flushPromises()
