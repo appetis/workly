@@ -88,7 +88,8 @@
                   <button class="btn-black-full" v-show="!isLoading">
                     Sign up with email
                   </button>
-                  <circle2 class="mx-auto" v-show="isLoading"></circle2>
+<!--                  <circle2 class="mx-auto" v-show="isLoading"></circle2>-->
+                  <div  class="mx-auto" v-show="isLoading">Loading...</div>
                   <div class="text-xs mt-1">
                     By signing up, you agree to the Worlky's
                     <span class="underline cursor-pointer">Terms of Use</span>
@@ -145,14 +146,13 @@
 </template>
 
 <script>
-import { Circle2 } from 'vue-loading-spinner'
+//import { Circle2 } from 'vue-loading-spinner'
 import Left from '@/components/init/Left'
 import Header from '@/components/init/Header'
 export default {
   name: 'Signup',
   props: {},
   components: {
-    Circle2,
     Left,
     Header,
   },

@@ -24,7 +24,6 @@
       -->
       <div class="mr-2 mt-3" v-show="isLoading">
 <!--        <DoubleBounce class="mx-auto" v-show="isLoading"></DoubleBounce>-->
-        Loading
       </div>
       <!--      <div
         class="ml-4 profile-photo"
