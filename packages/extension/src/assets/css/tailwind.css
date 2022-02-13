@@ -41,7 +41,11 @@
         @apply w-14 h-14 cursor-pointer rounded-full
     }*/
     .header-avatar {
-        @apply w-14 ml-4
+        @apply w-14 mt-1 ml-1 rounded-full shadow-sm
+    }
+    .header-avatar-edit-layer {
+        @apply absolute top-1 z-10 w-12 h-12 ml-1 rounded-full text-center pt-4 cursor-pointer text-white text-center font-semibold;
+        background: rgba(0, 0, 0, 0.5);
     }
     /*    .profile-photo {
             @apply mx-auto flex-shrink-0 flex items-center justify-center rounded-full
@@ -60,12 +64,7 @@
     .profile-online,
     .profile-vacation,
     .profile-other {
-        @apply absolute rounded-full -right-1 -bottom-1 border-2
-    }
-    .profile-online,
-    .profile-vacation,
-    .profile-other {
-        @apply h-4 w-4
+        @apply absolute h-4 w-4 rounded-full -right-1 -bottom-1 border-2 z-20
     }
     .profile-online-sm {
         @apply h-4 w-4
@@ -74,10 +73,9 @@
     .header-no-avatar {
         @apply top-1
     }
-
     .header-no-avatar,
     .sm-profile-photo .header-no-avatar {
-        @apply rounded-full bg-gray-100 text-center text-gray-400
+        @apply ml-1 rounded-full bg-gray-100 text-center text-gray-400
     }
     .header-no-avatar .profile-no-icon {
         width: 50px;
@@ -101,6 +99,7 @@
     .sm-profile-photo .profile-avatar {
         @apply w-6 h-6 shadow-sm
     }
+
     .modal {
         @apply flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0
     }
@@ -127,6 +126,13 @@
     .profile-modal .modal-body {
         @apply py-3 px-8 text-black
     }
+    .profile-modal .editable-text {
+        @apply w-full cursor-pointer px-1 py-1 hover:bg-gray-100
+    }
+    .profile-modal .input-text {
+        @apply w-full cursor-pointer px-1 py-0.5 border-solid border border-wk-light-point bg-gray-100 focus:outline-none
+    }
+
     .modal-content-sm {
         @apply sm:max-w-sm
     }

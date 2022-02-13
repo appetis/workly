@@ -71,7 +71,7 @@ describe('Header', () => {
     it('Call get User and displays status and avatar', async () => {
       UserService.getUser.mockResolvedValueOnce({ data: mockUserWithAvatar() })
 
-      const wrapper = factory()
+      //const wrapper = factory()
       await flushPromises()
 
       expect(UserService.getUser).toHaveBeenCalledTimes(1)

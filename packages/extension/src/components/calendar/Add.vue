@@ -8,16 +8,7 @@
             Event
           </div>
           <div
-            class="
-              inline-flex
-              align-middle
-              bg-white
-              text-brand-dark
-              rounded-full
-              h-14
-              w-14
-              shadow-sm
-            "
+            class="inline-flex align-middle bg-white text-brand-dark rounded-full h-14 w-14 shadow-sm"
           >
             <EventIcon class="m-auto" width="24" />
           </div>
@@ -27,16 +18,7 @@
             Meeting
           </div>
           <div
-            class="
-              inline-flex
-              align-middle
-              bg-white
-              text-brand-dark
-              rounded-full
-              h-14
-              w-14
-              shadow-sm
-            "
+            class="inline-flex align-middle bg-white text-brand-dark rounded-full h-14 w-14 shadow-sm"
           >
             <MeetingIcon class="m-auto" width="24" />
           </div>
@@ -46,16 +28,7 @@
             Project
           </div>
           <div
-            class="
-              inline-flex
-              align-middle
-              bg-white
-              text-brand-dark
-              rounded-full
-              h-14
-              w-14
-              shadow-sm
-            "
+            class="inline-flex align-middle bg-white text-brand-dark rounded-full h-14 w-14 shadow-sm"
           >
             <ProjectIcon class="m-auto" width="24" />
           </div>
@@ -65,16 +38,7 @@
             Out of Office
           </div>
           <div
-            class="
-              inline-flex
-              align-middle
-              bg-white
-              text-brand-dark
-              rounded-full
-              h-14
-              w-14
-              shadow-sm
-            "
+            class="inline-flex align-middle bg-white text-brand-dark rounded-full h-14 w-14 shadow-sm"
           >
             <VacationIcon class="m-auto" width="24" />
           </div>

@@ -51,8 +51,9 @@
         v-if="profile"
         v-show="!isLoading"
         :Profile="profile.Profile"
-        @openProfile="openProfile"
+        @clickMethod="openProfile"
         :cursorPointer="'cursor-pointer'"
+        :editableAvatar="false"
       />
     </div>
     <Profile
@@ -129,7 +130,7 @@ export default {
         await UserService.getUserStatus(user.id)
           .then((response) => {
             this.profile.Profile.status_class = this.getProfileClass(
-              response.data.status
+              response.data.statusCode
             )
             this.isLoading = false
           })

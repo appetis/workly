@@ -17,23 +17,14 @@
       <div class="modal-body" v-if="profile">
         <div>
           <div class="profile-top flex justify-between">
-            <div>
-              <h3
+            <div class="w-full">
+              <EditableText
                 class="text-base leading-6 font-semibold text-gray-900 mt-3"
-                id="profile-name"
-              >
-                {{ profile.Profile.name }}
-              </h3>
-              <div class="mt-0">
+                :text-value="profile.Profile.name"
+              />
+              <div class="mt-0.5">
                 <span
-                  class="
-                    inline-block
-                    bg-wk-light-point
-                    rounded-sm
-                    px-2
-                    mr-2
-                    text-white
-                  "
+                  class="inline-block bg-wk-light-point rounded-sm px-2 mr-2 text-white"
                 >
                   Admin
                 </span>
@@ -56,72 +47,94 @@
                 </div>
               </div>
               -->
-            <div class="mr-1">
-              <Avatar :Profile="profile.Profile" />
+            <div class="mx-1">
+              <Avatar
+                :Profile="profile.Profile"
+                @clickMethod="editProfile"
+                :cursorPointer="'cursor-pointer'"
+                :editableAvatar="true"
+              />
             </div>
           </div>
         </div>
-        <div class="mt-8 text-sm">
-          <div class="mb-3 inline-block w-full">
-            <span class="w-18">
-              <v-icon
-                name="map-pin"
-                base-class="pv-icon"
-                class="text-wk-light-point"
-              ></v-icon>
-            </span>
-            <span class="ml-3 align-middle" id="profile-status">
-              In office
-            </span>
+        <div class="mt-4 text-sm">
+          <div class="mb-1 flex items-center">
+            <v-icon
+              name="map-pin"
+              base-class="pv-icon"
+              class="text-wk-light-point"
+            ></v-icon>
+            <EditableText class="ml-2" :text-value="'In office'" />
           </div>
-          <div class="mb-3 inline-block w-full">
+          <!--          <div class="mb-1 flex items-center">
             <v-icon
               name="user"
               base-class="pv-icon"
               class="text-wk-light-point"
             ></v-icon>
-            <span class="ml-3 align-middle">
-              <span id="profile-department">{{
-                profile.Profile.department
-              }}</span>
-              -
-              <span class="profile-position">{{
-                profile.Profile.position
-              }}</span>
-            </span>
+            <div class="flex">
+              <EditableText
+                class="ml-2 flex-1"
+                :text-value="profile.Profile.department"
+              />
+              <div class="pt-1 align-center flex-1">-</div>
+              <EditableText
+                class="ml-2"
+                :text-value="profile.Profile.position"
+              />
+            </div>
+          </div>-->
+          <div class="mb-1 flex items-center">
+            <v-icon
+              name="grid"
+              base-class="pv-icon"
+              class="text-wk-light-point"
+            ></v-icon>
+            <EditableText
+              class="ml-2 flex-1"
+              :text-value="profile.Profile.department"
+            />
           </div>
-          <div class="mb-3 inline-block w-full">
+          <div class="mb-1 flex items-center">
+            <v-icon
+              name="briefcase"
+              base-class="pv-icon"
+              class="text-wk-light-point"
+            ></v-icon>
+            <EditableText
+              class="ml-2 flex-1"
+              :text-value="profile.Profile.position"
+            />
+          </div>
+          <div class="mb-1 flex items-center">
             <v-icon
               name="mail"
               base-class="pv-icon"
               class="text-wk-light-point"
             ></v-icon>
-            <span class="ml-3 align-middle" id="profile-email">
-              {{ profile.email }}
-            </span>
+            <EditableText class="ml-2" :text-value="profile.email" />
           </div>
-          <div class="mb-3 inline-block w-full">
+          <div class="mb-1 flex items-center">
             <v-icon
               name="phone"
               base-class="pv-icon"
               class="text-wk-light-point"
             ></v-icon>
-            <span class="ml-3 align-middle">
-              Ext.
-              <span id="profile-phone-ext">{{
-                profile.Profile.phone_ext
-              }}</span>
-            </span>
+            <div class="ml-2 flex">
+              <div class="pt-1">Ext.</div>
+              <EditableText
+                class="ml-2"
+                :text-value="profile.Profile.phone_ext"
+              />
+            </div>
           </div>
-          <div class="mb-3 inline-block w-full">
+          <div class="mb-1 flex items-center">
             <v-icon
               name="smartphone"
               base-class="pv-icon"
               class="text-wk-light-point"
             ></v-icon>
-            <span class="ml-3 align-middle" id="profile-phone">
-              {{ profile.Profile.phone }}
-            </span>
+            <EditableText class="ml-2" :text-value="profile.Profile.phone" />
           </div>
         </div>
       </div>
@@ -140,6 +153,7 @@
 
 <script>
 import Avatar from './Avatar'
+import EditableText from './EditableText'
 export default {
   name: 'Profile',
   props: {
@@ -147,6 +161,7 @@ export default {
   },
   components: {
     Avatar,
+    EditableText,
   },
   data() {
     return {}
@@ -154,6 +169,9 @@ export default {
   methods: {
     close() {
       this.$emit('close')
+    },
+    editProfile() {
+      console.log('edit protile')
     },
   },
 }
