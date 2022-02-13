@@ -23,7 +23,8 @@
       ></v-icon>
       -->
       <div class="mr-2 mt-3" v-show="isLoading">
-        <DoubleBounce class="mx-auto" v-show="isLoading"></DoubleBounce>
+<!--        <DoubleBounce class="mx-auto" v-show="isLoading"></DoubleBounce>-->
+        Loading
       </div>
       <!--      <div
         class="ml-4 profile-photo"
@@ -69,12 +70,12 @@
 import Profile from './user/Profile'
 import UserService from '@/services/UserService'
 import Avatar from '@/components/user/Avatar'
-import { DoubleBounce } from 'vue-loading-spinner'
+//import { DoubleBounce } from 'vue-loading-spinner'
 import { mapGetters } from 'vuex'
 export default {
   components: {
     Profile,
-    DoubleBounce,
+ //   DoubleBounce,
     Avatar,
   },
   data() {

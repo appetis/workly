@@ -31,5 +31,5 @@ export default {
   },
   updateAvatar(id, data) {
     return apiClient.post(`/api/users/${id}/avatar`, data)
-  }
+  },
 }

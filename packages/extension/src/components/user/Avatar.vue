@@ -6,11 +6,19 @@
     <img :src="Profile.avatar" class="profile-avatar" v-show="Profile.avatar" />
   </div>-->
   <div class="relative">
-    <div class="header-avatar-edit-layer" v-show="editable"
-    @mouseleave="hideEditAvatar"
-    @click="changeAvatar">
+    <div
+      class="header-avatar-edit-layer"
+      v-show="editable"
+      @mouseleave="hideEditAvatar"
+      @click="changeAvatar"
+    >
       EDIT
-      <input type="file" class="hidden" ref="input-avatar" @change="uploadAvatarImage" />
+      <input
+        type="file"
+        class="hidden"
+        ref="input-avatar"
+        @change="uploadAvatarImage"
+      />
     </div>
     <v-avatar
       color="teal"
@@ -45,28 +53,26 @@ export default {
   props: {
     Profile: null,
     cursorPointer: String,
-    editableAvatar: Boolean
+    editableAvatar: Boolean,
   },
   data() {
     return {
-      editable: false
+      editable: false,
     }
   },
   methods: {
     showEditAvatar() {
-      if (this.editableAvatar && !this.editable)
-        this.editable = true
+      if (this.editableAvatar && !this.editable) this.editable = true
     },
     hideEditAvatar() {
-      if (this.editableAvatar && this.editable)
-        this.editable = false
+      if (this.editableAvatar && this.editable) this.editable = false
     },
     changeAvatar() {
       //this.$nextTick(() => this.$refs['input-avatar'].click())
       this.$refs['input-avatar'].click()
     },
     async uploadAvatarImage(e) {
-      console.log("upload!")
+      console.log('upload!')
       var files = e.target.files || e.dataTransfer.files
       if (!files.length) return
 
@@ -82,6 +88,6 @@ export default {
       }
       reader.readAsDataURL(file)
     },
-  }
+  },
 }
 </script>
