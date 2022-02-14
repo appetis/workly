@@ -130,10 +130,7 @@ export default new Vuex.Store({
     async createUser({ commit }, user) {
       return await UserService.addUser(user)
         .then((response) => {
-          const data = {
-            user: response.data,
-          }
-          commit('SET_USER', data)
+          commit('SET_USER', response.data)
         })
         .catch((error) => {
           throw error

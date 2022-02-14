@@ -77,15 +77,7 @@
                   >
                 </div>
                 <div
-                  class="
-                    text-red-700
-                    mt-4
-                    border border-red-700
-                    rounded
-                    w-full
-                    py-2
-                    px-3
-                  "
+                  class="text-red-700 mt-4 border border-red-700 rounded w-full py-2 px-3"
                   v-show="showAuthenticationFailMessage != ''"
                 >
                   {{ showAuthenticationFailMessage }}
@@ -98,7 +90,8 @@
                   >
                     Login
                   </button>
-                  <circle2 class="mx-auto" v-show="isLoading"></circle2>
+<!--                  <circle2 class="mx-auto" v-show="isLoading"></circle2>-->
+                  <div  class="mx-auto" v-show="isLoading">Loading...</div>
                 </div>
               </form>
 
@@ -148,7 +141,8 @@
 </template>
 
 <script>
-import { Circle2 } from 'vue-loading-spinner'
+//import { Circle2 } from 'vue-loading-spinner'
+
 import Left from '@/components/init/Left'
 import Header from '@/components/init/Header'
 
@@ -156,7 +150,6 @@ export default {
   name: 'Signin',
   props: {},
   components: {
-    Circle2,
     Left,
     Header,
   },

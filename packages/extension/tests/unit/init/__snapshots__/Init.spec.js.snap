@@ -4,16 +4,30 @@ exports[`init/Init init modal snapshot 1`] = `
 <div aria-labelledby="modal-title" role="dialog" aria-modal="true" class="fixed inset-0 overflow-y-auto z-10">
   <div aria-hidden="true" class="init-modal-background"></div>
   <div class="modal">
-    <div class="modal-content-sm">
-      <div class="modal-body">
-        <h2 class="text-lg pt-4 pb-8">Do you have an invite code?</h2>
-        <div class="text-right flex">
-          <div class="w-1/2 px-1"><button id="btn-no" class="btn-border-black">
-              No
-            </button></div>
-          <div class="w-1/2 px-1"><button id="btn-yes" class="btn-border-black">
-              Yes
-            </button></div>
+    <div class="modal-content-xl">
+      <div class="flex">
+        <div class="w-7/12 bg-wk-dark p-14 text-white"><img src="" alt="workly logo" class="h-10">
+          <p class="mt-3">
+            We are all about the team. Organize projects, meetings, and individual
+            schedules to get things done in time.
+          </p>
+          <div class="text-center mt-14"><img src="" alt="info"></div>
+        </div>
+        <div class="w-6/12 relative">
+          <div class="modal-header"><img src="" alt="worlky small logo">
+            <div class="modal-title">Are you new?</div>
+          </div>
+          <div class="modal-body">
+            <h2 class="text-lg pt-4 pb-8">Do you have an invite code?</h2>
+            <div class="text-right flex">
+              <div class="w-1/2 px-1"><button id="btn-no" class="btn-border-black">
+                  No
+                </button></div>
+              <div class="w-1/2 px-1"><button id="btn-yes" class="btn-border-black">
+                  Yes
+                </button></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
