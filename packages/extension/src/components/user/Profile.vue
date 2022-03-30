@@ -20,6 +20,8 @@
             <div class="w-full">
               <EditableText
                 class="text-base leading-6 font-semibold text-gray-900 mt-3"
+                :type="'text'"
+                :text-name="'name'"
                 :text-value="profile.Profile.name"
               />
               <div class="mt-0.5">
@@ -50,7 +52,8 @@
             <div class="mx-1">
               <Avatar
                 :Profile="profile.Profile"
-                @clickMethod="editProfile"
+                :statusClass="statusClass"
+                @clickMethod="editAvatar"
                 :cursorPointer="'cursor-pointer'"
                 :editableAvatar="true"
               />
@@ -64,7 +67,15 @@
               base-class="pv-icon"
               class="text-wk-light-point"
             ></v-icon>
-            <EditableText class="ml-2" :text-value="'In office'" />
+            <EditableText
+              class="ml-2"
+              :type="'select'"
+              :status-options="status_options"
+              :text-name="'status'"
+              :text-value="profile.Profile.status"
+              :display-text="profile.Profile.statusName"
+              @edit-profile="updateProfileStatus"
+            />
           </div>
           <!--          <div class="mb-1 flex items-center">
             <v-icon
@@ -92,6 +103,8 @@
             ></v-icon>
             <EditableText
               class="ml-2 flex-1"
+              :type="'text'"
+              :text-name="'department'"
               :text-value="profile.Profile.department"
             />
           </div>
@@ -103,7 +116,10 @@
             ></v-icon>
             <EditableText
               class="ml-2 flex-1"
+              :type="'text'"
+              :text-name="'position'"
               :text-value="profile.Profile.position"
+              @edit-profile="updateProfilePosition"
             />
           </div>
           <div class="mb-1 flex items-center">
@@ -112,7 +128,12 @@
               base-class="pv-icon"
               class="text-wk-light-point"
             ></v-icon>
-            <EditableText class="ml-2" :text-value="profile.email" />
+            <EditableText
+              class="ml-2"
+              :type="'text'"
+              :text-name="'email'"
+              :text-value="profile.email"
+            />
           </div>
           <div class="mb-1 flex items-center">
             <v-icon
@@ -124,6 +145,8 @@
               <div class="pt-1">Ext.</div>
               <EditableText
                 class="ml-2"
+                :type="'text'"
+                :text-name="'phone_ext'"
                 :text-value="profile.Profile.phone_ext"
               />
             </div>
@@ -134,7 +157,12 @@
               base-class="pv-icon"
               class="text-wk-light-point"
             ></v-icon>
-            <EditableText class="ml-2" :text-value="profile.Profile.phone" />
+            <EditableText
+              class="ml-2"
+              :type="'text'"
+              :text-name="'phone'"
+              :text-value="profile.Profile.phone"
+            />
           </div>
         </div>
       </div>
@@ -154,24 +182,52 @@
 <script>
 import Avatar from './Avatar'
 import EditableText from './EditableText'
+import UserService from '@/services/UserService'
+
 export default {
   name: 'Profile',
   props: {
     profile: null,
+    statusClass: String,
   },
   components: {
     Avatar,
     EditableText,
   },
   data() {
-    return {}
+    return {
+      status_options: [
+        { text: 'In office', value: 'OF' },
+        { text: 'Work from home', value: 'WH' },
+      ],
+    }
   },
   methods: {
     close() {
       this.$emit('close')
     },
-    editProfile() {
-      console.log('edit protile')
+    editAvatar() {
+      const user = this.getLocalStorageUser
+      console.log('edit protile', user.id)
+      UserService.updateProfile(user.id)
+        .then((response) => {
+          console.log('========>', response)
+        })
+        .catch((error) => {
+          console.log('=========>', error)
+        })
+    },
+    updateProfileStatus(val) {
+      for (const status_option of this.status_options) {
+        if (status_option.value === val)
+          this.profile.Profile.statusName = status_option.text
+      }
+      this.$emit('change-profile-status', val)
+
+      //this.profile.Profile.statusName =
+    },
+    updateProfilePosition(val) {
+      this.profile.Profile.position = val
     },
   },
 }

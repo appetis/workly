@@ -88,8 +88,14 @@
                   <button class="btn-black-full" v-show="!isLoading">
                     Sign up with email
                   </button>
-<!--                  <circle2 class="mx-auto" v-show="isLoading"></circle2>-->
-                  <div  class="mx-auto" v-show="isLoading">Loading...</div>
+                  <!--                  <circle2 class="mx-auto" v-show="isLoading"></circle2>-->
+                  <scale-loader
+                    class="mx-auto"
+                    :loading="isLoading"
+                    :color="loading.color"
+                    :height="loading.height"
+                    :width="loading.width"
+                  ></scale-loader>
                   <div class="text-xs mt-1">
                     By signing up, you agree to the Worlky's
                     <span class="underline cursor-pointer">Terms of Use</span>
@@ -149,12 +155,14 @@
 //import { Circle2 } from 'vue-loading-spinner'
 import Left from '@/components/init/Left'
 import Header from '@/components/init/Header'
+import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue'
 export default {
   name: 'Signup',
   props: {},
   components: {
     Left,
     Header,
+    ScaleLoader,
   },
   data() {
     return {
@@ -166,6 +174,11 @@ export default {
       showSignupFailMessage: '',
       isLoading: false,
       user: this.freshUserObject(),
+      loading: {
+        color: 'rgb(93, 197, 150)',
+        width: '5px',
+        height: '30px',
+      },
     }
   },
   methods: {
