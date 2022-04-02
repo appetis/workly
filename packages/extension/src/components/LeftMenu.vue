@@ -72,7 +72,7 @@
     />
     <Verification
       v-show="showVerification"
-      id="modal-signup"
+      id="modal-verification"
       @openCalendar="openCalendar"
     />
   </div>

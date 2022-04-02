@@ -84,15 +84,7 @@
                   </div>
                 </div>
                 <div
-                  class="
-                    text-red-700
-                    mt-4
-                    border border-red-700
-                    rounded
-                    w-full
-                    py-2
-                    px-3
-                  "
+                  class="text-red-700 mt-4 border border-red-700 rounded w-full py-2 px-3"
                   v-show="showVerifyFailMessage != ''"
                 >
                   {{ showVerifyFailMessage }}

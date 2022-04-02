@@ -3,7 +3,7 @@
     <img
       :src="require('@/assets/images/workly.png')"
       alt="workly logo"
-      class="h-10"
+      class="h-14"
     />
     <p class="mt-3">
       We are all about the team. Organize projects, meetings, and individual

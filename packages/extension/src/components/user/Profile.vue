@@ -25,23 +25,12 @@
               </h3>
               <div class="mt-0">
                 <span
-                  class="
-                    inline-block
-                    bg-wk-defgray
-                    rounded-sm
-                    px-2
-                    mr-2
-                    text-white
-                  "
+                  class="inline-block bg-wk-defgray rounded-sm px-2 mr-2 text-white"
                 >
                   Admin
                 </span>
                 <p
-                  class="
-                    inline-block
-                    text-sm text-brand-defgray
-                    profile-position
-                  "
+                  class="inline-block text-sm text-brand-defgray profile-position"
                 >
                   {{ profile.Profile.position }}
                 </p>
