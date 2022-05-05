@@ -14,6 +14,7 @@ module.exports = {
           even: '#F0F5F5',
           'gray-box': '#AEAEAE',
           'gray-text': '#474747',
+          card: '#385859',
         },
       },
       fontWeight: {
