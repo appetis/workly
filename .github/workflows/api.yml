@@ -35,7 +35,7 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
 
       - name: Install Dependencies
-        run: npm install
+        run: npm --prefix ./ install
 
       - name: Compress files
         run: zip -r ./api-deploy.zip . -x *.git*
