@@ -41,17 +41,19 @@
       @click="$emit('clickMethod')"
       @mouseover="showEditAvatar"
     />
-    <div v-bind:class="Profile.status_class"></div>
+    <div v-bind:class="statusClass"></div>
   </div>
 </template>
 
 <script>
 import UserService from '@/services/UserService'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'avatar',
   props: {
     Profile: null,
+    statusClass: String,
     cursorPointer: String,
     editableAvatar: Boolean,
   },
@@ -59,6 +61,9 @@ export default {
     return {
       editable: false,
     }
+  },
+  computed: {
+    ...mapGetters(['getLocalStorageUser']),
   },
   methods: {
     showEditAvatar() {
@@ -71,13 +76,45 @@ export default {
       //this.$nextTick(() => this.$refs['input-avatar'].click())
       this.$refs['input-avatar'].click()
     },
-    async uploadAvatarImage(e) {
+    async uploadAvatarImage(event) {
       console.log('upload!')
-      var files = e.target.files || e.dataTransfer.files
+      var files = event.target.files || event.dataTransfer.files
       if (!files.length) return
+      const user = this.getLocalStorageUser
 
-      this.createImage(files[0])
-      await UserService.updateAvatar()
+      // this.createImage(files[0])
+
+      let data = new FormData()
+      data.append('name', 'my-picture')
+      data.append('avatar', event.target.files[0])
+
+      console.log('avatar ====>', data)
+
+      const { avatar } = await UserService.updateAvatar(user.id, data)
+      this.Profile.avatar = avatar
+      /*
+
+            const URL = 'http://foobar.com/upload';
+
+            let data = new FormData();
+            data.append('name', 'my-picture');
+            data.append('file', event.target.files[0]);
+
+            let config = {
+              header : {
+                'Content-Type' : 'image/png'
+              }
+            }
+
+            axios.put(
+                URL,
+                data,
+                config
+            ).then(
+                response => {
+                  console.log('image upload response > ', response)
+                }
+            )*/
     },
     createImage(file) {
       var reader = new FileReader()

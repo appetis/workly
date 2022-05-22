@@ -129,7 +129,9 @@
     .profile-modal .editable-text {
         @apply w-full cursor-pointer px-1 py-1 hover:bg-gray-100
     }
-    .profile-modal .input-text {
+    .profile-modal .input-text,
+    .profile-modal .input-select
+    {
         @apply w-full cursor-pointer px-1 py-0.5 border-solid border border-wk-light-point bg-gray-100 focus:outline-none
     }
 

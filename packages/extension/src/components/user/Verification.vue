@@ -94,9 +94,15 @@
                   <button class="btn-black-full" v-show="!isLoading">
                     Continue
                   </button>
-<!--                  <circle2 class="mx-auto" v-show="isLoading"></circle2>-->
+                  <!--                  <circle2 class="mx-auto" v-show="isLoading"></circle2>-->
 
-                  <div  class="mx-auto" v-show="isLoading">Loading...</div>
+                  <scale-loader
+                    class="mx-auto"
+                    :loading="isLoading"
+                    :color="loading.color"
+                    :height="loading.height"
+                    :width="loading.width"
+                  ></scale-loader>
                 </div>
               </form>
             </div>
@@ -110,16 +116,17 @@
 </template>
 
 <script>
-//import { Circle2 } from 'vue-loading-spinner'
 import Left from '@/components/init/Left'
 import Header from '@/components/init/Header'
+import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue'
 
 export default {
   name: 'Verification',
   components: {
-  //  Circle2,
+    //  Circle2,
     Left,
     Header,
+    ScaleLoader,
   },
   props: ['callFocus'],
   data() {
@@ -127,6 +134,11 @@ export default {
       current: 1,
       showVerifyFailMessage: '',
       isLoading: false,
+      loading: {
+        color: 'rgb(93, 197, 150)',
+        width: '5px',
+        height: '30px',
+      },
     }
   },
   mounted() {

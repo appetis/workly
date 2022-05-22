@@ -23,7 +23,13 @@
       ></v-icon>
       -->
       <div class="mr-2 mt-3" v-show="isLoading">
-<!--        <DoubleBounce class="mx-auto" v-show="isLoading"></DoubleBounce>-->
+        <!--        <DoubleBounce class="mx-auto" v-show="isLoading"></DoubleBounce>-->
+        <!--        <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>-->
+        <bounce-loader
+          :loading="isLoading"
+          :color="loading.color"
+          :size="loading.size"
+        ></bounce-loader>
       </div>
       <!--      <div
         class="ml-4 profile-photo"
@@ -51,6 +57,7 @@
         v-if="profile"
         v-show="!isLoading"
         :Profile="profile.Profile"
+        :statusClass="statusClass"
         @clickMethod="openProfile"
         :cursorPointer="'cursor-pointer'"
         :editableAvatar="false"
@@ -60,8 +67,11 @@
       v-show="showProfile"
       @close="closeProfile"
       :profile="profile"
+      :statusClass="statusClass"
+      :user="user"
       id="modal-profile"
       ref="profile"
+      @change-profile-status="changeProfileStatus"
     />
   </div>
 </template>
@@ -70,24 +80,32 @@ import Profile from './user/Profile'
 import UserService from '@/services/UserService'
 import Avatar from '@/components/user/Avatar'
 //import { DoubleBounce } from 'vue-loading-spinner'
+import BounceLoader from 'vue-spinner/src/BounceLoader.vue'
 import { mapGetters } from 'vuex'
 export default {
   components: {
     Profile,
- //   DoubleBounce,
+    //   DoubleBounce,
     Avatar,
+    BounceLoader,
   },
   data() {
     return {
       //avatar: require('@/assets/images/avatar.png'),
+      user: null,
       isLoading: this.$store.state.isGuest ? false : true,
       projectName: 'My project',
       avatar: null,
       profile: null,
+      statusClass: '',
       showProfile: false,
       isGuest: this.$store.state.isGuest,
       css: {
         profileTop: '100px',
+      },
+      loading: {
+        color: 'rgb(93, 197, 150)',
+        size: '40px',
       },
     }
   },
@@ -113,9 +131,8 @@ export default {
             //this.avatar = require('../assets/images/profile.jpeg')
             //console.log("response data ===>", response.data)
             this.profile = response.data.user
-            this.profile.Profile.status_class = this.getProfileClass(
-              this.profile.Profile.status
-            )
+            this.statusClass = this.profile.Profile.status_class =
+              this.getProfileClass(this.profile.Profile.status)
             this.isLoading = false
           })
           .catch((error) => {
@@ -129,9 +146,8 @@ export default {
       if (user && user.id) {
         await UserService.getUserStatus(user.id)
           .then((response) => {
-            this.profile.Profile.status_class = this.getProfileClass(
-              response.data.statusCode
-            )
+            this.statusClass = this.profile.Profile.status_class =
+              this.getProfileClass(response.data.statusCode)
             this.isLoading = false
           })
           .catch((error) => {
@@ -163,6 +179,14 @@ export default {
           status_color = 'other'
       }
       return `profile-${status_color}`
+    },
+    async changeProfileStatus(val) {
+      console.log('changeProfileStatus ===>', val)
+      await this.$nextTick(() => {
+        this.statusClass = this.profile.Profile.status_class =
+          this.getProfileClass(val)
+      })
+      console.log('changeProfileStatus ===>', this.profile.Profile.status_class)
     },
   },
   mounted: async function () {

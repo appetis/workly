@@ -90,8 +90,14 @@
                   >
                     Login
                   </button>
-<!--                  <circle2 class="mx-auto" v-show="isLoading"></circle2>-->
-                  <div  class="mx-auto" v-show="isLoading">Loading...</div>
+                  <!--                  <circle2 class="mx-auto" v-show="isLoading"></circle2>-->
+                  <scale-loader
+                    class="mx-auto"
+                    :loading="isLoading"
+                    :color="loading.color"
+                    :height="loading.height"
+                    :width="loading.width"
+                  ></scale-loader>
                 </div>
               </form>
 
@@ -145,6 +151,7 @@
 
 import Left from '@/components/init/Left'
 import Header from '@/components/init/Header'
+import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue'
 
 export default {
   name: 'Signin',
@@ -152,6 +159,7 @@ export default {
   components: {
     Left,
     Header,
+    ScaleLoader,
   },
   data() {
     return {
@@ -163,6 +171,11 @@ export default {
       showPassword: false,
       isLoading: false,
       user: this.freshUserObject(),
+      loading: {
+        color: 'rgb(93, 197, 150)',
+        width: '5px',
+        height: '30px',
+      },
     }
   },
   methods: {
