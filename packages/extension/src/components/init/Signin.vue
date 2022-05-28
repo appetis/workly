@@ -13,7 +13,7 @@
         <div class="flex">
           <Left />
           <div class="w-6/12 relative">
-            <Header title="Register" />
+            <Header title="Login" />
             <div class="modal-body">
               <!--
               <div class="mb-4">
@@ -27,11 +27,9 @@
 
               <form @submit.prevent="onSubmit">
                 <div>
-                  <label for="email">Email</label>
+                  <label for="username">Email</label>
                   <input
-                    type="email"
-                    id="email"
-                    ref="email"
+                    id="username"
                     class="white-board-rounded"
                     v-model="user.email"
                     v-bind:class="{ 'border-red-700': showRequiredEmail }"
@@ -39,12 +37,12 @@
                   />
                   <span
                     class="text-red-700 ml-1"
-                    v-show="showRequiredEmail"
                     id="message-required-email"
+                    v-show="showRequiredEmail"
                     >{{ showRequiredEmailMessage }}</span
                   >
                 </div>
-                <div class="pt-2">
+                <div class="pt-2 relative">
                   <div class="relative">
                     <label for="password">Password</label>
                     <input
@@ -80,22 +78,26 @@
                 </div>
                 <div
                   class="text-red-700 mt-4 border border-red-700 rounded w-full py-2 px-3"
-                  v-show="showSignupFailMessage != ''"
+                  v-show="showAuthenticationFailMessage != ''"
                 >
-                  {{ showSignupFailMessage }}
+                  {{ showAuthenticationFailMessage }}
                 </div>
                 <div class="pt-5">
-                  <button class="btn-black-full" v-show="!isLoading">
-                    Sign up with email
+                  <button
+                    type="submit"
+                    class="btn-black-full"
+                    v-show="!isLoading"
+                  >
+                    Login
                   </button>
-                  <circle2 class="mx-auto" v-show="isLoading"></circle2>
-                  <div class="text-xs mt-1">
-                    By signing up, you agree to the Worlky's
-                    <span class="underline cursor-pointer">Terms of Use</span>
-                    and
-                    <span class="underline cursor-pointer">Privacy Policy</span
-                    >.
-                  </div>
+                  <!--                  <circle2 class="mx-auto" v-show="isLoading"></circle2>-->
+                  <scale-loader
+                    class="mx-auto"
+                    :loading="isLoading"
+                    :color="loading.color"
+                    :height="loading.height"
+                    :width="loading.width"
+                  ></scale-loader>
                 </div>
               </form>
 
@@ -130,11 +132,11 @@
 
             <div class="modal-footer init-modal-footer">
               Already have an account?
-              <a
+              <span
                 class="text-blue cursor-pointer underline font-semibold"
-                @click="goSignin"
-                id="text-login"
-                >Login</a
+                @click="goSignup"
+                id="text-register"
+                >Register</span
               >
             </div>
           </div>
@@ -145,16 +147,19 @@
 </template>
 
 <script>
-import { Circle2 } from 'vue-loading-spinner'
+//import { Circle2 } from 'vue-loading-spinner'
+
 import Left from '@/components/init/Left'
 import Header from '@/components/init/Header'
+import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue'
+
 export default {
-  name: 'Signup',
+  name: 'Signin',
   props: {},
   components: {
-    Circle2,
     Left,
     Header,
+    ScaleLoader,
   },
   data() {
     return {
@@ -162,10 +167,15 @@ export default {
       showRequiredEmailMessage: '',
       showRequiredPassword: false,
       showRequiredPasswordMessage: '',
+      showAuthenticationFailMessage: '',
       showPassword: false,
-      showSignupFailMessage: '',
       isLoading: false,
       user: this.freshUserObject(),
+      loading: {
+        color: 'rgb(93, 197, 150)',
+        width: '5px',
+        height: '30px',
+      },
     }
   },
   methods: {
@@ -175,11 +185,14 @@ export default {
     goHasCode() {
       this.$emit('goHasCode')
     },
-    goSignin() {
-      this.$emit('goSignin')
+    goSignup() {
+      this.$emit('goSignup')
     },
     goAsGuest() {
       this.$emit('goAsGuest')
+    },
+    openCalendar() {
+      this.$emit('openCalendar')
     },
     goVerification() {
       this.$emit('goVerification')
@@ -236,25 +249,20 @@ export default {
       if (empty) return false
       this.isLoading = true
       this.$store
-        .dispatch('createUser', this.user)
-        .then(() => {
+        .dispatch('login', this.user)
+        .then((response) => {
           this.freshUserObject()
-          this.goVerification()
-          console.log('success')
+          if (response.data.user.status === 'VE') this.openCalendar()
+          else this.goVerification()
+
+          this.isLoading = false
+
+          this.$root.$emit('openCalendar')
         })
         .catch((error) => {
-          this.showSignupFailMessage = error.response.data.message
+          this.showAuthenticationFailMessage = error.response.data.message
           this.isLoading = false
         })
-      /*UserService.addUser(this.user)
-        .then(() => {
-          this.freshUserObject()
-          this.goVerification()
-          console.log('success')
-        })
-        .catch((error) => {
-          this.showSignupFailMessage = error.response.data.message
-        })*/
     },
     freshUserObject() {
       return {

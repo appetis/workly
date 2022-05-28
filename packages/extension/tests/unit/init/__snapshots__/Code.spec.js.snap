@@ -8,7 +8,8 @@ exports[`init/Code code modal snapshot 1`] = `
       <div class="flex">
         <div class="w-7/12 bg-wk-dark p-14 text-white"><img src="" alt="workly logo" class="h-10">
           <p class="mt-3">
-            We are all about the team. Organize projects, meetings, and individual schedules to get things done in time.
+            We are all about the team. Organize projects, meetings, and individual
+            schedules to get things done in time.
           </p>
           <div class="text-center mt-14"><img src="" alt="info"></div>
         </div>
@@ -17,7 +18,10 @@ exports[`init/Code code modal snapshot 1`] = `
             <div class="modal-title">Unlock with Invite Code</div>
           </div>
           <div class="modal-body">
-            <p>Please enter the 5-digit code your team sent to your email to join your team dashboard in workly.</p>
+            <p>
+              Please enter the 6-digit code your team sent to your email to
+              join your team dashboard in workly.
+            </p>
             <form>
               <div class="flex mt-6">
                 <div class="w-1/6 px-1"><input type="text" maxlength="1" class="input-code"></div>

@@ -32,17 +32,50 @@
         @apply float-left font-semi-bold text-2xl p-6
     }
     .header-menus {
-        @apply flex items-center float-right text-gray-500 px-6 py-1
+        @apply flex items-center float-right text-gray-500 px-6 py-2
     }
     .header-icons {
         @apply px-2 cursor-pointer
     }
-    .header-avatar {
+    /*.header-avatar {
         @apply w-14 h-14 cursor-pointer rounded-full
+    }*/
+    .header-avatar {
+        @apply w-14 mt-1 ml-1 rounded-full shadow-sm
     }
-    .profile-photo .header-no-avatar,
+    .header-avatar-edit-layer {
+        @apply absolute top-1 z-10 w-12 h-12 ml-1 rounded-full text-center pt-4 cursor-pointer text-white text-center font-semibold;
+        background: rgba(0, 0, 0, 0.5);
+    }
+    /*    .profile-photo {
+            @apply mx-auto flex-shrink-0 flex items-center justify-center rounded-full
+        }
+        .profile-online,
+        .profile-vacation,
+        .profile-other {
+            @apply rounded-full border-4 table;
+            padding: 2px;
+        }*/
+
+
+    .profile-photo {
+        @apply relative mx-auto flex-shrink-0 flex items-center justify-center h-20 w-20 rounded-full sm:h-20 sm:w-20
+    }
+    .profile-online,
+    .profile-vacation,
+    .profile-other {
+        @apply absolute h-4 w-4 rounded-full -right-1 -bottom-1 border-2 z-20
+    }
+    .profile-online-sm {
+        @apply h-4 w-4
+    }
+
+    .header-no-avatar {
+        @apply top-1
+    }
+    .header-no-avatar,
     .sm-profile-photo .header-no-avatar {
-        @apply rounded-full bg-gray-100 text-center text-gray-400
+        @apply ml-1 rounded-full bg-gray-100 text-center text-gray-400
     }
     .header-no-avatar .profile-no-icon {
         width: 50px;
@@ -52,10 +85,10 @@
         @apply rounded-full
     }
     .profile-photo .header-no-avatar {
-        @apply w-14 h-14 cursor-pointer
+        @apply w-14 h-14
     }
     .profile-photo .profile-avatar {
-        @apply w-16 h-16 cursor-pointer
+        @apply w-16 h-16
     }
     .sm-profile-photo .header-no-avatar {
         @apply w-6 h-6 inline-block shadow-sm
@@ -66,8 +99,16 @@
     .sm-profile-photo .profile-avatar {
         @apply w-6 h-6 shadow-sm
     }
+
     .modal {
         @apply flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0
+    }
+    .profile-modal {
+       /*@apply pt-4 px-4 pb-20 text-center sm:block sm:p-0;*/
+        @apply relative z-10
+    }
+    .profile-modal .modal-background {
+        @apply fixed inset-0 bg-transparent transition-opacity backdrop-filter
     }
     .modal-background,
     .modal .modal-background {
@@ -79,6 +120,21 @@
     .modal-content, .modal-content-sm, .modal-content-md, .modal-content-lg, .modal-content-xl {
         @apply inline-block bg-white text-left overflow-hidden shadow-xl transform transition-all sm:mt-40 sm:mb-8 sm:align-middle sm:w-full
     }
+    .profile-modal .modal-content-sm {
+        @apply absolute right-5 top-20 mt-0 rounded-md shadow-sm max-w-xs
+    }
+    .profile-modal .modal-body {
+        @apply py-3 px-8 text-black
+    }
+    .profile-modal .editable-text {
+        @apply w-full cursor-pointer px-1 py-1 hover:bg-gray-100
+    }
+    .profile-modal .input-text,
+    .profile-modal .input-select
+    {
+        @apply w-full cursor-pointer px-1 py-0.5 border-solid border border-wk-light-point bg-gray-100 focus:outline-none
+    }
+
     .modal-content-sm {
         @apply sm:max-w-sm
     }
@@ -92,7 +148,7 @@
         @apply sm:max-w-4xl
     }
     .modal-close {
-        @apply absolute right-0 p-4 cursor-pointer
+        @apply absolute right-0 p-3 cursor-pointer
     }
     .modal-header {
         @apply pt-10 px-8 sm:px-10
@@ -106,17 +162,10 @@
     .modal-footer {
         @apply py-3 px-5 sm:px-6 text-black
     }
-    .profile-photo {
-        @apply mx-auto flex-shrink-0 flex items-center justify-center rounded-full
-    }
-    .profile-online,
-    .profile-vacation,
-    .profile-other {
-        @apply rounded-full border-4 table;
-        padding: 2px;
-    }
+
+
     .profile-top {
-        @apply mt-3 text-center w-full mx-auto
+        @apply mt-3 w-full
     }
     .profile-icon {
         @apply inline-block bg-black rounded-full p-3 mx-2 text-center cursor-pointer text-white
@@ -198,7 +247,9 @@
     .custom-icon {
         width: 40px;
     }
-
+    .profile-modal .close-icon {
+        width: 20px;
+    }
     .page-title {
         @apply flex py-4 px-6
     }
@@ -323,14 +374,19 @@ img, svg, video, canvas, audio, iframe, embed, object {
 .logo {
     font-size: 10px;
 }
-.profile-online {
+/*.profile-online,
+.profile-online-sm {
     border-color: #0B700F;
+}*/
+.profile-online,
+.profile-online-sm {
+    background-color: #0B700F;
 }
 .profile-vacation {
-    border-color: #DA000B;
+    background-color: #DA000B;
 }
 .profile-other {
-    border-color: #FF9900;
+    background-color: #FF9900;
 }
 .theme--dark.v-chip:not(.v-chip--active).online {
     background-color: #0B700F;

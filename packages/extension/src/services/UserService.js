@@ -26,7 +26,10 @@ export default {
   verify(userid, data) {
     return apiClient.post(`/api/users/${userid}/verify`, data)
   },
-  addProfile(id) {
-    return apiClient.post(`/api/users/${id}/profile`)
+  updateProfile(id, data) {
+    return apiClient.post(`/api/users/${id}/profile`, data)
+  },
+  updateAvatar(id, data) {
+    return apiClient.post(`/api/users/${id}/avatar`, data)
   },
 }

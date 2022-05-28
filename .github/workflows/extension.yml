@@ -35,10 +35,10 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
 
       - name: Install Dependencies
-        run: npm install
+        run: npm --prefix ./ install
 
       - name: Build
-        run: npm run build
+        run: npm --prefix ./ run build
 
       - name: Compress files
         run: zip -r ./extension-deploy.zip ./dist

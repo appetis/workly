@@ -11,6 +11,7 @@ module.exports = {
           light: '#EEEEEE',
           dark: '#042F31',
           header: '#254F51',
+          'light-point': '#4DA5AA',
           even: '#F0F5F5',
           'gray-box': '#AEAEAE',
           'gray-text': '#474747',
