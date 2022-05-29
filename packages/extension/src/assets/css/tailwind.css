@@ -280,6 +280,9 @@
     .icon-12 {
         width: 12px;
     }
+    .icon-14 {
+        width: 14px;
+    }
     .icon-16 {
         width: 16px;
     }
@@ -337,6 +340,12 @@
     }
     .v-simple-checkbox {
         @apply flex;
+    }
+    .link {
+        @apply bg-wk-card text-white p-3 pb-0 rounded-lg !important;
+    }
+    .v-card {
+        border-width: inherit;
     }
 }
 @layer utilities {
