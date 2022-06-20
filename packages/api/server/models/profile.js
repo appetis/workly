@@ -6,6 +6,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(50),
         allowNull: false,
       },
+      initial: {
+        type: DataTypes.STRING(2),
+        allowNull: false,
+      },
       avatar: {
         type: DataTypes.STRING(200),
       },
@@ -38,6 +42,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Profile.associate = db => {
     db.Profile.belongsTo(db.User);
+    db.Profile.belongsTo(db.Color);
   };
 
   return Profile;
