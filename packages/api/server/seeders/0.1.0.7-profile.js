@@ -6,7 +6,9 @@ module.exports = {
       {
         id: 1,
         UserId: 1,
+        ColorId: 12,
         name: 'Wonho Lee',
+        initial: 'WL',
         avatar: '',
         department: 'IT',
         position: 'Developer',
@@ -19,7 +21,9 @@ module.exports = {
       {
         id: 2,
         UserId: 2,
+        ColorId: 13,
         name: 'Hyewon Kim',
+        initial: 'HK',
         avatar: '',
         department: 'IT',
         position: 'Developer',

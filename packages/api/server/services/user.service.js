@@ -1,4 +1,4 @@
-const { Code, User, Profile, Team } = require('../models');
+const { Code, User, Profile, Color, Team } = require('../models');
 
 const getStatusNameByCode = async statusCode => {
   const code = await Code.findOne({
@@ -11,9 +11,25 @@ const getStatusNameByCode = async statusCode => {
   return code.name;
 };
 
+const getColorById = async colorId => {
+  const color = await Color.findOne({
+    where: {
+      id: colorId,
+    },
+    attributes: ['color'],
+  });
+
+  return color.color;
+};
+
 const setProfileStatusName = async profile => {
   const statusName = await getStatusNameByCode(profile.status);
   profile.setDataValue('statusName', statusName);
+};
+
+const setColor = async profile => {
+  const color = await getColorById(profile.ColorId);
+  profile.setDataValue('color', color);
 };
 
 exports.addProfileStatusName = async profile => {
@@ -66,12 +82,13 @@ exports.getUserWithProfileById = async id => {
     },
     include: {
       model: Profile,
-      attributes: ['name', 'avatar', 'department', 'position', 'phone', 'phone_ext', 'status'],
+      attributes: ['name', 'initial', 'avatar', 'department', 'position', 'phone', 'phone_ext', 'status', 'ColorId'],
     },
   });
 
   if (user && user.Profile) {
     await setProfileStatusName(user.Profile);
+    await setColor(user.Profile);
   }
 
   return user;
