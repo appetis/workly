@@ -24,9 +24,9 @@ const verifyStatus = async (user, userVerification) => {
   await userVerification.update({ status: 'VE' });
 };
 
-const createOrUpdateUserProfile = async (userId, data) => {
+const createOrUpdateUserProfile = async (user, data) => {
   const profileData = {
-    UserId: userId,
+    UserId: user.id,
     name: data.name,
     department: data.department,
     position: data.position,
@@ -35,10 +35,12 @@ const createOrUpdateUserProfile = async (userId, data) => {
     status: data.status,
   };
 
-  let profile = await userService.getUserProfile(userId);
+  let profile = await userService.getUserProfile(user.id);
+
   if (profile) {
     profile = await profile.update(profileData);
   } else {
+    profileData.initial = user.email.substring(0, 2).toUpperCase();
     profile = await Profile.create(profileData);
   }
 
@@ -191,7 +193,7 @@ exports.verify = async (req, res) => {
 
 exports.updateProfile = async (req, res) => {
   try {
-    const userId = req.params.id;
+    const userId = parseInt(req.params.id, 10);
     const user = await userService.getUserWithProfileById(userId);
     if (!user) {
       return res.status(400).json({
@@ -200,7 +202,7 @@ exports.updateProfile = async (req, res) => {
       });
     }
 
-    const profile = await createOrUpdateUserProfile(userId, req.body);
+    const profile = await createOrUpdateUserProfile(user, req.body);
 
     return res.status(200).json({
       code: 200,
