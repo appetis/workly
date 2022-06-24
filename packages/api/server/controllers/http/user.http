@@ -46,7 +46,48 @@ GET http://localhost:3000/api/users/1
 Accept: application/json
 Authorization: Bareer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2NDMzMDEzLCJleHAiOjE2MzY0MzQ4MTMsImlzcyI6IndvcmtseSJ9.TNpDA_0h4eRVcWkSWf_yxQ0L1jnVJaXdvRFmPKTduNM
 
-### GET /{id}/status
-GET http://localhost:3000/api/users/1/status
-Accept: application/json
+### POST /{id}/name
+POST http://localhost:3000/api/users/1/name
+Content-Type: application/json
 Authorization: Bearer {{accessToken}}
+
+{
+  "name": "Wono"
+}
+
+### POST /{id}/department
+POST http://localhost:3000/api/users/1/department
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "department": "IT1"
+}
+
+### POST /{id}/position
+POST http://localhost:3000/api/users/1/position
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "position": "Developer1"
+}
+
+### POST /{id}/phone
+POST http://localhost:3000/api/users/1/phone
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "phone": "999-999-9999"
+}
+
+### POST /{id}/phone-ext
+POST http://localhost:3000/api/users/1/phone-ext
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "phoneExt": "999"
+}
+

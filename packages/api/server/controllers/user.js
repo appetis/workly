@@ -270,3 +270,148 @@ exports.updateAvatar = async (req, res) => {
     });
   }
 };
+
+exports.updateName = async (req, res) => {
+  const { name } = req.body;
+  const userId = parseInt(req.params.id, 10);
+
+  try {
+    const profile = await userService.getUserProfile(userId);
+    if (!profile) {
+      return res.status(400).json({
+        code: 400,
+        message: 'Cannot find the user profile',
+      });
+    }
+
+    await profile.update({ name });
+
+    return res.status(200).json({
+      code: 200,
+      message: 'Updated the name',
+      name,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      code: 500,
+      message: 'Server error',
+    });
+  }
+};
+
+exports.updateDepartment = async (req, res) => {
+  const { department } = req.body;
+  const userId = parseInt(req.params.id, 10);
+
+  try {
+    const profile = await userService.getUserProfile(userId);
+    if (!profile) {
+      return res.status(400).json({
+        code: 400,
+        message: 'Cannot find the user profile',
+      });
+    }
+
+    await profile.update({ department });
+
+    return res.status(200).json({
+      code: 200,
+      message: 'Updated the position',
+      department,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      code: 500,
+      message: 'Server error',
+    });
+  }
+};
+
+exports.updatePosition = async (req, res) => {
+  const { position } = req.body;
+  const userId = parseInt(req.params.id, 10);
+
+  try {
+    const profile = await userService.getUserProfile(userId);
+    if (!profile) {
+      return res.status(400).json({
+        code: 400,
+        message: 'Cannot find the user profile',
+      });
+    }
+
+    await profile.update({ position });
+
+    return res.status(200).json({
+      code: 200,
+      message: 'Updated the position',
+      position,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      code: 500,
+      message: 'Server error',
+    });
+  }
+};
+
+exports.updatePhone = async (req, res) => {
+  const { phone } = req.body;
+  const userId = parseInt(req.params.id, 10);
+
+  try {
+    const profile = await userService.getUserProfile(userId);
+    if (!profile) {
+      return res.status(400).json({
+        code: 400,
+        message: 'Cannot find the user profile',
+      });
+    }
+
+    await profile.update({ phone });
+
+    return res.status(200).json({
+      code: 200,
+      message: 'Updated the phone',
+      phone,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      code: 500,
+      message: 'Server error',
+    });
+  }
+};
+
+exports.updatePhoneExt = async (req, res) => {
+  const { phoneExt } = req.body;
+  const userId = parseInt(req.params.id, 10);
+
+  try {
+    const profile = await userService.getUserProfile(userId);
+    if (!profile) {
+      return res.status(400).json({
+        code: 400,
+        message: 'Cannot find the user profile',
+      });
+    }
+
+    await profile.update({ phoneExt });
+
+    return res.status(200).json({
+      code: 200,
+      message: 'Updated the phone_ext',
+      phoneExt,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      code: 500,
+      message: 'Server error',
+    });
+  }
+};
