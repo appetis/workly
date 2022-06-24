@@ -1,0 +1,23 @@
+### GET /{id}/members
+GET http://localhost:3000/api/teams/1/members
+Accept: application/json
+Authorization: Bearer {{accessToken}}
+
+### POST /{id}/join
+POST http://localhost:3000/api/teams/2/join
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{"userId": 2, "teamId": 1}
+
+### GET /{name}
+GET http://localhost:3000/api/teams/Appetis
+Accept: application/json
+Authorization: Bearer {{accessToken}}
+
+### POST /
+POST http://localhost:3000/api/teams
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{"name": "Appetis", "userId": 1}
